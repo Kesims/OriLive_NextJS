@@ -1,14 +1,12 @@
 "use client";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { ApolloProvider } from "@apollo/client";
 import { CssBaseline } from "@material-ui/core";
 import { SnackbarProvider } from "notistack";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "@/src/utils/theme";
+import { client } from "@/src/utils/apolloClient";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-	const client = new ApolloClient({
-		uri: "http://localhost:3001/graphql",
-		cache: new InMemoryCache(),
-	});
-
 	return (
 		<html lang="en">
 			{/*
@@ -17,10 +15,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       */}
 			<head />
 			<body>
-				<CssBaseline />
-				<ApolloProvider client={client}>
-					<SnackbarProvider maxSnack={3}>{children}</SnackbarProvider>
-				</ApolloProvider>
+				<ThemeProvider theme={theme}>
+					<CssBaseline />
+					<ApolloProvider client={client}>
+						<SnackbarProvider maxSnack={3}>{children}</SnackbarProvider>
+					</ApolloProvider>
+				</ThemeProvider>
 			</body>
 		</html>
 	);

@@ -1,6 +1,6 @@
 "use client";
 
-import { LoginForm } from "@/components/login";
+import { LoginForm } from "@/components/login/login";
 import { Container } from "@mui/material";
 
 export default function Login() {
