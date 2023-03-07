@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "codegen": "graphql-codegen --config codegen.ts"
+    "codegen": "graphql-codegen --config codegen.ts",
+    "lintfix": "eslint . --fix --ext .tsx,.ts"
   },
   "dependencies": {
     "@apollo/client": "^3.7.8",
@@ -15,16 +16,17 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@fontsource/roboto": "^4.5.8",
-    "@material-ui/core": "^4.12.4",
     "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.9",
     "@mui/styled-engine-sc": "^5.11.9",
     "@next/font": "13.1.6",
     "graphql": "^16.6.0",
-    "next": "13.1.6",
+    "next": "latest",
+    "notistack": "latest",
     "react": "18.2.0",
+    "react-apollo": "^3.1.5",
     "react-dom": "18.2.0",
-    "react-hook-form": "^7.43.1",
+    "react-hook-form": "^7.43.2",
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
