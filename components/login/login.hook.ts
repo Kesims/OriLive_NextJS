@@ -16,7 +16,7 @@ export const useLogin = () => {
 					username: formData.username,
 				},
 			});
-			router.push("dashboard");
+			router.push("/dashboard");
 		} catch (e) {
 			if (e instanceof ApolloError) {
 				enqueueSnackbar(e.message, { variant: "error" });

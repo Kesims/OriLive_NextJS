@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import SideMenu from "@/components/sideMenu/sideMenu";
+import SideMenu from "@/components/dashboard/sideMenu/sideMenu";
 import { Box } from "@material-ui/core";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
