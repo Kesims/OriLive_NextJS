@@ -8,9 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "codegen": "graphql-codegen --config codegen.ts",
-    "export": "next export",
     "tsc": "tsc -noEmit",
-    "lintfix": "lint --fix"
+    "lintfix": "eslint . --fix --ext .tsx,.ts"
   },
   "dependencies": {
     "@apollo/client": "^3.7.8",
@@ -24,7 +23,7 @@
     "@next/font": "13.1.6",
     "cookies-next": "^2.1.1",
     "graphql": "^16.6.0",
-    "next": "13.0.6",
+    "next": "latest",
     "notistack": "latest",
     "react": "18.2.0",
     "react-apollo": "^3.1.5",
