@@ -3,8 +3,8 @@ import React from "react";
 
 interface SideMenuProps {
 	open: boolean;
-	iconSrc: string;
 	text: string;
+	children: React.ReactNode;
 }
 
 interface SideMenuPropsClick {
@@ -19,7 +19,7 @@ interface SideMenuPropsHref {
 
 type Props = SideMenuProps & (SideMenuPropsClick | SideMenuPropsHref);
 
-export const SideMenuItem: React.FC<Props> = ({ open, href, iconSrc, text, onClick }) => {
+export const SideMenuItem: React.FC<Props> = ({ open, href, text, onClick, children }) => {
 	const Item = (
 		<ListItem disablePadding sx={{ display: "block" }}>
 			<ListItemButton
@@ -37,7 +37,7 @@ export const SideMenuItem: React.FC<Props> = ({ open, href, iconSrc, text, onCli
 						justifyContent: "center",
 					}}
 				>
-					<img src={iconSrc} height={25} alt={href + " icon"} />
+					{children}
 				</ListItemIcon>
 				<ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
 			</ListItemButton>

@@ -11,6 +11,11 @@ import { useLogutMutationMutation } from "@/src/generated/graphql";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
 import { deleteCookie } from "cookies-next";
+import { NodesIcon } from "@/components/dashboard/sideMenu/icons/nodesIcon";
+import { LogoutIcon } from "@/components/dashboard/sideMenu/icons/logoutIcon";
+import { OresultsIcon } from "@/components/dashboard/sideMenu/icons/oresultsIcon";
+import { NetworkCommandsIcon } from "@/components/dashboard/sideMenu/icons/networkCommandsIcon";
+import { PunchesIcon } from "@/components/dashboard/sideMenu/icons/punchesIcon";
 const drawerWidth = 270;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -96,39 +101,24 @@ export default function SideMenu() {
 			</DrawerHeader>
 			<Divider />
 			<List>
-				<SideMenuItem
-					href={"/dashboard/punches"}
-					open={open}
-					iconSrc={"/icons/punchlist.svg"}
-					text={"Zaznamenané ražení"}
-				/>
-				<SideMenuItem
-					href={"/dashboard/nodes"}
-					open={open}
-					iconSrc={"/icons/node.svg"}
-					text={"Zařízení"}
-				/>
-				<SideMenuItem
-					href={"/dashboard/networkCommands"}
-					open={open}
-					iconSrc={"/icons/settings.svg"}
-					text={"Síťové příkazy"}
-				/>
-				<SideMenuItem
-					href={"/dashboard/oresults"}
-					open={open}
-					iconSrc={"/icons/shuffle.svg"}
-					text={"Propojení OResults"}
-				/>
+				<SideMenuItem href={"/dashboard/punches"} open={open} text={"Zaznamenané ražení"}>
+					<PunchesIcon />
+				</SideMenuItem>
+				<SideMenuItem href={"/dashboard/nodes"} open={open} text={"Zařízení"}>
+					<NodesIcon />
+				</SideMenuItem>
+				<SideMenuItem href={"/dashboard/networkCommands"} open={open} text={"Síťové příkazy"}>
+					<NetworkCommandsIcon />
+				</SideMenuItem>
+				<SideMenuItem href={"/dashboard/oresults"} open={open} text={"Propojení OResults"}>
+					<OresultsIcon />
+				</SideMenuItem>
 			</List>
 			<Divider style={{ marginTop: "auto" }} />
 			<List>
-				<SideMenuItem
-					open={open}
-					iconSrc={"/icons/logout.svg"}
-					text={"Odhlásit se"}
-					onClick={handleLogout}
-				/>
+				<SideMenuItem open={open} text={"Odhlásit se"} onClick={handleLogout}>
+					<LogoutIcon />
+				</SideMenuItem>
 			</List>
 		</Drawer>
 	);
