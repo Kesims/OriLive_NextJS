@@ -10,12 +10,13 @@ import { SideMenuItem } from "./sideMenuItem";
 import { useLogutMutationMutation } from "@/src/generated/graphql";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
-import { deleteCookie } from "cookies-next";
+import { deleteCookie, getCookie, setCookie } from "cookies-next";
 import { NodesIcon } from "@/components/dashboard/sideMenu/icons/nodesIcon";
 import { LogoutIcon } from "@/components/dashboard/sideMenu/icons/logoutIcon";
 import { OresultsIcon } from "@/components/dashboard/sideMenu/icons/oresultsIcon";
 import { NetworkCommandsIcon } from "@/components/dashboard/sideMenu/icons/networkCommandsIcon";
 import { PunchesIcon } from "@/components/dashboard/sideMenu/icons/punchesIcon";
+import { useApolloClient } from "@apollo/client";
 const drawerWidth = 270;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -68,10 +69,13 @@ export default function SideMenu() {
     const [logout] = useLogutMutationMutation();
     const router = useRouter();
     const { enqueueSnackbar } = useSnackbar();
+
+    const client = useApolloClient();
     const handleLogout = async () => {
         try {
             await logout();
-            deleteCookie("connect.sid"); // TODO Find out how to actually fix this
+            await client.resetStore();
+            deleteCookie("connect.sid", { path: "/" }); // TODO Find out how to actually fix this
             router.push("/");
         } catch (e) {
             enqueueSnackbar("Odhlášení se nezdařilo!", { variant: "error" });

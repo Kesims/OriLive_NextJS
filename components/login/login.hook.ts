@@ -5,10 +5,13 @@ import { useSnackbar } from "notistack";
 import { LoginFormData } from "./login.types";
 
 export const useLogin = () => {
-    const [login] = useLoginMutationMutation({ onCompleted: () => console.log("Login successful.") });
+    const [login, { loading }] = useLoginMutationMutation({
+        onCompleted: () => console.log("Login successful."),
+    });
     const router = useRouter();
     const { enqueueSnackbar } = useSnackbar();
     const loginHandler = async (formData: LoginFormData) => {
+        if (loading) return;
         try {
             await login({
                 variables: {
@@ -25,5 +28,5 @@ export const useLogin = () => {
             }
         }
     };
-    return { loginHandler };
+    return { loginHandler, loading };
 };
