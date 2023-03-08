@@ -75,7 +75,7 @@ export default function SideMenu() {
         try {
             await logout();
             await client.resetStore();
-            deleteCookie("connect.sid", { path: "/" }); // TODO Find out how to actually fix this
+            deleteCookie("connect.sid", { path: "/" });
             router.push("/");
         } catch (e) {
             enqueueSnackbar("Odhlášení se nezdařilo!", { variant: "error" });
