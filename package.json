@@ -20,7 +20,6 @@
     "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.9",
     "@mui/styled-engine-sc": "^5.11.9",
-    "@next/font": "13.1.6",
     "cookies-next": "^2.1.1",
     "graphql": "^16.6.0",
     "next": "latest",
