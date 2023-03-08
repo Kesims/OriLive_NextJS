@@ -10,13 +10,13 @@ import { SideMenuItem } from "./sideMenuItem";
 import { useLogutMutationMutation } from "@/src/generated/graphql";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
-import { deleteCookie, getCookie, setCookie } from "cookies-next";
-import { NodesIcon } from "@/components/dashboard/sideMenu/icons/nodesIcon";
-import { LogoutIcon } from "@/components/dashboard/sideMenu/icons/logoutIcon";
-import { OresultsIcon } from "@/components/dashboard/sideMenu/icons/oresultsIcon";
-import { NetworkCommandsIcon } from "@/components/dashboard/sideMenu/icons/networkCommandsIcon";
-import { PunchesIcon } from "@/components/dashboard/sideMenu/icons/punchesIcon";
+import { deleteCookie } from "cookies-next";
 import { useApolloClient } from "@apollo/client";
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import StorageRoundedIcon from "@mui/icons-material/StorageRounded";
+import ShuffleRoundedIcon from "@mui/icons-material/ShuffleRounded";
+import AvTimerOutlinedIcon from "@mui/icons-material/AvTimerOutlined";
+import { DynamicFormOutlined } from "@mui/icons-material";
 const drawerWidth = 270;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -107,22 +107,22 @@ export default function SideMenu() {
             <Divider />
             <List>
                 <SideMenuItem href={"/dashboard/punches"} open={open} text={"Zaznamenané ražení"}>
-                    <PunchesIcon />
+                    <AvTimerOutlinedIcon sx={{ color: "black" }} />
                 </SideMenuItem>
                 <SideMenuItem href={"/dashboard/nodes"} open={open} text={"Zařízení"}>
-                    <NodesIcon />
+                    <StorageRoundedIcon sx={{ color: "black" }} />
                 </SideMenuItem>
                 <SideMenuItem href={"/dashboard/networkCommands"} open={open} text={"Síťové příkazy"}>
-                    <NetworkCommandsIcon />
+                    <DynamicFormOutlined sx={{ color: "black" }} />
                 </SideMenuItem>
                 <SideMenuItem href={"/dashboard/oresults"} open={open} text={"Propojení OResults"}>
-                    <OresultsIcon />
+                    <ShuffleRoundedIcon sx={{ color: "black" }} />
                 </SideMenuItem>
             </List>
             <Divider style={{ marginTop: "auto" }} />
             <List>
                 <SideMenuItem open={open} text={"Odhlásit se"} onClick={handleLogout}>
-                    <LogoutIcon />
+                    <LogoutRoundedIcon sx={{ color: "black" }} />
                 </SideMenuItem>
             </List>
         </Drawer>
