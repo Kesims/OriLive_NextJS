@@ -33,21 +33,12 @@ const closedMixin = (): CSSObject => ({
 });
 
 export const Drawer: React.FC<Props> = ({ open, setOpen, children }) => {
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
-
     return (
         <MuiDrawer
-            onMouseEnter={handleDrawerOpen}
-            onMouseLeave={handleDrawerClose}
+            onMouseEnter={() => setOpen(true)}
+            onMouseLeave={() => setOpen(false)}
             variant={"permanent"}
             sx={{
-                // width: drawerWidth,
                 flexShrink: 0,
                 justifyContent: "space-around",
                 whiteSpace: "nowrap",

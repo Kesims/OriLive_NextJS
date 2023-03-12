@@ -2,6 +2,7 @@ import React from "react";
 import { theme } from "@/src/utils/theme";
 import { Link } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
+import { urlConf } from "@/src/urlConf";
 
 interface Props {
     open: boolean;
@@ -10,7 +11,7 @@ interface Props {
 export const DrawerHeader: React.FC<Props> = ({ open }) => {
     return (
         <Link
-            href={"/dashboard"}
+            href={urlConf.dashboard.overview}
             sx={{
                 display: "flex",
                 alignItems: "center",
