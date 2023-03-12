@@ -1,8 +1,7 @@
 "use client";
 import { ApolloProvider } from "@apollo/client";
-import { CssBaseline } from "@material-ui/core";
 import { SnackbarProvider } from "notistack";
-import { ThemeProvider } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { theme } from "@/src/utils/theme";
 import { client } from "@/src/utils/apolloClient";
 
