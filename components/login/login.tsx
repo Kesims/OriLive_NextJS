@@ -5,7 +5,7 @@ import { useLogin } from "@/components/login/login.hook";
 import type { LoginFormData } from "@/components/login/login.types";
 
 export function LoginForm() {
-    const { loginHandler } = useLogin();
+    const { loginHandler, loading } = useLogin();
     const { register, handleSubmit } = useForm<LoginFormData>();
 
     return (
