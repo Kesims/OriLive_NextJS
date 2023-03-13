@@ -6,7 +6,11 @@ import type { LoginFormData } from "@/components/login/login.types";
 
 export function LoginForm() {
     const { loginHandler, loading } = useLogin();
-    const { register, handleSubmit } = useForm<LoginFormData>();
+    const {
+        register,
+        handleSubmit,
+        formState: { dirtyFields },
+    } = useForm<LoginFormData>();
 
     return (
         <Box
@@ -22,6 +26,7 @@ export function LoginForm() {
             </Typography>
             <Box component="form" onSubmit={handleSubmit(loginHandler)} noValidate sx={{ mt: 1 }}>
                 <TextField
+                    data-testid={"usernameField"}
                     margin="normal"
                     required
                     fullWidth
@@ -32,6 +37,7 @@ export function LoginForm() {
                     {...register("username", {})}
                 />
                 <TextField
+                    data-testid={"passwordField"}
                     margin="normal"
                     required
                     fullWidth
@@ -45,7 +51,14 @@ export function LoginForm() {
                     control={<Checkbox value="remember" color="primary" />}
                     label="Zapamatovat si údaje"
                 />
-                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+                <Button
+                    data-testid={"loginButton"}
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                    disabled={!(dirtyFields.password && dirtyFields.username)}
+                >
                     Přihlásit se
                 </Button>
             </Box>

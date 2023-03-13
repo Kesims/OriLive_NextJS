@@ -4,6 +4,7 @@ import { SnackbarProvider } from "notistack";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { theme } from "@/src/utils/theme";
 import { client } from "@/src/utils/apolloClient";
+import React from "react";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
