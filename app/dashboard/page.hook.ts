@@ -1,44 +1,52 @@
-import { GetDashboardOverviewQuery } from "@/src/generated/graphql";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useActiveDevices } from "@/hooks/device/activeDevices.hook";
+import { usePunches } from "@/hooks/punch/punches.hook";
+import { useOResults } from "@/hooks/oresults/oresults.hook";
+import { useNetworkCommands } from "@/hooks/networkCommands/networkCommands.hook";
 
 export function useDashboardOverview() {
-    const [nodeCount, setNodeCount] = useState<number>();
-    const [gatewayCount, setGatewayCount] = useState<number>();
-    const [punchCount, setPunchCount] = useState<number>();
+    const devices = useActiveDevices(180);
+
+    const afterDate = new Date(new Date(new Date().getTime() - 3600000).toString());
+    // toDateString is a hacky way to prevent the thingy doing infinite requests due to date object changing...
+    const punches = usePunches(afterDate);
     const [punchText, setPunchText] = useState<string>();
+
+    const oresultsMappings = useOResults();
+    const [oresultsMappingsText, setOResultsMappingsText] = useState<string>();
+
+    const networkCommands = useNetworkCommands();
     const [networkCommandsText, setNetworkCommandsText] = useState<string>();
-    const processGqlData = (data: GetDashboardOverviewQuery) => {
-        const newNodeCount = data.nodes.filter((node) => node.node_type === 1).length;
-        const newGatewayCount = data.nodes.filter((node) => node.node_type === 0).length;
-        setNodeCount(newNodeCount ? newNodeCount : 0);
-        setGatewayCount(newGatewayCount ? newGatewayCount : 0);
 
-        const newPunchCount = data.punches.filter(
-            (punch) => new Date().getTime() - new Date(punch.receive_time).getTime() < 3600000,
-        ).length;
-        setPunchCount(newPunchCount);
+    useEffect(() => {
+        if (punches.latestDatePunch !== undefined) {
+            const diffInMinutes = Math.floor(
+                (new Date().getTime() - punches.latestDatePunch.receiveTime.getTime()) / 60000,
+            );
+            setPunchText(`Poslední ražení: ${diffInMinutes} minut zpět`);
+        } else {
+            setPunchText(`Poslední ražení: více než 60 minut zpět`);
+        }
+    }, [punches.punches]);
 
-        const latestDatePunch = data.punches.reduce((latest, punch) => {
-            const receiveTimeDate = new Date(punch.receive_time);
-            const latestReceiveTimeDate = new Date(latest.receive_time);
-            return receiveTimeDate > latestReceiveTimeDate ? punch : latest;
-        });
+    useEffect(() => {
+        if (oresultsMappings.mappingsCount !== undefined) {
+            setOResultsMappingsText(`${oresultsMappings.mappingsCount} zařízení mapováno do OResults`);
+        }
+    }, [oresultsMappings.mappingsCount]);
 
-        const diffInMinutes = Math.floor(
-            (new Date().getTime() - new Date(latestDatePunch.receive_time).getTime()) / 60000,
-        );
-        setPunchText(`Poslední ražení: ${diffInMinutes} minut zpět`);
-
-        const networkCommandCount = data.networkCommands.length;
-        setNetworkCommandsText(`${networkCommandCount} aktivních síťových příkazů`);
-    };
+    useEffect(() => {
+        if (networkCommands.networkCommandCount !== undefined) {
+            setNetworkCommandsText(`${networkCommands.networkCommandCount} aktivních síťových příkazů`);
+        }
+    }, [networkCommands.networkCommandCount]);
 
     return {
-        nodeCount,
-        gatewayCount,
-        punchCount,
+        nodeCount: devices.nodeCount,
+        gatewayCount: devices.gatewayCount,
+        punchCount: punches.punchCount,
         punchText,
         networkCommandsText,
-        processGqlData,
+        oresultsMappingsText,
     };
 }

@@ -1,9 +1,0 @@
-query GetNodes {
-    nodes {
-        node_id
-        node_type
-        battery_level
-        last_contact
-        neighbours
-    }
-}

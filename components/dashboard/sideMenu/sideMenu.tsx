@@ -23,11 +23,9 @@ export default function SideMenu() {
     const router = useRouter();
     const { enqueueSnackbar } = useSnackbar();
 
-    const client = useApolloClient();
     const handleLogout = async () => {
         try {
             await logout();
-            await client.resetStore();
             deleteCookie("connect.sid", { path: "/" });
             router.push(urlConf.homepage);
         } catch (e) {

@@ -1,0 +1,31 @@
+query getOResultsMappings {
+    oresultsMappings {
+        id
+        node_id
+        api_key
+    }
+}
+
+subscription oresultsMappingAdded {
+    oresultsMappingAdded {
+        id
+        node_id
+        api_key
+    }
+}
+
+subscription oresultsMappingRemoved {
+    oresultsMappingRemoved {
+        id
+        node_id
+        api_key
+    }
+}
+
+mutation createOresultsMapping($input: CreateOresultsMappingInput!) {
+    createOresultsMapping(createOresultsMappingInput: $input)
+}
+
+mutation removeOresultsMapping($id: Int!) {
+    removeOresultsMapping(id: $id)
+}

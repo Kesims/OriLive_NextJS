@@ -22,6 +22,7 @@
     "@mui/styled-engine-sc": "^5.11.9",
     "cookies-next": "^2.1.1",
     "graphql": "^16.6.0",
+    "graphql-ws": "^5.12.0",
     "next": "latest",
     "notistack": "latest",
     "react": "18.2.0",
