@@ -2,39 +2,36 @@
 import Grid2 from "@mui/material/Unstable_Grid2";
 import React from "react";
 import { LoginForm } from "@/components/login/login";
-import { Box, Container, Link, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
+import {
+    Box,
+    Container,
+    Link,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Typography,
+    useTheme,
+} from "@mui/material";
 import Divider from "@mui/material/Divider";
 import ExpandMoreRounded from "@mui/icons-material/ExpandMoreRounded";
 import ArrowRightRounded from "@mui/icons-material/ArrowRightRounded";
-import { theme } from "@/src/utils/theme";
 import List from "@mui/material/List";
 import { EmailRounded, LinkedIn } from "@mui/icons-material";
-import { useWindowSize } from "@/hooks/frontPage/frontPage.hook";
+
+const oNodeList = [
+    "Kompaktní, levná, lehká",
+    "Výdrž baterie více než 13 hodin",
+    "Node / WiFi Gateway",
+    "Nastavení pomocí mobilní aplikace a Bluetooth",
+    "ESP32, LoRa 169 MHz",
+];
+
 export default function Home() {
-    const windowSize = useWindowSize();
-
-    let topSectionHeight = undefined;
-    let topSectionFormHeight = undefined;
-    let largeHeadingFontSize = "2rem";
-    let logoWidth = "70%";
-    if (windowSize.width > 900) {
-        topSectionFormHeight = "90%";
-        topSectionHeight = "100vh";
-        largeHeadingFontSize = "3rem";
-        logoWidth = "55%";
-    }
-
-    const oNodeList = [
-        "Kompaktní, levná, lehká",
-        "Výdrž baterie více než 13 hodin",
-        "Node / WiFi Gateway",
-        "Nastavení pomocí mobilní aplikace a Bluetooth",
-        "ESP32, LoRa 169 MHz",
-    ];
+    const theme = useTheme();
 
     return (
         <main>
-            <Grid2 container sx={{ height: topSectionHeight, width: "100%" }}>
+            <Grid2 container sx={{ [theme.breakpoints.up("md")]: { height: "100vh" }, width: "100%" }}>
                 <Grid2
                     sm={12}
                     md={6}
@@ -47,7 +44,12 @@ export default function Home() {
                     }}
                 >
                     <Box sx={{ display: "flex", justifyContent: "center" }}>
-                        <img src={"/logo.png"} width={logoWidth} />
+                        <img
+                            src={"/logo.png"}
+                            width={theme.breakpoints.up("md") ? "55%" : "70%"}
+                            loading={"lazy"}
+                            decoding={"async"}
+                        />
                     </Box>
                 </Grid2>
                 <Grid2
@@ -59,7 +61,7 @@ export default function Home() {
                         display: "flex",
                         flexFlow: "column",
                         justifyContent: "center",
-                        height: topSectionFormHeight,
+                        [theme.breakpoints.up("md")]: { height: "90%" },
                     }}
                 >
                     <Box sx={{ display: "flex", justifyContent: "center", marginBottom: "80px" }}>
@@ -110,7 +112,13 @@ export default function Home() {
                         sx={{ display: "flex", justifyContent: "center", flexFlow: "column" }}
                     >
                         <Box sx={{ display: "flex", justifyContent: "center" }}>
-                            <img src={"/o-node.png"} alt={"o-node"} width={"75%"} />
+                            <img
+                                src={"/o-node.png"}
+                                alt={"o-node"}
+                                width={"75%"}
+                                loading={"lazy"}
+                                decoding={"async"}
+                            />
                         </Box>
                     </Grid2>
                     <Grid2
@@ -182,7 +190,13 @@ export default function Home() {
                         sx={{ display: "flex", flexFlow: "column", justifyContent: "center" }}
                     >
                         <Box sx={{ display: "flex", justifyContent: "center" }}>
-                            <img src={"/nodeSimplistic.png"} alt={"example network"} width={"40%"} />
+                            <img
+                                src={"/nodeSimplistic.png"}
+                                alt={"example network"}
+                                width={"40%"}
+                                loading={"lazy"}
+                                decoding={"async"}
+                            />
                         </Box>
                     </Grid2>
                 </Grid2>
@@ -195,7 +209,7 @@ export default function Home() {
                         fontWeight={"bold"}
                         color={theme.palette.primary.main}
                         marginBottom={4}
-                        fontSize={largeHeadingFontSize}
+                        sx={{ [theme.breakpoints.down("md")]: { fontSize: "2rem" } }}
                     >
                         JEDNODUCHOST
                     </Typography>
@@ -215,7 +229,13 @@ export default function Home() {
                                     Mobilní aplikace
                                 </Typography>
 
-                                <img src={"/mobileShowcase.png"} alt={"mobile app showcase"} width={"100%"} />
+                                <img
+                                    src={"/mobileShowcase.png"}
+                                    alt={"mobile app showcase"}
+                                    width={"100%"}
+                                    loading={"lazy"}
+                                    decoding={"async"}
+                                />
                                 <Typography
                                     variant={"body1"}
                                     marginTop={3}
@@ -237,7 +257,13 @@ export default function Home() {
                                     Webový dashboard
                                 </Typography>
 
-                                <img src={"/laptopShowcase.png"} alt={"dashboard"} width={"100%"} />
+                                <img
+                                    src={"/laptopShowcase.png"}
+                                    alt={"dashboard"}
+                                    width={"100%"}
+                                    loading={"lazy"}
+                                    decoding={"async"}
+                                />
                                 <Typography
                                     variant={"body1"}
                                     marginTop={3}
