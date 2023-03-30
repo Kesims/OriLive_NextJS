@@ -15,7 +15,7 @@ export const BasePanel: React.FC<Props> = ({ heading, size, button, children }) 
     const childArr = React.Children.toArray(children);
 
     return (
-        <Panel xs={size}>
+        <Panel md={size}>
             <Box p={2} sx={{ height: "100%" }}>
                 <Grid2 container columnSpacing={3} rowSpacing={2} p={1} sx={{ height: "calc(100% - 40px)" }}>
                     <Grid2 xs={12}>
@@ -25,7 +25,7 @@ export const BasePanel: React.FC<Props> = ({ heading, size, button, children }) 
                     </Grid2>
                     {childArr.map((child, key) => {
                         return (
-                            <Grid2 key={key} xs={size > 7 ? 6 : 12}>
+                            <Grid2 key={key} md={size > 7 ? 6 : 12} xs={12}>
                                 <Box
                                     sx={{
                                         display: "flex",
@@ -43,7 +43,9 @@ export const BasePanel: React.FC<Props> = ({ heading, size, button, children }) 
 
                 {button ? (
                     <Grid2 container paddingTop={0}>
-                        <Grid2 xs={size > 7 ? 6 : 12}>{button}</Grid2>
+                        <Grid2 md={size > 7 ? 6 : 12} xs={12}>
+                            {button}
+                        </Grid2>
                     </Grid2>
                 ) : (
                     <></>

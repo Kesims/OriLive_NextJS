@@ -7,7 +7,6 @@ import { useLogutMutationMutation } from "@/src/generated/graphql";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
 import { deleteCookie } from "cookies-next";
-import { useApolloClient } from "@apollo/client";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import StorageRoundedIcon from "@mui/icons-material/StorageRounded";
 import ShuffleRoundedIcon from "@mui/icons-material/ShuffleRounded";
@@ -16,22 +15,11 @@ import { DynamicFormOutlined } from "@mui/icons-material";
 import { Drawer } from "./drawer";
 import { DrawerHeader } from "./drawerHeader";
 import { urlConf } from "@/src/urlConf";
+import { useHandleLogout } from "@/components/login/logoutHandler";
 
 export default function SideMenu() {
     const [open, setOpen] = React.useState(false);
-    const [logout] = useLogutMutationMutation();
-    const router = useRouter();
-    const { enqueueSnackbar } = useSnackbar();
-
-    const handleLogout = async () => {
-        try {
-            await logout();
-            deleteCookie("connect.sid", { path: "/" });
-            router.push(urlConf.homepage);
-        } catch (e) {
-            enqueueSnackbar("Odhlášení se nezdařilo!", { variant: "error" });
-        }
-    };
+    const handleLogout = useHandleLogout();
 
     return (
         <Drawer open={open} setOpen={setOpen}>
