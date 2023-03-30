@@ -260,10 +260,9 @@ export default function Home() {
                         Chci poděkovat všem, kteří mi pomohli s vývojem tohoto projektu. V první řadě je to
                         RNDr. Jan Koupil, Ph.D., za vedení při tvorbě práce SOČ a Ing. Pavel Faltejsek, který
                         mě zasvětil do IT okolo pořádání závodů a dal mi hromadu cenných tipů. Dík patří také
-                        [titul?] Karlu Koudelkovi, který mě naučil pracovat s moderními webovými technologiemi
-                        a Mgr. Janu Juricovi, autorovi projektu{" "}
-                        <Link href={"https://oresults.eu"}>OResults.eu</Link>, který také poskytl mnoho tipů a
-                        je velmi otevřený spolupráci.
+                        Karlovi Koudelkovi, který mě naučil pracovat s moderními webovými technologiemi a Mgr.
+                        Janu Juricovi, autorovi projektu <Link href={"https://oresults.eu"}>OResults.eu</Link>
+                        , který také poskytl mnoho tipů a je velmi otevřený spolupráci.
                     </Typography>
                 </Container>
             </Box>
