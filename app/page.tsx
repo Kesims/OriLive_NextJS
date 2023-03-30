@@ -2,24 +2,28 @@
 import Grid2 from "@mui/material/Unstable_Grid2";
 import React from "react";
 import { LoginForm } from "@/components/login/login";
-import {
-    Box,
-    Card,
-    Container,
-    Link,
-    ListItem,
-    ListItemIcon,
-    ListItemText,
-    Paper,
-    Typography,
-} from "@mui/material";
+import { Box, Container, Link, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import ExpandMoreRounded from "@mui/icons-material/ExpandMoreRounded";
 import ArrowRightRounded from "@mui/icons-material/ArrowRightRounded";
 import { theme } from "@/src/utils/theme";
 import List from "@mui/material/List";
 import { EmailRounded, LinkedIn } from "@mui/icons-material";
+import { useWindowSize } from "@/hooks/frontPage/frontPage.hook";
 export default function Home() {
+    const windowSize = useWindowSize();
+
+    let topSectionHeight = undefined;
+    let topSectionFormHeight = undefined;
+    let largeHeadingFontSize = "2rem";
+    let logoWidth = "70%";
+    if (windowSize.width > 900) {
+        topSectionFormHeight = "90%";
+        topSectionHeight = "100vh";
+        largeHeadingFontSize = "3rem";
+        logoWidth = "55%";
+    }
+
     const oNodeList = [
         "Kompaktní, levná, lehká",
         "Výdrž baterie více než 13 hodin",
@@ -30,38 +34,35 @@ export default function Home() {
 
     return (
         <main>
-            <link rel="preconnect" href="https://fonts.googleapis.com" />
-            <link rel="preconnect" href="https://fonts.gstatic.com" />
-            <link href="https://fonts.googleapis.com/css2?family=Codystar&display=swap" rel="stylesheet" />
-
-            <Grid2 container spacing={2} sx={{ height: "100vh", width: "100%" }}>
+            <Grid2 container sx={{ height: topSectionHeight, width: "100%" }}>
                 <Grid2
-                    xs={6}
-                    p={10}
+                    sm={12}
+                    md={6}
+                    p={4}
                     sx={{
                         maxWidth: "100%",
-                        height: "90%",
                         display: "flex",
                         flexFlow: "column",
                         justifyContent: "center",
                     }}
                 >
                     <Box sx={{ display: "flex", justifyContent: "center" }}>
-                        <img src={"/logo.png"} width={"65%"} />
+                        <img src={"/logo.png"} width={logoWidth} />
                     </Box>
                 </Grid2>
                 <Grid2
-                    xs={6}
-                    p={10}
+                    sm={12}
+                    md={6}
+                    p={4}
                     sx={{
                         maxWidth: "100%",
-                        height: "90%",
                         display: "flex",
                         flexFlow: "column",
                         justifyContent: "center",
+                        height: topSectionFormHeight,
                     }}
                 >
-                    <Box sx={{ display: "flex", justifyContent: "center" }}>
+                    <Box sx={{ display: "flex", justifyContent: "center", marginBottom: "80px" }}>
                         <Container maxWidth="xs">
                             <LoginForm />
                         </Container>
@@ -82,8 +83,8 @@ export default function Home() {
             </Grid2>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Container maxWidth={"md"} sx={{ paddingTop: "150px", paddingBottom: "200px" }}>
-                    <Typography variant={"h4"} align={"center"} fontWeight={"bold"}>
-                        CO JE PROJEKT ORILIVE?
+                    <Typography variant={"h4"} align={"center"} fontWeight={"bold"} maxWidth={"100%"}>
+                        CO JE ORILIVE?
                     </Typography>
                     <Typography variant={"body1"} align={"center"} marginTop={3} fontSize={"18px"}>
                         Jedná se o studentský projekt, který se zabývá konstrukcí sady zařízení pro bezdrátový
@@ -103,14 +104,22 @@ export default function Home() {
                 p={3}
             >
                 <Grid2 container spacing={3}>
-                    <Grid2 xs={5} sx={{ display: "flex", justifyContent: "center", flexFlow: "column" }}>
+                    <Grid2
+                        sm={12}
+                        md={5}
+                        sx={{ display: "flex", justifyContent: "center", flexFlow: "column" }}
+                    >
                         <Box sx={{ display: "flex", justifyContent: "center" }}>
                             <img src={"/o-node.png"} alt={"o-node"} width={"75%"} />
                         </Box>
                     </Grid2>
-                    <Grid2 xs={7}>
-                        <Container sx={{ paddingX: "50px" }} maxWidth={"md"}>
-                            <Typography variant={"h4"} color={"white"} fontWeight={"bold"}>
+                    <Grid2
+                        sm={12}
+                        md={7}
+                        sx={{ display: "flex", justifyContent: "center", flexFlow: "column" }}
+                    >
+                        <Container maxWidth={"md"}>
+                            <Typography variant={"h4"} color={"white"} fontWeight={"bold"} marginTop={5}>
                                 Deska OriLive O-Node
                             </Typography>
                             <Typography variant={"body1"} color={"white"} marginY={6} fontSize={"18px"}>
@@ -147,14 +156,18 @@ export default function Home() {
                     </Grid2>
                 </Grid2>
             </Box>
-            <Box p={6} sx={{ paddingY: "200px", display: "flex", justifyContent: "center" }}>
+            <Box p={3} sx={{ paddingY: "200px", display: "flex", justifyContent: "center" }}>
                 <Grid2 container spacing={2} maxWidth={"lg"}>
-                    <Grid2 xs={7} sx={{ display: "flex", flexFlow: "column", justifyContent: "center" }}>
+                    <Grid2
+                        sm={12}
+                        md={7}
+                        sx={{ display: "flex", flexFlow: "column", justifyContent: "center" }}
+                    >
                         <Container maxWidth={"md"}>
                             <Typography variant={"h4"} fontWeight={"bold"}>
                                 OPRP Protokol
                             </Typography>
-                            <Typography variant={"body1"} marginTop={3} fontSize={"18px"}>
+                            <Typography variant={"body1"} marginTop={3} fontSize={"18px"} marginBottom={8}>
                                 OPRP (OriLive Punch Routing Protocol) je jednoduchý protokol, speciálně
                                 navržený pro potřeby projektu. Jednotkám umožňuje formovat meshovou síť, ve
                                 které mohou data téct z jednotlivých nodů ke gateway jednotce přes více
@@ -163,14 +176,18 @@ export default function Home() {
                             </Typography>
                         </Container>
                     </Grid2>
-                    <Grid2 xs={5} sx={{ display: "flex", flexFlow: "column", justifyContent: "center" }}>
+                    <Grid2
+                        sm={12}
+                        md={5}
+                        sx={{ display: "flex", flexFlow: "column", justifyContent: "center" }}
+                    >
                         <Box sx={{ display: "flex", justifyContent: "center" }}>
                             <img src={"/nodeSimplistic.png"} alt={"example network"} width={"40%"} />
                         </Box>
                     </Grid2>
                 </Grid2>
             </Box>
-            <Box p={6} sx={{ paddingBottom: "150px", display: "flex", justifyContent: "center" }}>
+            <Box p={4} sx={{ paddingBottom: "150px", display: "flex", justifyContent: "center" }}>
                 <Container>
                     <Typography
                         variant={"h3"}
@@ -178,6 +195,7 @@ export default function Home() {
                         fontWeight={"bold"}
                         color={theme.palette.primary.main}
                         marginBottom={4}
+                        fontSize={largeHeadingFontSize}
                     >
                         JEDNODUCHOST
                     </Typography>
@@ -186,8 +204,8 @@ export default function Home() {
                         nepředstavoval tak pro pořadatele zátěž.
                     </Typography>
                     <Grid2 container spacing={4}>
-                        <Grid2 xs={6}>
-                            <Container sx={{ paddingX: "50px" }}>
+                        <Grid2 sm={12} md={6}>
+                            <Container>
                                 <Typography
                                     variant={"h4"}
                                     fontWeight={"bold"}
@@ -208,8 +226,8 @@ export default function Home() {
                                 </Typography>
                             </Container>
                         </Grid2>
-                        <Grid2 xs={6}>
-                            <Container sx={{ paddingX: "50px" }}>
+                        <Grid2 sm={12} md={6}>
+                            <Container>
                                 <Typography
                                     variant={"h4"}
                                     fontWeight={"bold"}
@@ -233,12 +251,12 @@ export default function Home() {
                     </Grid2>
                 </Container>
             </Box>
-            <Box p={6} sx={{ paddingBottom: "170px", display: "flex", justifyContent: "center" }}>
+            <Box p={3} sx={{ paddingBottom: "180px", display: "flex", justifyContent: "center" }}>
                 <Container maxWidth={"lg"}>
                     <Typography variant={"h4"} fontWeight={"bold"} marginBottom={4}>
                         Poděkování
                     </Typography>
-                    <Typography variant={"body1"} fontSize={"18px"} maxWidth={"80%"}>
+                    <Typography variant={"body1"} fontSize={"18px"}>
                         Chci poděkovat všem, kteří mi pomohli s vývojem tohoto projektu. V první řadě je to
                         RNDr. Jan Koupil, Ph.D., za vedení při tvorbě práce SOČ a Ing. Pavel Faltejsek, který
                         mě zasvětil do IT okolo pořádání závodů a dal mi hromadu cenných tipů. Dík patří také
@@ -254,7 +272,7 @@ export default function Home() {
                     backgroundColor: theme.palette.primary.main,
                     display: "flex",
                     justifyContent: "center",
-                    paddingY: "50",
+                    paddingY: "50px",
                 }}
                 p={3}
             >
