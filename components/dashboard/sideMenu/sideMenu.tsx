@@ -12,7 +12,7 @@ import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import StorageRoundedIcon from "@mui/icons-material/StorageRounded";
 import ShuffleRoundedIcon from "@mui/icons-material/ShuffleRounded";
 import AvTimerOutlinedIcon from "@mui/icons-material/AvTimerOutlined";
-import { DynamicFormOutlined } from "@mui/icons-material";
+import DynamicFormOutlined from "@mui/icons-material/DynamicFormOutlined";
 import { Drawer } from "./drawer";
 import { DrawerHeader } from "./drawerHeader";
 import { urlConf } from "@/src/urlConf";
