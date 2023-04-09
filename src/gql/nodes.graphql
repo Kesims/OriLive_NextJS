@@ -1,5 +1,6 @@
 query GetNodes {
     nodes {
+        id
         node_id
         node_type
         battery_level
@@ -10,6 +11,7 @@ query GetNodes {
 
 subscription nodeAdded {
     nodeAdded {
+        id
         node_id
         node_type
         battery_level
@@ -20,6 +22,7 @@ subscription nodeAdded {
 
 subscription nodeRemoved {
     nodeRemoved {
+        id
         node_id
         node_type
         battery_level

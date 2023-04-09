@@ -6,7 +6,7 @@ import { LargeNumericInfo } from "@/components/dashboard/info/largeNumericInfo";
 import { TextInfo } from "@/components/dashboard/info/textInfo";
 import { Stack } from "@mui/material";
 import { StatusIconColor } from "@/components/dashboard/info/parts/statusIcon.types";
-import { useDashboardOverview } from "@/app/dashboard/page.hook";
+import { useDashboardOverview } from "@/hooks/dashboard/overview/dashboardOverview.hook";
 
 export default function Dashboard() {
     const { nodeCount, gatewayCount, punchCount, punchText, networkCommandsText, oresultsMappingsText } =

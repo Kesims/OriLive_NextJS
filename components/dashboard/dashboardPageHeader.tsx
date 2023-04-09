@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2";
 
 interface Props {
@@ -16,7 +16,12 @@ export const DashboardPageHeader: React.FC<Props> = ({ text, children }) => {
                 <Typography variant="h4">{text}</Typography>
             </Grid2>
             <Grid2 xs={7} sx={gridItemStyle}>
-                <Box sx={{ display: "flex", justifyContent: "right" }}> {children} </Box>
+                <Box sx={{ display: "flex", justifyContent: "right" }}>
+                    <Paper variant={"outlined"} sx={{ paddingX: 4 }}>
+                        {" "}
+                        {children}{" "}
+                    </Paper>
+                </Box>
             </Grid2>
         </Grid2>
     );

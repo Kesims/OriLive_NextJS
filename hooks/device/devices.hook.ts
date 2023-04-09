@@ -3,8 +3,10 @@ import {
     useGetNodesQuery,
     useNodeAddedSubscription,
     useNodeRemovedSubscription,
+    useRemoveNodeMutation,
 } from "@/src/generated/graphql";
 import { Device } from "@/hooks/device/device.types";
+import { useSnackbar } from "notistack";
 
 export function useDevices() {
     const [devices, setDevices] = useState<Device[]>();
@@ -15,6 +17,9 @@ export function useDevices() {
 
     const nodeAddedSubscription = useNodeAddedSubscription();
     const nodeRemovedSubscription = useNodeRemovedSubscription();
+    const [removeNode, removeNodeStatus] = useRemoveNodeMutation();
+
+    const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
         if (!loading) {
@@ -33,6 +38,7 @@ export function useDevices() {
         if (nodeAddedSubscription.data?.nodeAdded) {
             const node = nodeAddedSubscription.data.nodeAdded;
             const newDevice = {
+                id: node.id,
                 node_id: node.node_id,
                 node_type: node.node_type,
                 battery_level: node.battery_level,
@@ -60,7 +66,7 @@ export function useDevices() {
     useEffect(() => {
         if (nodeRemovedSubscription.data && devices) {
             const remove_id = nodeRemovedSubscription.data.nodeRemoved.node_id;
-            const newDevices = { ...devices }.filter((node) => node.node_id !== remove_id);
+            const newDevices = [...devices].filter((node) => node.node_id !== remove_id);
             setDevices(newDevices);
         }
     }, [nodeRemovedSubscription.data]);
@@ -77,6 +83,7 @@ export function useDevices() {
             const dv: Device[] = [];
             data.nodes.forEach((node) => {
                 dv.push({
+                    id: node.id,
                     node_id: node.node_id,
                     node_type: node.node_type,
                     battery_level: node.battery_level,
@@ -101,5 +108,28 @@ export function useDevices() {
         return [];
     };
 
-    return { allDevices: devices, nodes: getNodes(), gateways: getGateways(), nodeCount, gatewayCount };
+    const removeDevice = async (id: number) => {
+        if (removeNodeStatus.loading) return;
+        try {
+            await removeNode({
+                variables: {
+                    id: id,
+                },
+            });
+            enqueueSnackbar("Zařízení bylo úspěšně odebráno.", { variant: "success" });
+            return true;
+        } catch (e) {
+            enqueueSnackbar("Při odebírání zazřízení došlo k neznámé chybě.", { variant: "error" });
+        }
+        return false;
+    };
+
+    return {
+        allDevices: devices,
+        nodes: getNodes(),
+        gateways: getGateways(),
+        nodeCount,
+        gatewayCount,
+        removeDevice,
+    };
 }

@@ -238,17 +238,17 @@ export type NetworkCommandRemovedSubscription = { __typename?: 'Subscription', n
 export type GetNodesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetNodesQuery = { __typename?: 'Query', nodes: Array<{ __typename?: 'Node', node_id: string, node_type: number, battery_level: number, last_contact: any, neighbours: string }> };
+export type GetNodesQuery = { __typename?: 'Query', nodes: Array<{ __typename?: 'Node', id: number, node_id: string, node_type: number, battery_level: number, last_contact: any, neighbours: string }> };
 
 export type NodeAddedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type NodeAddedSubscription = { __typename?: 'Subscription', nodeAdded?: { __typename?: 'Node', node_id: string, node_type: number, battery_level: number, last_contact: any, neighbours: string } | null };
+export type NodeAddedSubscription = { __typename?: 'Subscription', nodeAdded?: { __typename?: 'Node', id: number, node_id: string, node_type: number, battery_level: number, last_contact: any, neighbours: string } | null };
 
 export type NodeRemovedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type NodeRemovedSubscription = { __typename?: 'Subscription', nodeRemoved: { __typename?: 'Node', node_id: string, node_type: number, battery_level: number, last_contact: any, neighbours: string } };
+export type NodeRemovedSubscription = { __typename?: 'Subscription', nodeRemoved: { __typename?: 'Node', id: number, node_id: string, node_type: number, battery_level: number, last_contact: any, neighbours: string } };
 
 export type RemoveNodeMutationVariables = Exact<{
   id: Scalars['Int'];
@@ -609,6 +609,7 @@ export type NetworkCommandRemovedSubscriptionResult = Apollo.SubscriptionResult<
 export const GetNodesDocument = gql`
     query GetNodes {
   nodes {
+    id
     node_id
     node_type
     battery_level
@@ -647,6 +648,7 @@ export type GetNodesQueryResult = Apollo.QueryResult<GetNodesQuery, GetNodesQuer
 export const NodeAddedDocument = gql`
     subscription nodeAdded {
   nodeAdded {
+    id
     node_id
     node_type
     battery_level
@@ -680,6 +682,7 @@ export type NodeAddedSubscriptionResult = Apollo.SubscriptionResult<NodeAddedSub
 export const NodeRemovedDocument = gql`
     subscription nodeRemoved {
   nodeRemoved {
+    id
     node_id
     node_type
     battery_level
