@@ -1,11 +1,15 @@
 "use client";
 import { DashboardPage } from "@/components/dashboard/dashboardPage";
 import { Panel } from "@/components/dashboard/panels/panel";
-import NodeTable from "@/components/dashboard/nodes/nodeTable";
 import { LargeNumericInfo } from "@/components/dashboard/info/largeNumericInfo";
 import { StatusIconColor } from "@/components/dashboard/info/parts/statusIcon.types";
 import { useActiveDevices } from "@/hooks/device/activeDevices.hook";
-
+import dynamic from "next/dynamic";
+import NodeGrid from "@/components/dashboard/nodes/nodeGrid";
+const NodeTableDynamic = dynamic(() => import("@/components/dashboard/nodes/nodeTable"), {
+    loading: () => <p>Loading...</p>,
+    ssr: false,
+});
 export default function Nodes() {
     const { allDevices } = useActiveDevices(180);
 
@@ -27,7 +31,7 @@ export default function Nodes() {
             }
         >
             <Panel md={12}>
-                <NodeTable></NodeTable>
+                <NodeTableDynamic></NodeTableDynamic>
             </Panel>
         </DashboardPage>
     );
