@@ -9,6 +9,7 @@ import {
     ListItem,
     ListItemIcon,
     ListItemText,
+    Tooltip,
     Typography,
     useTheme,
 } from "@mui/material";
@@ -17,6 +18,9 @@ import ExpandMoreRounded from "@mui/icons-material/ExpandMoreRounded";
 import ArrowRightRounded from "@mui/icons-material/ArrowRightRounded";
 import List from "@mui/material/List";
 import { EmailRounded, LinkedIn } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
+import { changeLanguage } from "i18next";
+import Button from "@mui/material/Button";
 
 const oNodeList = [
     "Kompaktní, levná, lehká",
@@ -29,8 +33,19 @@ const oNodeList = [
 export default function Home() {
     const theme = useTheme();
 
+    const { t, i18n } = useTranslation("landingPage");
+
+    const changeLanguageHandler = () => {
+        changeLanguage(i18n.language === "cs" ? "en" : "cs");
+    };
+
     return (
         <main>
+            <Box sx={{ position: "fixed", right: 0, top: 0, margin: 2 }}>
+                <Tooltip title={t("changeLanguage")} placement={"left"}>
+                    <Button onClick={changeLanguageHandler}>{i18n.language === "cs" ? "en" : "cs"}</Button>
+                </Tooltip>
+            </Box>
             <Grid2 container sx={{ [theme.breakpoints.up("md")]: { height: "100vh" }, width: "100%" }}>
                 <Grid2
                     sm={12}
@@ -74,7 +89,12 @@ export default function Home() {
                     <Container>
                         <Divider>
                             <Box sx={{ display: "flex", justifyContent: "center", flexFlow: "column" }}>
-                                <Typography color={theme.palette.primary.main}>O PROJEKTU</Typography>
+                                <Typography
+                                    color={theme.palette.primary.main}
+                                    sx={{ textTransform: "uppercase" }}
+                                >
+                                    {t("about")}
+                                </Typography>
                                 <Box sx={{ display: "flex", justifyContent: "center" }}>
                                     <ExpandMoreRounded sx={{ color: "grey" }} />
                                 </Box>
