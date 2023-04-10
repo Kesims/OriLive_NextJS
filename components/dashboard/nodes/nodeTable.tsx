@@ -16,8 +16,9 @@ import Battery0Bar from "@mui/icons-material/Battery0Bar";
 import BatteryUnknownIcon from "@mui/icons-material/BatteryUnknown";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 import { Button, Tooltip } from "@mui/material";
-import { HeaderCell } from "./cells/headerCell";
-import { BodyCell } from "./cells/bodyCell";
+import { HeaderCell } from "@/components/utils/tables/tableCells/headerCell";
+import { BodyCell } from "@/components/utils/tables/tableCells/bodyCell";
+import { dynamicSort } from "@/components/utils/tables/dynamicSort";
 
 const renderBattery = (batteryLevel: number) => {
     switch (batteryLevel) {
@@ -35,18 +36,6 @@ const renderBattery = (batteryLevel: number) => {
             return <BatteryUnknownIcon />;
     }
 };
-
-function dynamicSort<T>(property: string, sortOrder: number) {
-    return function (a: T, b: T) {
-        const result =
-            a[property as keyof T] < b[property as keyof T]
-                ? -1
-                : a[property as keyof T] > b[property as keyof T]
-                ? 1
-                : 0;
-        return result * sortOrder;
-    };
-}
 
 export default function NodeTable() {
     const { allDevices, removeDevice } = useDevices();

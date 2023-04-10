@@ -6,6 +6,7 @@ import BottomMenu from "@/components/dashboard/bottomMenu/bottomMenu";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
     const theme = useTheme();
+
     return (
         <Box sx={{ display: "flex" }}>
             <SideMenu />

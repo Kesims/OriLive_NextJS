@@ -67,9 +67,36 @@ export function usePunches(afterDate: Date) {
         }
     };
 
+    const getMinutesFromLastPunch = () => {
+        const latestDatePunch = getLatestDatePunch();
+        if (latestDatePunch) {
+            return Math.floor((new Date().getTime() - latestDatePunch.receiveTime.getTime()) / 60000);
+        }
+        return undefined;
+    };
+
+    const getUniqueComeptitionIds = () => {
+        if (punches) return Array.from(new Set(punches.map((punch) => punch.competitionId)));
+        return [];
+    };
+
+    const getUniqueSiNumbers = () => {
+        if (punches) return Array.from(new Set(punches.map((punch) => punch.siNumber)));
+        return [];
+    };
+
+    const getUniqueStationNumbers = () => {
+        if (punches) return Array.from(new Set(punches.map((punch) => punch.stationNumber)));
+        return [];
+    };
+
     return {
         punches,
         punchCount: punches !== undefined ? punches.length : undefined,
         latestDatePunch: getLatestDatePunch(),
+        minutesFromLastPunch: getMinutesFromLastPunch(),
+        uniqueCompetitions: getUniqueComeptitionIds(),
+        uniqueSiNumbers: getUniqueSiNumbers(),
+        uniqueStationNumbers: getUniqueStationNumbers(),
     };
 }

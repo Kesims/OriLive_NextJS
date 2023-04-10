@@ -41,14 +41,12 @@ export const BasePanel: React.FC<Props> = ({ heading, size, button, children }) 
                     })}
                 </Grid2>
 
-                {button ? (
+                {button && (
                     <Grid2 container paddingTop={0}>
                         <Grid2 md={size > 7 ? 6 : 12} xs={12}>
                             {button}
                         </Grid2>
                     </Grid2>
-                ) : (
-                    <></>
                 )}
             </Box>
         </Panel>

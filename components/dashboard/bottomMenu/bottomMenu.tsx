@@ -13,7 +13,7 @@ import Divider from "@mui/material/Divider";
 import { Box, useTheme } from "@mui/material";
 
 export default function BottomMenu() {
-    const [value, setValue] = useState("overview");
+    const [value, setValue] = useState<string>();
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
@@ -31,6 +31,7 @@ export default function BottomMenu() {
                     position: "fixed",
                     bottom: "0",
                     overflowX: "scroll",
+                    overflowY: "hidden",
                     backgroundColor: "white",
                     zIndex: 1000,
                     display: "flex",

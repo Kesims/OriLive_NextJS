@@ -18,8 +18,8 @@ export const DashboardPage: React.FC<DashboardPagePropsInterface> = ({
     const notMobile = useMediaQuery(theme.breakpoints.up("md"));
 
     return (
-        <Box p={notMobile ? 4 : 1} marginX={notMobile ? 4 : 1}>
-            <DashboardPageHeader text={pageHeading}>{headerChildren}</DashboardPageHeader>
+        <Box paddingX={notMobile ? 4 : 1} marginX={notMobile ? 4 : 1}>
+            <DashboardPageHeader text={pageHeading}> {headerChildren}</DashboardPageHeader>
             <Grid2 container justifyContent="space-between" mt={4} columnSpacing={3} rowSpacing={3}>
                 {children}
             </Grid2>
