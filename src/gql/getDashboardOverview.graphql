@@ -1,0 +1,12 @@
+query GetDashboardOverview {
+    nodes {
+        node_type
+        last_contact
+    }
+    networkCommands {
+        id
+    }
+    punches {
+        receive_time
+    }
+}

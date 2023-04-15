@@ -1,0 +1,23 @@
+subscription punchSubscription {
+    punchAdded {
+        id
+        competition_id
+        time
+        receive_time
+        si_number
+        station_number
+        seconds
+    }
+}
+
+query getPunches($after: DateTime) {
+    punches(after: $after) {
+        id
+        competition_id
+        time
+        receive_time
+        si_number
+        station_number
+        seconds
+    }
+}

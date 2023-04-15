@@ -1,0 +1,36 @@
+query GetNodes {
+    nodes {
+        id
+        node_id
+        node_type
+        battery_level
+        last_contact
+        neighbours
+    }
+}
+
+subscription nodeAdded {
+    nodeAdded {
+        id
+        node_id
+        node_type
+        battery_level
+        last_contact
+        neighbours
+    }
+}
+
+subscription nodeRemoved {
+    nodeRemoved {
+        id
+        node_id
+        node_type
+        battery_level
+        last_contact
+        neighbours
+    }
+}
+
+mutation removeNode($id: Int!) {
+    removeNode(id: $id)
+}

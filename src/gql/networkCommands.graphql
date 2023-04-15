@@ -1,0 +1,37 @@
+query getNetworkCommands {
+    networkCommands {
+        id
+        competition_id
+        creation_time
+        type
+        data
+    }
+}
+
+subscription networkCommandAdded {
+    networkCommandAdded {
+        id
+        competition_id
+        creation_time
+        type
+        data
+    }
+}
+
+mutation createNetworkCommand($createNetworkCommandInput: CreateNetworkCommandInput!) {
+    createNetworkCommand(createNetworkCommandInput: $createNetworkCommandInput)
+}
+
+mutation deleteNetworkCommand($id: Int!) {
+    removeNetworkCommand(id: $id)
+}
+
+subscription networkCommandRemoved {
+    networkCommandRemoved {
+        id
+        competition_id
+        creation_time
+        type
+        data
+    }
+}
