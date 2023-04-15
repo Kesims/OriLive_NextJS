@@ -19,6 +19,7 @@ import { Button, Tooltip } from "@mui/material";
 import { HeaderCell } from "@/components/utils/tables/tableCells/headerCell";
 import { BodyCell } from "@/components/utils/tables/tableCells/bodyCell";
 import { dynamicSort } from "@/components/utils/tables/dynamicSort";
+import { Panel } from "../panels/panel";
 
 const renderBattery = (batteryLevel: number) => {
     switch (batteryLevel) {
@@ -61,70 +62,72 @@ export default function NodeTable() {
     };
 
     return (
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }}>
-                <TableHead>
-                    <TableRow>
-                        <HeaderCell
-                            sortIcon={getSortIconString("node_id")}
-                            onClick={() => sortClickHandler("node_id")}
-                        >
-                            ID jednotky
-                        </HeaderCell>
-                        <HeaderCell
-                            sortIcon={getSortIconString("node_type")}
-                            onClick={() => sortClickHandler("node_type")}
-                        >
-                            Typ jednotky
-                        </HeaderCell>
-                        <HeaderCell
-                            sortIcon={getSortIconString("battery_level")}
-                            onClick={() => sortClickHandler("battery_level")}
-                        >
-                            Stav baterie
-                        </HeaderCell>
-                        <HeaderCell
-                            sortIcon={getSortIconString("last_contact")}
-                            onClick={() => sortClickHandler("last_contact")}
-                        >
-                            Poslední update
-                        </HeaderCell>
-                        <HeaderCell>Online</HeaderCell>
-                        <HeaderCell></HeaderCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {sortedDevices()?.map((device) => (
-                        <TableRow
-                            key={device.node_id}
-                            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                        >
-                            <BodyCell>{device.node_id}</BodyCell>
-                            <BodyCell>{device.node_type ? "GATEWAY" : "NODE"}</BodyCell>
-                            <BodyCell>{renderBattery(device.battery_level)}</BodyCell>
-                            <BodyCell>{device.last_contact.toLocaleString()}</BodyCell>
-                            <BodyCell>
-                                {device.last_contact > new Date(new Date().getTime() - 3 * 60000) ? (
-                                    <StatusIcon color={StatusIconColor.green} />
-                                ) : (
-                                    <StatusIcon color={StatusIconColor.red} />
-                                )}
-                            </BodyCell>
-                            <BodyCell>
-                                <Tooltip title={"Delete (ID " + device.node_id + ")"} followCursor={true}>
-                                    <Button
-                                        onClick={async () => {
-                                            await removeDevice(device.id);
-                                        }}
-                                    >
-                                        <DeleteForeverRoundedIcon sx={{ color: "black" }} />
-                                    </Button>
-                                </Tooltip>
-                            </BodyCell>
+        <Panel md={12}>
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }}>
+                    <TableHead>
+                        <TableRow>
+                            <HeaderCell
+                                sortIcon={getSortIconString("node_id")}
+                                onClick={() => sortClickHandler("node_id")}
+                            >
+                                ID jednotky
+                            </HeaderCell>
+                            <HeaderCell
+                                sortIcon={getSortIconString("node_type")}
+                                onClick={() => sortClickHandler("node_type")}
+                            >
+                                Typ jednotky
+                            </HeaderCell>
+                            <HeaderCell
+                                sortIcon={getSortIconString("battery_level")}
+                                onClick={() => sortClickHandler("battery_level")}
+                            >
+                                Stav baterie
+                            </HeaderCell>
+                            <HeaderCell
+                                sortIcon={getSortIconString("last_contact")}
+                                onClick={() => sortClickHandler("last_contact")}
+                            >
+                                Poslední update
+                            </HeaderCell>
+                            <HeaderCell>Online</HeaderCell>
+                            <HeaderCell></HeaderCell>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                    </TableHead>
+                    <TableBody>
+                        {sortedDevices()?.map((device) => (
+                            <TableRow
+                                key={device.node_id}
+                                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                            >
+                                <BodyCell>{device.node_id}</BodyCell>
+                                <BodyCell>{device.node_type ? "GATEWAY" : "NODE"}</BodyCell>
+                                <BodyCell>{renderBattery(device.battery_level)}</BodyCell>
+                                <BodyCell>{device.last_contact.toLocaleString()}</BodyCell>
+                                <BodyCell>
+                                    {device.last_contact > new Date(new Date().getTime() - 3 * 60000) ? (
+                                        <StatusIcon color={StatusIconColor.green} />
+                                    ) : (
+                                        <StatusIcon color={StatusIconColor.red} />
+                                    )}
+                                </BodyCell>
+                                <BodyCell>
+                                    <Tooltip title={"Delete (ID " + device.node_id + ")"} followCursor={true}>
+                                        <Button
+                                            onClick={async () => {
+                                                await removeDevice(device.id);
+                                            }}
+                                        >
+                                            <DeleteForeverRoundedIcon sx={{ color: "black" }} />
+                                        </Button>
+                                    </Tooltip>
+                                </BodyCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Panel>
     );
 }

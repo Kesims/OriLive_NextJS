@@ -4,7 +4,9 @@ import {
     useGetOResultsMappingsQuery,
     useOresultsMappingAddedSubscription,
     useOresultsMappingRemovedSubscription,
+    useRemoveOresultsMappingMutation,
 } from "@/src/generated/graphql";
+import { useSnackbar } from "notistack";
 
 export function useOResults() {
     const [mappings, setMappings] = useState<OResultsMapping[]>();
@@ -13,6 +15,12 @@ export function useOResults() {
 
     const mappingAdded = useOresultsMappingAddedSubscription();
     const mappingRemoved = useOresultsMappingRemovedSubscription();
+
+    const { enqueueSnackbar } = useSnackbar();
+
+    const [removeMapping, removeNodeStatus] = useRemoveOresultsMappingMutation({
+        onCompleted: () => console.log("Login successful."),
+    });
 
     useEffect(() => {
         if (!loading) {
@@ -42,5 +50,21 @@ export function useOResults() {
 
     const mappingsCount = mappings !== undefined ? mappings.length : undefined;
 
-    return { mappings, mappingsCount };
+    const removeMappingHandler = async (id: number) => {
+        if (removeNodeStatus.loading) return;
+        try {
+            await removeMapping({
+                variables: {
+                    id: id,
+                },
+            });
+            enqueueSnackbar("Mapování bylo zrušeno.", { variant: "success" });
+            return true;
+        } catch (e) {
+            enqueueSnackbar("Při odebírání mapování došlo k neznámé chybě.", { variant: "error" });
+        }
+        return false;
+    };
+
+    return { mappings, mappingsCount, removeMapping: removeMappingHandler };
 }

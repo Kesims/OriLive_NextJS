@@ -7,6 +7,7 @@ import { TextInfo } from "@/components/dashboard/info/textInfo";
 import { Stack } from "@mui/material";
 import { StatusIconColor } from "@/components/dashboard/info/parts/statusIcon.types";
 import { useDashboardOverview } from "@/hooks/dashboard/overview/dashboardOverview.hook";
+import { urlConf } from "@/src/urlConf";
 
 export default function Dashboard() {
     const { nodeCount, gatewayCount, punchCount, punchText, networkCommandsText, oresultsMappingsText } =
@@ -18,7 +19,7 @@ export default function Dashboard() {
                 heading={"Dostupné jednotky O-Node"}
                 size={8}
                 button={
-                    <Button variant="contained" fullWidth disableElevation>
+                    <Button variant="contained" fullWidth disableElevation href={urlConf.dashboard.nodes}>
                         Správa zařízení
                     </Button>
                 }
@@ -50,7 +51,7 @@ export default function Dashboard() {
                 heading={"Propojení OResults"}
                 size={4}
                 button={
-                    <Button variant="contained" fullWidth disableElevation>
+                    <Button variant="contained" fullWidth disableElevation href={urlConf.dashboard.oresults}>
                         Správa propojení
                     </Button>
                 }
@@ -71,7 +72,12 @@ export default function Dashboard() {
                 heading={"Síťové příkazy"}
                 size={4}
                 button={
-                    <Button variant="contained" fullWidth disableElevation>
+                    <Button
+                        variant="contained"
+                        fullWidth
+                        disableElevation
+                        href={urlConf.dashboard.networkCommands}
+                    >
                         Správa příkazů
                     </Button>
                 }
@@ -85,7 +91,7 @@ export default function Dashboard() {
                 heading={"Zaznamenané ražení"}
                 size={8}
                 button={
-                    <Button variant="contained" fullWidth disableElevation>
+                    <Button variant="contained" fullWidth disableElevation href={urlConf.dashboard.punches}>
                         Detail ražení
                     </Button>
                 }

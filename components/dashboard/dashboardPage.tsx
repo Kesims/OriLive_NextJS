@@ -1,6 +1,6 @@
 import { DashboardPageHeader } from "@/components/dashboard/dashboardPageHeader";
 import React, { ReactNode } from "react";
-import { Box, useMediaQuery, useTheme } from "@mui/material";
+import { Box } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2";
 
 interface DashboardPagePropsInterface {
@@ -14,13 +14,17 @@ export const DashboardPage: React.FC<DashboardPagePropsInterface> = ({
     headerChildren,
     children,
 }) => {
-    const theme = useTheme();
-    const notMobile = useMediaQuery(theme.breakpoints.up("md"));
-
     return (
-        <Box paddingX={notMobile ? 4 : 1} marginX={notMobile ? 4 : 1}>
+        <Box paddingX={1} marginX={1}>
             <DashboardPageHeader text={pageHeading}> {headerChildren}</DashboardPageHeader>
-            <Grid2 container justifyContent="space-between" mt={4} columnSpacing={3} rowSpacing={3}>
+            <Grid2
+                container
+                justifyContent="space-between"
+                mt={4}
+                columnSpacing={3}
+                rowSpacing={3}
+                marginTop={0}
+            >
                 {children}
             </Grid2>
         </Box>
