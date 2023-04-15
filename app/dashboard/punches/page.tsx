@@ -41,38 +41,8 @@ export default function Punches() {
                 />,
             ]}
         >
-            {/*<BasePanel heading={"Filtr závodu"} size={4}>*/}
-            {/*    <UniversalFilter*/}
-            {/*        options={uniqueCompetitions}*/}
-            {/*        selectedValues={selectedCompetitions}*/}
-            {/*        setSelectedVaues={setSelectedCompetitions}*/}
-            {/*        title={"Zvolte závod(y)"}*/}
-            {/*    />*/}
-            {/*</BasePanel>*/}
-            {/*<BasePanel heading={"Filtr kontroly"} size={4}>*/}
-            {/*    <UniversalFilter*/}
-            {/*        options={uniqueStationNumbers}*/}
-            {/*        selectedValues={selectedStations}*/}
-            {/*        setSelectedVaues={setSelectedStations}*/}
-            {/*        title={"Zvolte kontrolu(y)"}*/}
-            {/*    />*/}
-            {/*</BasePanel>*/}
-            {/*<BasePanel heading={"Filtr čipu"} size={4}>*/}
-            {/*    <UniversalFilter*/}
-            {/*        options={uniqueSiNumbers}*/}
-            {/*        selectedValues={selectedSiNumbers}*/}
-            {/*        setSelectedVaues={setSelectedSiNumbers}*/}
-            {/*        title={"Zvolte čip(y)"}*/}
-            {/*    />*/}
-            {/*</BasePanel>*/}
-            <Grid2 xs={12} maxWidth={"100%"}>
+            <Grid2 xs={12} maxWidth={"100%"} height={"calc(100vh - 160px)"}>
                 <PunchTableGrid punches={punches} />
-                {/*<PunchTable*/}
-                {/*    siNumberFilter={selectedSiNumbers}*/}
-                {/*    stationNumberFilter={selectedStations}*/}
-                {/*    competitionIdFilter={selectedCompetitions}*/}
-                {/*    punches={punches}*/}
-                {/*/>*/}
             </Grid2>
         </DashboardPage>
     );

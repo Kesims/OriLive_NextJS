@@ -1,13 +1,17 @@
 "use client";
 import { DashboardPage } from "@/components/dashboard/dashboardPage";
-import { Panel } from "@/components/dashboard/panels/panel";
 import { LargeNumericInfo } from "@/components/dashboard/info/largeNumericInfo";
 import { StatusIconColor } from "@/components/dashboard/info/parts/statusIcon.types";
 import { useActiveDevices } from "@/hooks/device/activeDevices.hook";
 import dynamic from "next/dynamic";
-import NodeGrid from "@/components/dashboard/nodes/nodeGrid";
+import { Box, LinearProgress } from "@mui/material";
+import React from "react";
 const NodeTableDynamic = dynamic(() => import("@/components/dashboard/nodes/nodeTable"), {
-    loading: () => <p>Loading...</p>,
+    loading: () => (
+        <Box width={"100%"}>
+            <LinearProgress sx={{ m: 2 }} />
+        </Box>
+    ),
     ssr: false,
 });
 export default function Nodes() {
@@ -30,9 +34,7 @@ export default function Nodes() {
                 />
             }
         >
-            <Panel md={12}>
-                <NodeTableDynamic></NodeTableDynamic>
-            </Panel>
+            <NodeTableDynamic></NodeTableDynamic>
         </DashboardPage>
     );
 }

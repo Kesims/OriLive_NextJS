@@ -21,8 +21,8 @@ export type CreateNetworkCommandInput = {
   competition_id: Scalars['String'];
   /** Command data (currently also Int) */
   data: Scalars['Int'];
-  /** Command type (Int) */
-  type: Scalars['Int'];
+  /** Command type (String) */
+  type: Scalars['String'];
 };
 
 export type CreateOresultsMappingInput = {
@@ -42,7 +42,7 @@ export type CreateUserInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createNetworkCommand: NetworkCommand;
+  createNetworkCommand: Scalars['Boolean'];
   createOresultsMapping: Scalars['Boolean'];
   createUser: User;
   login: Scalars['Boolean'];
@@ -221,7 +221,7 @@ export type CreateNetworkCommandMutationVariables = Exact<{
 }>;
 
 
-export type CreateNetworkCommandMutation = { __typename?: 'Mutation', createNetworkCommand: { __typename?: 'NetworkCommand', id: number, competition_id: string, creation_time: any, type: string, data: number } };
+export type CreateNetworkCommandMutation = { __typename?: 'Mutation', createNetworkCommand: boolean };
 
 export type DeleteNetworkCommandMutationVariables = Exact<{
   id: Scalars['Int'];
@@ -507,13 +507,7 @@ export type NetworkCommandAddedSubscriptionHookResult = ReturnType<typeof useNet
 export type NetworkCommandAddedSubscriptionResult = Apollo.SubscriptionResult<NetworkCommandAddedSubscription>;
 export const CreateNetworkCommandDocument = gql`
     mutation createNetworkCommand($createNetworkCommandInput: CreateNetworkCommandInput!) {
-  createNetworkCommand(createNetworkCommandInput: $createNetworkCommandInput) {
-    id
-    competition_id
-    creation_time
-    type
-    data
-  }
+  createNetworkCommand(createNetworkCommandInput: $createNetworkCommandInput)
 }
     `;
 export type CreateNetworkCommandMutationFn = Apollo.MutationFunction<CreateNetworkCommandMutation, CreateNetworkCommandMutationVariables>;

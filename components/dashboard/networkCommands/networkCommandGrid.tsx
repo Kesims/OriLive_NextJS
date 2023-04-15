@@ -1,41 +1,50 @@
-import * as React from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { Punch } from "@/hooks/punch/punch.types";
 import { Box } from "@mui/material";
 import { theme } from "@/src/utils/theme";
+import * as React from "react";
+import { NetworkCommand } from "@/src/generated/graphql";
+import { Panel } from "@/components/dashboard/panels/panel";
 
 const columns: GridColDef[] = [
+    { field: "id", headerName: "ID", headerClassName: "header-bgd", flex: 1, minWidth: 120 },
+
     {
-        field: "stationNumber",
-        headerName: "ČÍSLO KONTROLY",
+        field: "competition_id",
+        headerName: "ID ZÁVODU",
         headerClassName: "header-bgd",
         flex: 1,
-        minWidth: 120,
-    },
-    { field: "siNumber", headerName: "ČÍSLO ČIPU", headerClassName: "header-bgd", flex: 1, minWidth: 120 },
-    {
-        field: "time",
-        headerName: "ČAS RAŽENÍ",
-        headerClassName: "header-bgd",
-        valueFormatter: (params) => params.value.toLocaleString(),
-        flex: 1,
-        minWidth: 180,
+        minWidth: 80,
     },
     {
-        field: "receiveTime",
-        headerName: "ČAS PŘIJETÍ",
+        field: "type",
+        headerName: "TYP",
         headerClassName: "header-bgd",
-        valueFormatter: (params) => params.value.toLocaleString(),
         flex: 1,
-        minWidth: 180,
+        minWidth: 80,
+    },
+    {
+        field: "data",
+        headerName: "DATA",
+        headerClassName: "header-bgd",
+        flex: 1,
+        minWidth: 80,
+    },
+    {
+        field: "creation_time",
+        headerName: "ČAS VYTVOŘENÍ",
+        headerClassName: "header-bgd",
+        valueFormatter: (params) =>
+            typeof params.value === "string" && new Date(params.value).toLocaleString(),
+        flex: 1,
+        minWidth: 220,
     },
 ];
 
 interface Props {
-    punches?: Punch[];
+    networkCommands?: NetworkCommand[];
 }
 
-export default function PunchTableGrid({ punches }: Props) {
+export default function NetworkCommandGrid({ networkCommands }: Props) {
     return (
         <Box
             sx={{
@@ -46,15 +55,14 @@ export default function PunchTableGrid({ punches }: Props) {
                     fontWeight: "bold",
                     color: theme.palette.common.white,
                 },
+                py: 1,
             }}
         >
             <DataGrid
-                rows={punches ? punches : []}
+                rows={networkCommands ? networkCommands : []}
                 columns={columns}
-                autoPageSize={true}
                 disableColumnSelector={true}
                 disableRowSelectionOnClick={true}
-                rowHeight={40}
                 sx={{
                     "& .MuiDataGrid-sortIcon": {
                         opacity: 1,

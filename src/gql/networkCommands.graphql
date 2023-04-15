@@ -19,13 +19,7 @@ subscription networkCommandAdded {
 }
 
 mutation createNetworkCommand($createNetworkCommandInput: CreateNetworkCommandInput!) {
-    createNetworkCommand(createNetworkCommandInput: $createNetworkCommandInput) {
-        id
-        competition_id
-        creation_time
-        type
-        data
-    }
+    createNetworkCommand(createNetworkCommandInput: $createNetworkCommandInput)
 }
 
 mutation deleteNetworkCommand($id: Int!) {

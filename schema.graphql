@@ -1,0 +1,113 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+    subscription: Subscription
+}
+
+type Mutation {
+    createNetworkCommand(createNetworkCommandInput: CreateNetworkCommandInput!): Boolean!
+    createOresultsMapping(createOresultsMappingInput: CreateOresultsMappingInput!): Boolean!
+    createUser(createUserInput: CreateUserInput!): User!
+    login(password: String!, username: String!): Boolean!
+    logout: Boolean!
+    removeNetworkCommand(id: Int!): Boolean!
+    removeNode(id: Int!): Boolean!
+    removeOresultsMapping(id: Int!): Boolean!
+    removeUser(id: Int!): User!
+}
+
+type NetworkCommand {
+    competition_id: String!
+    creation_time: DateTime!
+    data: Int!
+    "NetworkCommand ID"
+    id: Int!
+    type: String!
+}
+
+type Node {
+    battery_level: Int!
+    id: Int!
+    last_contact: DateTime!
+    neighbours: String!
+    node_id: String!
+    node_type: Int!
+}
+
+type OResultsMapping {
+    "OResults API key"
+    api_key: String!
+    "Mapping ID"
+    id: Int!
+    "Local node ID"
+    node_id: Int!
+}
+
+type Punch {
+    competition_id: String!
+    "Punch ID"
+    id: Int!
+    receive_time: DateTime!
+    seconds: Int!
+    si_number: String!
+    station_number: String!
+    time: DateTime!
+}
+
+type Query {
+    checkLogin: Boolean!
+    networkCommands: [NetworkCommand!]!
+    nodes: [Node!]!
+    oresultsMappings: [OResultsMapping!]!
+    punches(after: DateTime): [Punch!]!
+    userById(id: Int!): User!
+    userByUsername(username: String!): User!
+    users: [User!]!
+}
+
+type Subscription {
+    networkCommandAdded: NetworkCommand!
+    networkCommandRemoved: NetworkCommand!
+    nodeAdded: Node
+    nodeRemoved: Node!
+    oresultsMappingAdded: OResultsMapping!
+    oresultsMappingRemoved: OResultsMapping!
+    punchAdded: Punch!
+}
+
+type User {
+    "User ID"
+    id: Int!
+    password: String!
+    user_type: Int!
+    username: String!
+}
+
+"A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format."
+scalar DateTime
+
+input CreateNetworkCommandInput {
+    "Id of the competition the command is for."
+    competition_id: String!
+    "Command data (currently also Int)"
+    data: Int!
+    "Command type (String)"
+    type: String!
+}
+
+input CreateOresultsMappingInput {
+    "Local node ID"
+    local_id: Int!
+    "OResults api key for the device"
+    oresults_key: String!
+}
+
+input CreateUserInput {
+    password: String!
+    "User type (0 = user, 1 = administrator)"
+    user_type: Int!
+    "Unique username"
+    username: String!
+}
