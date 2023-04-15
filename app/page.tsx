@@ -22,18 +22,18 @@ import { useTranslation } from "react-i18next";
 import { changeLanguage } from "i18next";
 import Button from "@mui/material/Button";
 
-const oNodeList = [
-    "Kompaktní, levná, lehká",
-    "Výdrž baterie více než 13 hodin",
-    "Node / WiFi Gateway",
-    "Nastavení pomocí mobilní aplikace a Bluetooth",
-    "ESP32, LoRa 169 MHz",
-];
-
 export default function Home() {
     const theme = useTheme();
 
     const { t, i18n } = useTranslation("landingPage");
+
+    const oNodeList = [
+        t("onodeBoardFeatures.compact"),
+        t("onodeBoardFeatures.batteryLife"),
+        t("onodeBoardFeatures.operatingMode"),
+        t("onodeBoardFeatures.easySetup"),
+        t("onodeBoardFeatures.technical"),
+    ];
 
     const changeLanguageHandler = () => {
         changeLanguage(i18n.language === "cs" ? "en" : "cs");
@@ -43,7 +43,9 @@ export default function Home() {
         <main>
             <Box sx={{ position: "fixed", right: 0, top: 0, margin: 2 }}>
                 <Tooltip title={t("changeLanguage")} placement={"left"}>
-                    <Button onClick={changeLanguageHandler}>{i18n.language === "cs" ? "en" : "cs"}</Button>
+                    <Button onClick={changeLanguageHandler} sx={{ backgroundColor: "white" }}>
+                        {i18n.language === "cs" ? "en" : "cs"}
+                    </Button>
                 </Tooltip>
             </Box>
             <Grid2 container sx={{ [theme.breakpoints.up("md")]: { height: "100vh" }, width: "100%" }}>
@@ -105,14 +107,17 @@ export default function Home() {
             </Grid2>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Container maxWidth={"md"} sx={{ paddingTop: "150px", paddingBottom: "200px" }}>
-                    <Typography variant={"h4"} align={"center"} fontWeight={"bold"} maxWidth={"100%"}>
-                        CO JE ORILIVE?
+                    <Typography
+                        variant={"h4"}
+                        align={"center"}
+                        fontWeight={"bold"}
+                        maxWidth={"100%"}
+                        sx={{ textTransform: "uppercase" }}
+                    >
+                        {t("whatIsOrilive")}
                     </Typography>
                     <Typography variant={"body1"} align={"center"} marginTop={3} fontSize={"18px"}>
-                        Jedná se o studentský projekt, který se zabývá konstrukcí sady zařízení pro bezdrátový
-                        přenos výsledků v orientačních sportech. Při vývoji je kladen důraz na nízkou
-                        pořizovací cenu zařízení, jednoduchost ovládání a nezávislost na sítích mobilních
-                        operátorů.
+                        {t("whatIsOriliveText")}
                     </Typography>
                 </Container>
             </Box>
@@ -148,12 +153,10 @@ export default function Home() {
                     >
                         <Container maxWidth={"md"}>
                             <Typography variant={"h4"} color={"white"} fontWeight={"bold"} marginTop={5}>
-                                Deska OriLive O-Node
+                                {t("onodeBoard")}
                             </Typography>
                             <Typography variant={"body1"} color={"white"} marginY={6} fontSize={"18px"}>
-                                Deska O-Node slouží ke sběru SRR dat ze zařízení SPORTident, která následně
-                                pomocí technologie LoRa a vlastního OPRP protokolu odesílá na nejbližší
-                                gateway jednotku.
+                                {t("onodeBoardText")}
                             </Typography>
                             <List>
                                 {oNodeList.map((item, key) => {
@@ -193,14 +196,10 @@ export default function Home() {
                     >
                         <Container maxWidth={"md"}>
                             <Typography variant={"h4"} fontWeight={"bold"}>
-                                OPRP Protokol
+                                {t("oprpProtocol")}
                             </Typography>
                             <Typography variant={"body1"} marginTop={3} fontSize={"18px"} marginBottom={8}>
-                                OPRP (OriLive Punch Routing Protocol) je jednoduchý protokol, speciálně
-                                navržený pro potřeby projektu. Jednotkám umožňuje formovat meshovou síť, ve
-                                které mohou data téct z jednotlivých nodů ke gateway jednotce přes více
-                                přeskoků. Zároveň je navržený tak, aby byly rámce co nejmenší. To celému
-                                systému umožnuje výborné pokrytí a zajišťuje dostatečnou propustnost sítě.
+                                {t("oprpProtocolText")}
                             </Typography>
                         </Container>
                     </Grid2>
@@ -230,12 +229,12 @@ export default function Home() {
                         color={theme.palette.primary.main}
                         marginBottom={4}
                         sx={{ [theme.breakpoints.down("md")]: { fontSize: "2rem" } }}
+                        textTransform={"uppercase"}
                     >
-                        JEDNODUCHOST
+                        {t("simplicity")}
                     </Typography>
                     <Typography variant={"body1"} fontSize={"18px"} textAlign={"center"} marginBottom={10}>
-                        Systém je navržený tak, aby vyžadoval pouze minimální přípravy před závodem a
-                        nepředstavoval tak pro pořadatele zátěž.
+                        {t("simplicityText")}
                     </Typography>
                     <Grid2 container spacing={4}>
                         <Grid2 sm={12} md={6}>
@@ -246,7 +245,7 @@ export default function Home() {
                                     align={"center"}
                                     marginBottom={5}
                                 >
-                                    Mobilní aplikace
+                                    {t("mobileApp")}
                                 </Typography>
 
                                 <img
@@ -262,7 +261,7 @@ export default function Home() {
                                     fontSize={"18px"}
                                     align={"center"}
                                 >
-                                    Mobilní aplikace dělá z nastavení jednotek otázku vteřin.
+                                    {t("mobileAppText")}
                                 </Typography>
                             </Container>
                         </Grid2>
@@ -274,7 +273,7 @@ export default function Home() {
                                     align={"center"}
                                     marginBottom={5}
                                 >
-                                    Webový dashboard
+                                    {t("webDashboard")}
                                 </Typography>
 
                                 <img
@@ -290,7 +289,7 @@ export default function Home() {
                                     fontSize={"18px"}
                                     align={"center"}
                                 >
-                                    Stav zařízení, tok dat a podobně lze sledovat v dashboardu.
+                                    {t("webDashboardText")}
                                 </Typography>
                             </Container>
                         </Grid2>
@@ -300,15 +299,12 @@ export default function Home() {
             <Box p={3} sx={{ paddingBottom: "180px", display: "flex", justifyContent: "center" }}>
                 <Container maxWidth={"lg"}>
                     <Typography variant={"h4"} fontWeight={"bold"} marginBottom={4}>
-                        Poděkování
+                        {t("acknowledgements")}
                     </Typography>
                     <Typography variant={"body1"} fontSize={"18px"}>
-                        Chci poděkovat všem, kteří mi pomohli s vývojem tohoto projektu. V první řadě je to
-                        RNDr. Jan Koupil, Ph.D., za vedení při tvorbě práce SOČ a Ing. Pavel Faltejsek, který
-                        mě zasvětil do IT okolo pořádání závodů a dal mi hromadu cenných tipů. Dík patří také
-                        Karlovi Koudelkovi, který mě naučil pracovat s moderními webovými technologiemi a Mgr.
-                        Janu Juricovi, autorovi projektu <Link href={"https://oresults.eu"}>OResults.eu</Link>
-                        , který také poskytl mnoho tipů a je velmi otevřený spolupráci.
+                        {t("acknowledgementsText1")}
+                        <Link href={"https://oresults.eu"}>OResults.eu</Link>
+                        {t("acknowledgementsText2")}
                     </Typography>
                 </Container>
             </Box>
@@ -330,7 +326,7 @@ export default function Home() {
                             align={"center"}
                             marginBottom={3}
                         >
-                            Kontakt
+                            {t("contact")}
                         </Typography>
                         <List sx={{ color: "white" }}>
                             <ListItem button key="Email" component="a" href="mailto:neumma@delta-studenti.cz">

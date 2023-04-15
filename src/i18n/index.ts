@@ -14,5 +14,6 @@ export const initTranslations = async () => {
         interpolation: {
             escapeValue: true,
         },
+        keySeparator: ".",
     });
 };
