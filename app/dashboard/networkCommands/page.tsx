@@ -5,10 +5,8 @@ import { LargeNumericInfo } from "@/components/dashboard/info/largeNumericInfo";
 import { StatusIconColor } from "@/components/dashboard/info/parts/statusIcon.types";
 import React from "react";
 import Grid2 from "@mui/material/Unstable_Grid2";
-import { Panel } from "@/components/dashboard/panels/panel";
 import AddCommand from "@/components/dashboard/networkCommands/addCommand";
 import NetworkCommandGrid from "@/components/dashboard/networkCommands/networkCommandGrid";
-import { height } from "@mui/system";
 
 export default function NetworkCommands() {
     const networkCommands = useNetworkCommands();

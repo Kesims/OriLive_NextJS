@@ -1,6 +1,6 @@
 import { DashboardPageHeader } from "@/components/dashboard/dashboardPageHeader";
 import React, { ReactNode } from "react";
-import { Box, useMediaQuery, useTheme } from "@mui/material";
+import { Box } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2";
 
 interface DashboardPagePropsInterface {

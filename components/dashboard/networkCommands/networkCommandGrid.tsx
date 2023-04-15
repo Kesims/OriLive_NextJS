@@ -3,7 +3,6 @@ import { Box } from "@mui/material";
 import { theme } from "@/src/utils/theme";
 import * as React from "react";
 import { NetworkCommand } from "@/src/generated/graphql";
-import { Panel } from "@/components/dashboard/panels/panel";
 
 const columns: GridColDef[] = [
     { field: "id", headerName: "ID", headerClassName: "header-bgd", flex: 1, minWidth: 120 },
