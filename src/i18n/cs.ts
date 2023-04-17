@@ -54,4 +54,52 @@ export default {
         rememberMe: "Zapamatovat si údaje",
         login: "Přihlásit se",
     },
+    dashboard: {
+        sideMenu: {
+            punches: "Detail ražení",
+            networkCommands: "Síťové příkazy",
+            devices: "Správa zařízení",
+            oresults: "Propojení OResults",
+            logout: "Odhlásit se",
+        },
+        bottomMenu: {
+            overview: "Přehled",
+            punches: "Ražení",
+            networkCommands: "Příkazy",
+            devices: "Zařízení",
+            oresults: "OResults",
+            logout: "Odhlásit",
+        },
+        overview: {
+            title: "Vítejte v dashboardu",
+            onodesTitle: "Dostupné jednotky O-Node",
+            deviceSettingsButton: "Správa zařízení",
+            devicesAsNodes: "jednotek v režimu node",
+            devicesAsGateways: "jednotek v režimu gateway",
+            oresultsTitle: "Propojení OResults",
+            oresultsSettingsButton: "Správa propojení",
+            oresultsDevicesMapped: "{{count}} zařízení mapováno do OResults",
+            networkCommandsTitle: "Síťové příkazy",
+            networkCommandsSettingsButton: "Správa příkazů",
+            commandsActive: "{{count}} aktivních síťových příkazů",
+            punchesTitle: "Zaznamenané ražení",
+            punchesSettingsButton: "Detail ražení",
+            lastPunch: "Poslední ražení: {{diffInMinutes}} minut zpět",
+            moreThan60: "více než 60",
+            punchesInLastHour: "ražení za poslední hodinu",
+        },
+        devices: {
+            title: "Správa zařízení",
+            devicesAvailable: "dostupných zařízení",
+        },
+        oresults: {
+            title: "Propojení OResults",
+        },
+        punches: {
+            title: "Zaznamenané ražení",
+        },
+        networkCommands: {
+            title: "Síťové příkazy",
+        },
+    },
 } satisfies TranslationKeys;

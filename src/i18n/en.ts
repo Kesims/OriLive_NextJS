@@ -50,4 +50,52 @@ export default {
         rememberMe: "Remember me",
         login: "Login",
     },
+    dashboard: {
+        sideMenu: {
+            punches: "Punches",
+            networkCommands: "Network commands",
+            devices: "Device overview",
+            oresults: "OResults integration",
+            logout: "Logout",
+        },
+        bottomMenu: {
+            overview: "Overview",
+            punches: "Punches",
+            networkCommands: "Commands",
+            devices: "Devices",
+            oresults: "OResults",
+            logout: "Logout",
+        },
+        overview: {
+            title: "Welcome to the dashboard",
+            onodesTitle: "Available O-Node units",
+            deviceSettingsButton: "Device management",
+            devicesAsNodes: "units in node mode",
+            devicesAsGateways: "units in gateway mode",
+            oresultsTitle: "OResults integration",
+            oresultsSettingsButton: "Integration management",
+            oresultsDevicesMapped: "{{count}} devices mapped to OResults",
+            networkCommandsTitle: "Network commands",
+            networkCommandsSettingsButton: "Command management",
+            commandsActive: "{{count}} active network commands",
+            punchesTitle: "Recorded punches",
+            punchesSettingsButton: "Punch detail",
+            lastPunch: "Last punch: {{diffInMinutes}} minutes ago",
+            moreThan60: "more than 60",
+            punchesInLastHour: "punches in the last hour",
+        },
+        devices: {
+            title: "Device overview",
+            devicesAvailable: "available devices",
+        },
+        oresults: {
+            title: "Propojení OResults",
+        },
+        punches: {
+            title: "Zaznamenané ražení",
+        },
+        networkCommands: {
+            title: "Síťové příkazy",
+        },
+    },
 } satisfies TranslationKeys;

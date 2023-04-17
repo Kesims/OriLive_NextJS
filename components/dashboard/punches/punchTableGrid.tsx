@@ -38,7 +38,7 @@ interface Props {
 export default function PunchTableGrid({ punches }: Props) {
     return (
         <Box
-            sx={{
+            sx={(theme) => ({
                 height: "100%",
                 "& .header-bgd": {
                     backgroundColor: theme.palette.primary.main,
@@ -46,7 +46,7 @@ export default function PunchTableGrid({ punches }: Props) {
                     fontWeight: "bold",
                     color: theme.palette.common.white,
                 },
-            }}
+            })}
         >
             <DataGrid
                 rows={punches ? punches : []}

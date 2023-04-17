@@ -23,7 +23,7 @@ export const DashboardPageHeader: React.FC<Props> = ({ text, children }) => {
             <Grid2
                 md={7}
                 xs={12}
-                sx={{ ...gridItemStyle, [theme.breakpoints.down("md")]: { display: "none" } }}
+                sx={(theme) => ({ ...gridItemStyle, [theme.breakpoints.down("md")]: { display: "none" } })}
             >
                 <Box sx={{ display: "flex", justifyContent: "right" }}>{children}</Box>
             </Grid2>

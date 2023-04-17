@@ -33,4 +33,52 @@ export interface TranslationKeys {
         rememberMe: string;
         login: string;
     };
+    dashboard: {
+        sideMenu: {
+            punches: string;
+            networkCommands: string;
+            devices: string;
+            oresults: string;
+            logout: string;
+        };
+        bottomMenu: {
+            overview: string;
+            punches: string;
+            networkCommands: string;
+            devices: string;
+            oresults: string;
+            logout: string;
+        };
+        overview: {
+            title: string;
+            onodesTitle: string;
+            deviceSettingsButton: string;
+            devicesAsNodes: string;
+            devicesAsGateways: string;
+            oresultsTitle: string;
+            oresultsSettingsButton: string;
+            oresultsDevicesMapped: string;
+            networkCommandsTitle: string;
+            networkCommandsSettingsButton: string;
+            commandsActive: string;
+            punchesTitle: string;
+            punchesSettingsButton: string;
+            lastPunch: string;
+            moreThan60: string;
+            punchesInLastHour: string;
+        };
+        devices: {
+            title: string;
+            devicesAvailable: string;
+        };
+        networkCommands: {
+            title: string;
+        };
+        oresults: {
+            title: string;
+        };
+        punches: {
+            title: string;
+        };
+    };
 }

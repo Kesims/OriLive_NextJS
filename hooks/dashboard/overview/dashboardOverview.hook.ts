@@ -3,6 +3,7 @@ import { useActiveDevices } from "@/hooks/device/activeDevices.hook";
 import { usePunches } from "@/hooks/punch/punches.hook";
 import { useOResults } from "@/hooks/oresults/oresults.hook";
 import { useNetworkCommands } from "@/hooks/networkCommands/networkCommands.hook";
+import { useTranslation } from "react-i18next";
 
 export function useDashboardOverview() {
     const devices = useActiveDevices(180);
@@ -17,27 +18,32 @@ export function useDashboardOverview() {
 
     const networkCommands = useNetworkCommands();
     const [networkCommandsText, setNetworkCommandsText] = useState<string>();
+    const { t } = useTranslation("dashboard", { keyPrefix: "overview" });
 
     useEffect(() => {
         if (punches.latestDatePunch !== undefined) {
             const diffInMinutes = Math.floor(
                 (new Date().getTime() - punches.latestDatePunch.receiveTime.getTime()) / 60000,
             );
-            setPunchText(`Poslední ražení: ${diffInMinutes} minut zpět`);
+            setPunchText(t("lastPunch", { diffInMinutes: diffInMinutes }).toString());
         } else {
-            setPunchText(`Poslední ražení: více než 60 minut zpět`);
+            setPunchText(t("lastPunch", { diffInMinutes: t("moreThan60") }).toString());
         }
     }, [punches.punches]);
 
     useEffect(() => {
         if (oresultsMappings.mappingsCount !== undefined) {
-            setOResultsMappingsText(`${oresultsMappings.mappingsCount} zařízení mapováno do OResults`);
+            setOResultsMappingsText(
+                t("oresultsDevicesMapped", { count: oresultsMappings.mappingsCount }).toString(),
+            );
         }
     }, [oresultsMappings.mappingsCount]);
 
     useEffect(() => {
         if (networkCommands.networkCommandCount !== undefined) {
-            setNetworkCommandsText(`${networkCommands.networkCommandCount} aktivních síťových příkazů`);
+            setNetworkCommandsText(
+                t("commandsActive", { count: networkCommands.networkCommandCount }).toString(),
+            );
         }
     }, [networkCommands.networkCommandCount]);
 

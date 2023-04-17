@@ -1,6 +1,5 @@
 import { OResultsMapping } from "@/src/generated/graphql";
 import { Box } from "@mui/material";
-import { theme } from "@/src/utils/theme";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import * as React from "react";
 import Button from "@mui/material/Button";
@@ -50,7 +49,7 @@ export default function OResultsMappingsGrid({ oresultsMappings, removeMapping }
 
     return (
         <Box
-            sx={{
+            sx={(theme) => ({
                 height: "100%",
                 "& .header-bgd": {
                     backgroundColor: theme.palette.primary.main,
@@ -59,7 +58,7 @@ export default function OResultsMappingsGrid({ oresultsMappings, removeMapping }
                     color: theme.palette.common.white,
                 },
                 py: 1,
-            }}
+            })}
         >
             <DataGrid
                 rows={oresultsMappings ? oresultsMappings : []}

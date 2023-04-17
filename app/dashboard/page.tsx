@@ -8,19 +8,21 @@ import { Stack } from "@mui/material";
 import { StatusIconColor } from "@/components/dashboard/info/parts/statusIcon.types";
 import { useDashboardOverview } from "@/hooks/dashboard/overview/dashboardOverview.hook";
 import { urlConf } from "@/src/urlConf";
+import { useTranslation } from "react-i18next";
 
 export default function Dashboard() {
     const { nodeCount, gatewayCount, punchCount, punchText, networkCommandsText, oresultsMappingsText } =
         useDashboardOverview();
+    const { t } = useTranslation("dashboard", { keyPrefix: "overview" });
 
     return (
-        <DashboardPage pageHeading={"Vítejte v dashboardu!"}>
+        <DashboardPage pageHeading={t("title")}>
             <BasePanel
-                heading={"Dostupné jednotky O-Node"}
+                heading={t("onodesTitle")}
                 size={8}
                 button={
                     <Button variant="contained" fullWidth disableElevation href={urlConf.dashboard.nodes}>
-                        Správa zařízení
+                        {t("deviceSettingsButton")}
                     </Button>
                 }
             >
@@ -33,7 +35,7 @@ export default function Dashboard() {
                             : StatusIconColor.red
                     }
                     value={nodeCount}
-                    description={"jednotek v režimu node"}
+                    description={t("devicesAsNodes")}
                 />
                 <LargeNumericInfo
                     statusColor={
@@ -44,15 +46,15 @@ export default function Dashboard() {
                             : StatusIconColor.red
                     }
                     value={gatewayCount}
-                    description={"jednotek v režimu gateway"}
+                    description={t("devicesAsGateways")}
                 />
             </BasePanel>
             <BasePanel
-                heading={"Propojení OResults"}
+                heading={t("oresultsTitle")}
                 size={4}
                 button={
                     <Button variant="contained" fullWidth disableElevation href={urlConf.dashboard.oresults}>
-                        Správa propojení
+                        {t("oresultsSettingsButton")}
                     </Button>
                 }
             >
@@ -69,7 +71,7 @@ export default function Dashboard() {
                 </Stack>
             </BasePanel>
             <BasePanel
-                heading={"Síťové příkazy"}
+                heading={t("networkCommandsTitle")}
                 size={4}
                 button={
                     <Button
@@ -78,7 +80,7 @@ export default function Dashboard() {
                         disableElevation
                         href={urlConf.dashboard.networkCommands}
                     >
-                        Správa příkazů
+                        {t("networkCommandsSettingsButton")}
                     </Button>
                 }
             >
@@ -88,11 +90,11 @@ export default function Dashboard() {
                 ></TextInfo>
             </BasePanel>
             <BasePanel
-                heading={"Zaznamenané ražení"}
+                heading={t("punchesTitle")}
                 size={8}
                 button={
                     <Button variant="contained" fullWidth disableElevation href={urlConf.dashboard.punches}>
-                        Detail ražení
+                        {t("punchesSettingsButton")}
                     </Button>
                 }
             >
@@ -115,7 +117,7 @@ export default function Dashboard() {
                             : StatusIconColor.red
                     }
                     value={punchCount}
-                    description={"ražení za poslední hodinu"}
+                    description={t("punchesInLastHour")}
                 />
             </BasePanel>
         </DashboardPage>

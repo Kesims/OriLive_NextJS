@@ -11,6 +11,7 @@ import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { useHandleLogout } from "@/components/login/logoutHandler";
 import Divider from "@mui/material/Divider";
 import { Box, useTheme } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 export default function BottomMenu() {
     const [value, setValue] = useState<string>();
@@ -21,6 +22,8 @@ export default function BottomMenu() {
 
     const handleLogout = useHandleLogout();
     const theme = useTheme();
+
+    const { t } = useTranslation("dashboard", { keyPrefix: "bottomMenu" });
 
     return (
         <Box sx={{ [theme.breakpoints.up("md")]: { display: "none" } }}>
@@ -41,38 +44,38 @@ export default function BottomMenu() {
                 onChange={handleChange}
             >
                 <BottomNavigationAction
-                    label="Přehled"
+                    label={t("overview")}
                     value="overview"
                     icon={<HouseRounded />}
                     href={urlConf.dashboard.overview}
                 />
                 <BottomNavigationAction
-                    label="Ražení"
+                    label={t("punches")}
                     value="punches"
                     icon={<AvTimerOutlinedIcon />}
                     href={urlConf.dashboard.punches}
                 />
                 <BottomNavigationAction
-                    label="Zařízení"
+                    label={t("devices")}
                     value="nodes"
                     icon={<StorageRoundedIcon />}
                     href={urlConf.dashboard.nodes}
                 />{" "}
                 <BottomNavigationAction
-                    label="Příkazy"
+                    label={t("networkCommands")}
                     value="networkCommands"
                     icon={<DynamicFormOutlined />}
                     href={urlConf.dashboard.networkCommands}
                 />{" "}
                 <BottomNavigationAction
-                    label="OResults"
+                    label={t("oresults")}
                     value="oresults"
                     icon={<ShuffleRoundedIcon />}
                     href={urlConf.dashboard.oresults}
                 />{" "}
                 <Divider variant={"middle"} orientation={"vertical"} />
                 <BottomNavigationAction
-                    label="Odhlásit"
+                    label={t("logout")}
                     value="logout"
                     icon={<LogoutRoundedIcon />}
                     onClick={handleLogout}

@@ -6,6 +6,7 @@ import { useActiveDevices } from "@/hooks/device/activeDevices.hook";
 import dynamic from "next/dynamic";
 import { Box, LinearProgress } from "@mui/material";
 import React from "react";
+import { useTranslation } from "react-i18next";
 const NodeTableDynamic = dynamic(() => import("@/components/dashboard/nodes/nodeTable"), {
     loading: () => (
         <Box width={"100%"}>
@@ -16,10 +17,11 @@ const NodeTableDynamic = dynamic(() => import("@/components/dashboard/nodes/node
 });
 export default function Nodes() {
     const { allDevices } = useActiveDevices(180);
+    const { t } = useTranslation("dashboard", { keyPrefix: "devices" });
 
     return (
         <DashboardPage
-            pageHeading={"Správa zařízení"}
+            pageHeading={t("title")}
             headerChildren={
                 <LargeNumericInfo
                     statusColor={
@@ -30,7 +32,7 @@ export default function Nodes() {
                             : StatusIconColor.red
                     }
                     value={allDevices?.length}
-                    description={"dostupných zařízení"}
+                    description={t("devicesAvailable")}
                 />
             }
         >

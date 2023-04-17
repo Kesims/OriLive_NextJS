@@ -1,6 +1,5 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
-import { theme } from "@/src/utils/theme";
 import * as React from "react";
 import { NetworkCommand } from "@/src/generated/graphql";
 
@@ -46,7 +45,7 @@ interface Props {
 export default function NetworkCommandGrid({ networkCommands }: Props) {
     return (
         <Box
-            sx={{
+            sx={(theme) => ({
                 height: "100%",
                 "& .header-bgd": {
                     backgroundColor: theme.palette.primary.main,
@@ -55,7 +54,7 @@ export default function NetworkCommandGrid({ networkCommands }: Props) {
                     color: theme.palette.common.white,
                 },
                 py: 1,
-            }}
+            })}
         >
             <DataGrid
                 rows={networkCommands ? networkCommands : []}

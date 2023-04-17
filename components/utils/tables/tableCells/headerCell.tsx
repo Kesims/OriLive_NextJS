@@ -1,4 +1,3 @@
-import { theme } from "@/src/utils/theme";
 import TableCell from "@mui/material/TableCell";
 import ArrowUpwardRoundedIcon from "@mui/icons-material/ArrowUpwardRounded";
 import ArrowDownwardRoundedIcon from "@mui/icons-material/ArrowDownwardRounded";
@@ -34,13 +33,13 @@ export function HeaderCell(props: Props) {
         <TableCell
             onClick={props.onClick}
             align={"center"}
-            sx={{
+            sx={(theme) => ({
                 backgroundColor: theme.palette.primary.main,
                 color: theme.palette.common.white,
                 fontWeight: "bold",
                 textTransform: "uppercase",
                 cursor: "default",
-            }}
+            })}
         >
             <Box
                 sx={{

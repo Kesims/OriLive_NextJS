@@ -10,6 +10,7 @@ import { initTranslations } from "@/src/i18n";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     initTranslations();
+
     return (
         <html lang="en">
             {/*

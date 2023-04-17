@@ -19,13 +19,16 @@ import ArrowRightRounded from "@mui/icons-material/ArrowRightRounded";
 import List from "@mui/material/List";
 import { EmailRounded, LinkedIn } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
-import { changeLanguage } from "i18next";
 import Button from "@mui/material/Button";
+import { changeLanguage } from "i18next";
 
 export default function Home() {
     const theme = useTheme();
 
     const { t, i18n } = useTranslation("landingPage");
+    const changeLanguageHandler = () => {
+        changeLanguage(i18n.language === "cs" ? "en" : "cs");
+    };
 
     const oNodeList = [
         t("onodeBoardFeatures.compact"),
@@ -34,10 +37,6 @@ export default function Home() {
         t("onodeBoardFeatures.easySetup"),
         t("onodeBoardFeatures.technical"),
     ];
-
-    const changeLanguageHandler = () => {
-        changeLanguage(i18n.language === "cs" ? "en" : "cs");
-    };
 
     return (
         <main>
