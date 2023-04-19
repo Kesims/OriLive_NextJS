@@ -7,20 +7,22 @@ import React from "react";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import AddCommand from "@/components/dashboard/networkCommands/addCommand";
 import NetworkCommandGrid from "@/components/dashboard/networkCommands/networkCommandGrid";
+import { useTranslation } from "react-i18next";
 
 export default function NetworkCommands() {
     const networkCommands = useNetworkCommands();
+    const { t } = useTranslation("dashboard", { keyPrefix: "networkCommands" });
 
     return (
         <DashboardPage
-            pageHeading={"Síťové příkazy"}
+            pageHeading={t("title")}
             headerChildren={
                 <LargeNumericInfo
                     statusColor={
                         networkCommands.networkCommands ? StatusIconColor.green : StatusIconColor.red
                     }
                     value={networkCommands.networkCommandCount}
-                    description={"aktivních síťových příkazů"}
+                    description={t("activeCommands")}
                 />
             }
         >

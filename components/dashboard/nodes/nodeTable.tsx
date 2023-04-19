@@ -20,6 +20,7 @@ import { HeaderCell } from "@/components/utils/tables/tableCells/headerCell";
 import { BodyCell } from "@/components/utils/tables/tableCells/bodyCell";
 import { dynamicSort } from "@/components/utils/tables/dynamicSort";
 import { Panel } from "../panels/panel";
+import { useTranslation } from "react-i18next";
 
 const renderBattery = (batteryLevel: number) => {
     switch (batteryLevel) {
@@ -42,6 +43,7 @@ export default function NodeTable() {
     const { allDevices, removeDevice } = useDevices();
     const [sortColumn, setSortColumn] = React.useState("node_id");
     const [sortDirection, setSortDirection] = React.useState<"asc" | "desc">("asc");
+    const { t } = useTranslation("dashboard", { keyPrefix: "devices" });
 
     function sortClickHandler(column: string) {
         if (sortColumn === column) {
@@ -71,27 +73,27 @@ export default function NodeTable() {
                                 sortIcon={getSortIconString("node_id")}
                                 onClick={() => sortClickHandler("node_id")}
                             >
-                                ID jednotky
+                                {t("deviceId")}
                             </HeaderCell>
                             <HeaderCell
                                 sortIcon={getSortIconString("node_type")}
                                 onClick={() => sortClickHandler("node_type")}
                             >
-                                Typ jednotky
+                                {t("deviceType")}
                             </HeaderCell>
                             <HeaderCell
                                 sortIcon={getSortIconString("battery_level")}
                                 onClick={() => sortClickHandler("battery_level")}
                             >
-                                Stav baterie
+                                {t("batteryLevel")}
                             </HeaderCell>
                             <HeaderCell
                                 sortIcon={getSortIconString("last_contact")}
                                 onClick={() => sortClickHandler("last_contact")}
                             >
-                                Poslední update
+                                {t("lastSeen")}
                             </HeaderCell>
-                            <HeaderCell>Online</HeaderCell>
+                            <HeaderCell>{t("online")}</HeaderCell>
                             <HeaderCell></HeaderCell>
                         </TableRow>
                     </TableHead>

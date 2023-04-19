@@ -70,15 +70,45 @@ export interface TranslationKeys {
         devices: {
             title: string;
             devicesAvailable: string;
+            deviceId: string;
+            deviceType: string;
+            batteryLevel: string;
+            lastSeen: string;
+            online: string;
+            deviceRemovedSuccessfully: string;
+            failedToRemoveDevice: string;
         };
         networkCommands: {
             title: string;
+            activeCommands: string;
+            competitionId: string;
+            commandType: string;
+            commandData: string;
+            creationTime: string;
+            addCommand: string;
+            commandTypeLong: string;
+            createCommandButton: string;
+            commandAdded: string;
+            unknownErrorOccurred: string;
         };
         oresults: {
             title: string;
+            unitsMapped: string;
+            mapNewDevice: string;
+            localID: string;
+            oresultsApiKey: string;
+            mapDeviceButton: string;
+            deviceMappedSuccessfully: string;
+            unknownErrorOccurred: string;
         };
         punches: {
             title: string;
+            punchesInLastHour: string;
+            minutesSinceLastPunch: string;
+            stationNumber: string;
+            siNumber: string;
+            punchTime: string;
+            receiveTime: string;
         };
     };
 }

@@ -8,10 +8,12 @@ import {
 } from "@/components/dashboard/networkCommands/networkCommand.types";
 import { useCreateCommand } from "@/components/dashboard/networkCommands/createCommand.hook";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 export default function AddCommand() {
     const { createNetworkCommandHandler } = useCreateCommand();
     const { register, handleSubmit } = useForm<NetworkCommandFormData>();
+    const { t } = useTranslation("dashboard", { keyPrefix: "networkCommands" });
 
     return (
         <Panel md={12}>
@@ -24,7 +26,7 @@ export default function AddCommand() {
                 }}
             >
                 <Typography component="h4" variant="h5" sx={{ textTransform: "uppercase", paddingBottom: 3 }}>
-                    Vytvořit síťový příkaz
+                    {t("addCommand")}
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit(createNetworkCommandHandler)} sx={{ mt: 1 }}>
                     <TextField
@@ -32,7 +34,7 @@ export default function AddCommand() {
                         required
                         fullWidth
                         id="competition_id"
-                        label="ID závoru"
+                        label={t("competitionId")}
                         autoComplete="competition_id"
                         autoFocus
                         {...register("competitionId", {})}
@@ -46,7 +48,7 @@ export default function AddCommand() {
                             },
                         }}
                         fullWidth
-                        label="Data"
+                        label={t("commandData")}
                         type="number"
                         id="data"
                         autoComplete="data"
@@ -58,7 +60,7 @@ export default function AddCommand() {
                         fullWidth
                         id="command_type"
                         select
-                        label="Typ příkazu"
+                        label={t("commandTypeLong")}
                         defaultValue="node_mode"
                         {...register("type", {})}
                     >
@@ -69,7 +71,7 @@ export default function AddCommand() {
                         ))}
                     </TextField>
                     <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-                        Vytvořit
+                        {t("createCommandButton")}
                     </Button>
                 </Box>
             </Box>

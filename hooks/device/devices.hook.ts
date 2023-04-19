@@ -7,6 +7,7 @@ import {
 } from "@/src/generated/graphql";
 import { Device } from "@/hooks/device/device.types";
 import { useSnackbar } from "notistack";
+import { useTranslation } from "react-i18next";
 
 export function useDevices() {
     const [devices, setDevices] = useState<Device[]>();
@@ -19,6 +20,7 @@ export function useDevices() {
     const nodeRemovedSubscription = useNodeRemovedSubscription();
     const [removeNode, removeNodeStatus] = useRemoveNodeMutation();
 
+    const { t } = useTranslation("dashboard", { keyPrefix: "devices" });
     const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
@@ -116,10 +118,10 @@ export function useDevices() {
                     id: id,
                 },
             });
-            enqueueSnackbar("Zařízení bylo úspěšně odebráno.", { variant: "success" });
+            enqueueSnackbar(t("deviceRemovedSuccessfully"), { variant: "success" });
             return true;
         } catch (e) {
-            enqueueSnackbar("Při odebírání zazřízení došlo k neznámé chybě.", { variant: "error" });
+            enqueueSnackbar(t("failedToRemoveDevice"), { variant: "error" });
         }
         return false;
     };

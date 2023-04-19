@@ -7,18 +7,20 @@ import { StatusIconColor } from "@/components/dashboard/info/parts/statusIcon.ty
 import Grid2 from "@mui/material/Unstable_Grid2";
 import AddMapping from "@/components/dashboard/oresults/addMapping";
 import OResultsMappingsGrid from "@/components/dashboard/oresults/oresultsMappingsGrid";
+import { useTranslation } from "react-i18next";
 
 export default function Oresults() {
     const oresults = useOResults();
+    const { t } = useTranslation("dashboard", { keyPrefix: "oresults" });
 
     return (
         <DashboardPage
-            pageHeading={"Propojení OResults"}
+            pageHeading={t("title")}
             headerChildren={
                 <LargeNumericInfo
                     statusColor={oresults.mappings ? StatusIconColor.green : StatusIconColor.red}
                     value={oresults.mappingsCount}
-                    description={"jednotek mapováno do OResults"}
+                    description={t("unitsMapped")}
                 />
             }
         >

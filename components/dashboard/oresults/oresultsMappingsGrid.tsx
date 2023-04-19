@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import * as React from "react";
 import Button from "@mui/material/Button";
+import { useTranslation } from "react-i18next";
 
 interface Props {
     oresultsMappings?: OResultsMapping[];
@@ -10,10 +11,12 @@ interface Props {
 }
 
 export default function OResultsMappingsGrid({ oresultsMappings, removeMapping }: Props) {
+    const { t } = useTranslation("dashboard", { keyPrefix: "oresults" });
+
     const columns: GridColDef[] = [
         {
             field: "node_id",
-            headerName: "LOKÁLNÍ ID",
+            headerName: t("localID").toString(),
             headerClassName: "header-bgd",
             align: "center",
             headerAlign: "center",
@@ -22,7 +25,7 @@ export default function OResultsMappingsGrid({ oresultsMappings, removeMapping }
         },
         {
             field: "api_key",
-            headerName: "ORESULTS API KLÍČ",
+            headerName: t("oresultsApiKey").toString(),
             headerClassName: "header-bgd",
             align: "center",
             headerAlign: "center",

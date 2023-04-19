@@ -2,20 +2,27 @@ import * as React from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Punch } from "@/hooks/punch/punch.types";
 import { Box } from "@mui/material";
-import { theme } from "@/src/utils/theme";
+import { useTranslation } from "react-i18next";
+import { TFunction } from "i18next";
 
-const columns: GridColDef[] = [
+const columns = (t: TFunction<"dashboard", "punches", "dashboard">): GridColDef[] => [
     {
         field: "stationNumber",
-        headerName: "ČÍSLO KONTROLY",
+        headerName: t("stationNumber").toString(),
         headerClassName: "header-bgd",
         flex: 1,
         minWidth: 120,
     },
-    { field: "siNumber", headerName: "ČÍSLO ČIPU", headerClassName: "header-bgd", flex: 1, minWidth: 120 },
+    {
+        field: "siNumber",
+        headerName: t("siNumber").toString(),
+        headerClassName: "header-bgd",
+        flex: 1,
+        minWidth: 120,
+    },
     {
         field: "time",
-        headerName: "ČAS RAŽENÍ",
+        headerName: t("punchTime").toString(),
         headerClassName: "header-bgd",
         valueFormatter: (params) => params.value.toLocaleString(),
         flex: 1,
@@ -23,7 +30,7 @@ const columns: GridColDef[] = [
     },
     {
         field: "receiveTime",
-        headerName: "ČAS PŘIJETÍ",
+        headerName: t("receiveTime").toString(),
         headerClassName: "header-bgd",
         valueFormatter: (params) => params.value.toLocaleString(),
         flex: 1,
@@ -36,6 +43,7 @@ interface Props {
 }
 
 export default function PunchTableGrid({ punches }: Props) {
+    const { t } = useTranslation("dashboard", { keyPrefix: "punches" });
     return (
         <Box
             sx={(theme) => ({
@@ -50,7 +58,7 @@ export default function PunchTableGrid({ punches }: Props) {
         >
             <DataGrid
                 rows={punches ? punches : []}
-                columns={columns}
+                columns={columns(t)}
                 autoPageSize={true}
                 disableColumnSelector={true}
                 disableRowSelectionOnClick={true}

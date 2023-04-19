@@ -2,34 +2,36 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import * as React from "react";
 import { NetworkCommand } from "@/src/generated/graphql";
+import { TFunction } from "i18next";
+import { useTranslation } from "react-i18next";
 
-const columns: GridColDef[] = [
+const columns = (t: TFunction<"dashboard", "networkCommands", "dashboard">): GridColDef[] => [
     { field: "id", headerName: "ID", headerClassName: "header-bgd", flex: 1, minWidth: 120 },
 
     {
         field: "competition_id",
-        headerName: "ID ZÁVODU",
+        headerName: t("competitionId").toString(),
         headerClassName: "header-bgd",
         flex: 1,
         minWidth: 80,
     },
     {
         field: "type",
-        headerName: "TYP",
+        headerName: t("commandType").toString(),
         headerClassName: "header-bgd",
         flex: 1,
         minWidth: 80,
     },
     {
         field: "data",
-        headerName: "DATA",
+        headerName: t("commandData").toString(),
         headerClassName: "header-bgd",
         flex: 1,
         minWidth: 80,
     },
     {
         field: "creation_time",
-        headerName: "ČAS VYTVOŘENÍ",
+        headerName: t("creationTime").toString(),
         headerClassName: "header-bgd",
         valueFormatter: (params) =>
             typeof params.value === "string" && new Date(params.value).toLocaleString(),
@@ -43,6 +45,8 @@ interface Props {
 }
 
 export default function NetworkCommandGrid({ networkCommands }: Props) {
+    const { t } = useTranslation("dashboard", { keyPrefix: "networkCommands" });
+
     return (
         <Box
             sx={(theme) => ({
@@ -58,7 +62,7 @@ export default function NetworkCommandGrid({ networkCommands }: Props) {
         >
             <DataGrid
                 rows={networkCommands ? networkCommands : []}
-                columns={columns}
+                columns={columns(t)}
                 disableColumnSelector={true}
                 disableRowSelectionOnClick={true}
                 sx={{

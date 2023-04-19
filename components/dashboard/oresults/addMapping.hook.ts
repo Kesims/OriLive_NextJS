@@ -2,12 +2,15 @@ import { useCreateOresultsMappingMutation } from "@/src/generated/graphql";
 import { useSnackbar } from "notistack";
 import { ApolloError } from "@apollo/client";
 import { AddMappingFormData } from "@/components/dashboard/oresults/oresults.type";
+import { useTranslation } from "react-i18next";
 
 export const useCreateMapping = () => {
     const [createMapping, { loading }] = useCreateOresultsMappingMutation({
         onCompleted: () => console.log("Mapping added."),
     });
     const { enqueueSnackbar } = useSnackbar();
+    const { t } = useTranslation("dashboard", { keyPrefix: "oresults" });
+
     const createMappingHandler = async (formData: AddMappingFormData) => {
         if (loading) return;
         try {
@@ -20,13 +23,13 @@ export const useCreateMapping = () => {
                 },
             });
             if (result.data?.createOresultsMapping) {
-                enqueueSnackbar("Mapování bylo úspešně nastaveno.", { variant: "success" });
+                enqueueSnackbar(t("deviceMappedSuccessfully"), { variant: "success" });
             }
         } catch (e) {
             if (e instanceof ApolloError) {
                 enqueueSnackbar(e.message, { variant: "error" });
             } else {
-                enqueueSnackbar("Došlo k neznámé chybě", { variant: "error" });
+                enqueueSnackbar(t("unknownErrorOccurred"), { variant: "error" });
             }
         }
     };

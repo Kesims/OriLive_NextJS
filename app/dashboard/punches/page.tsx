@@ -6,14 +6,16 @@ import { StatusIconColor } from "@/components/dashboard/info/parts/statusIcon.ty
 import { usePunches } from "@/hooks/punch/punches.hook";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import PunchTableGrid from "@/components/dashboard/punches/punchTableGrid";
+import { useTranslation } from "react-i18next";
 
 export default function Punches() {
     const afterDate = new Date(new Date(new Date().getTime() - 3600000).toString());
     const { punches, punchCount, minutesFromLastPunch } = usePunches(afterDate);
+    const { t } = useTranslation("dashboard", { keyPrefix: "punches" });
 
     return (
         <DashboardPage
-            pageHeading={"Zaznamenané ražení"}
+            pageHeading={t("title")}
             headerChildren={[
                 <LargeNumericInfo
                     key={1}
@@ -25,7 +27,7 @@ export default function Punches() {
                             : StatusIconColor.red
                     }
                     value={punchCount}
-                    description={"ražení za poslední hodinu"}
+                    description={t("punchesInLastHour")}
                 />,
                 <LargeNumericInfo
                     key={2}
@@ -37,7 +39,7 @@ export default function Punches() {
                             : StatusIconColor.red
                     }
                     value={minutesFromLastPunch}
-                    description={"minut od poslednícho ražení"}
+                    description={t("minutesSinceLastPunch")}
                 />,
             ]}
         >
