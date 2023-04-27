@@ -40,6 +40,8 @@ export interface TranslationKeys {
             devices: string;
             oresults: string;
             logout: string;
+            language: string;
+            changeLanguage: string;
         };
         bottomMenu: {
             overview: string;

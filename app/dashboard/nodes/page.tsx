@@ -36,7 +36,7 @@ export default function Nodes() {
                 />
             }
         >
-            <NodeTableDynamic></NodeTableDynamic>
+            <NodeTableDynamic />
         </DashboardPage>
     );
 }

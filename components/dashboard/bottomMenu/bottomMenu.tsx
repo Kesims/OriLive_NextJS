@@ -60,26 +60,26 @@ export default function BottomMenu() {
                     value="nodes"
                     icon={<StorageRoundedIcon />}
                     href={urlConf.dashboard.nodes}
-                />{" "}
+                />
                 <BottomNavigationAction
                     label={t("networkCommands")}
                     value="networkCommands"
                     icon={<DynamicFormOutlined />}
                     href={urlConf.dashboard.networkCommands}
-                />{" "}
+                />
                 <BottomNavigationAction
                     label={t("oresults")}
                     value="oresults"
                     icon={<ShuffleRoundedIcon />}
                     href={urlConf.dashboard.oresults}
-                />{" "}
+                />
                 <Divider variant={"middle"} orientation={"vertical"} />
                 <BottomNavigationAction
                     label={t("logout")}
                     value="logout"
                     icon={<LogoutRoundedIcon />}
                     onClick={handleLogout}
-                />{" "}
+                />
             </BottomNavigation>
         </Box>
     );

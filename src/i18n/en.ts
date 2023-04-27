@@ -18,7 +18,7 @@ export default {
             batteryLife: "Battery life for several races",
             operatingMode: "Node/Wi-Fi Gateway",
             easySetup: "Setup via mobile app and Bluetooth",
-            technical: "ESP32, LoRa 169MHz",
+            technical: "ESP32, LoRa 433/169 MHz",
         },
         oprpProtocol: "OPRP protocol",
         oprpProtocolText:
@@ -57,6 +57,8 @@ export default {
             devices: "Device overview",
             oresults: "OResults integration",
             logout: "Logout",
+            language: "Language",
+            changeLanguage: "Přepnout do češtiny",
         },
         bottomMenu: {
             overview: "Overview",

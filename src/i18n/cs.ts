@@ -20,7 +20,7 @@ export default {
             batteryLife: "Výdrž baterie na několik závodů",
             operatingMode: "Node/Wi-Fi Gateway",
             easySetup: "Nastavení pomocí mobilní aplikace a Bluetooth",
-            technical: "ESP32, LoRa 169MHz",
+            technical: "ESP32, LoRa 433/169 MHz",
         },
         oprpProtocol: "OPRP protokol",
         oprpProtocolText:
@@ -61,6 +61,8 @@ export default {
             devices: "Správa zařízení",
             oresults: "Propojení OResults",
             logout: "Odhlásit se",
+            language: "Jazyk",
+            changeLanguage: "Switch to English",
         },
         bottomMenu: {
             overview: "Přehled",
