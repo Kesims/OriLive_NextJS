@@ -1,9 +1,10 @@
 "use client";
 import { ApolloProvider } from "@apollo/client";
-import { SnackbarProvider } from "notistack";
+import { closeSnackbar, SnackbarProvider } from "notistack";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { theme } from "@/src/utils/theme";
 import { client } from "@/src/utils/apolloClient";
+import CloseIcon from "@mui/icons-material/Close";
 import React from "react";
 import "@/src/i18n/";
 import { initTranslations } from "@/src/i18n";
@@ -29,7 +30,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <ThemeProvider theme={theme}>
                     <CssBaseline />
                     <ApolloProvider client={client}>
-                        <SnackbarProvider maxSnack={3}>{children}</SnackbarProvider>
+                        <SnackbarProvider
+                            maxSnack={3}
+                            action={(snackbarId) => (
+                                <CloseIcon
+                                    onClick={() => closeSnackbar(snackbarId)}
+                                    fontSize={"small"}
+                                    sx={{ cursor: "pointer", marginX: 1 }}
+                                />
+                            )}
+                        >
+                            {children}
+                        </SnackbarProvider>
                     </ApolloProvider>
                 </ThemeProvider>
             </body>
