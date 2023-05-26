@@ -99,13 +99,13 @@ export function useDevices() {
 
     const getNodes = () => {
         if (devices) {
-            return devices.filter((node) => node.node_type == 1);
+            return devices.filter((node) => node.node_type == 0);
         }
         return [];
     };
     const getGateways = () => {
         if (devices) {
-            return devices.filter((node) => node.node_type == 0);
+            return devices.filter((node) => node.node_type == 1);
         }
         return [];
     };

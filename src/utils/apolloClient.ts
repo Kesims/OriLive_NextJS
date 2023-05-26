@@ -12,7 +12,10 @@ const wsLink =
     typeof window !== "undefined"
         ? new GraphQLWsLink(
               createClient({
-                  url: "ws://localhost:3001/graphql",
+                  // url: "ws://localhost:3001/graphql",
+                  url: process.env.NEXT_PUBLIC_WS_API_URL
+                      ? process.env.NEXT_PUBLIC_WS_API_URL
+                      : "wss://api.orilive.live/graphql",
               }),
           )
         : null;
