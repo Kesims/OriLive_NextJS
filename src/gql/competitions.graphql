@@ -1,0 +1,54 @@
+query getCompetitions {
+    competitions {
+        id
+        name
+        description
+        type
+        location
+        startTime
+        endTime
+        organizer
+        owner {
+            id
+            username
+        }
+    }
+}
+
+mutation createCompetition($competition: CreateCompetitionInput!) {
+    createCompetition(competition: $competition)
+}
+
+subscription competitionAdded {
+    competitionAdded {
+        id
+        name
+        description
+        type
+        location
+        startTime
+        endTime
+        organizer
+        owner {
+            id
+            username
+        }
+    }
+}
+
+subscription competitionRemoved {
+    competitionRemoved {
+        id
+        name
+        description
+        type
+        location
+        startTime
+        endTime
+        organizer
+        owner {
+            id
+            username
+        }
+    }
+}

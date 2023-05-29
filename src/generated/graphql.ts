@@ -16,6 +16,37 @@ export type Scalars = {
   DateTime: any;
 };
 
+export type Competition = {
+  __typename?: 'Competition';
+  description?: Maybe<Scalars['String']>;
+  endTime?: Maybe<Scalars['DateTime']>;
+  /** Competition ID */
+  id: Scalars['Int'];
+  location?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  organizer?: Maybe<Scalars['String']>;
+  owner: User;
+  startTime: Scalars['DateTime'];
+  type: Scalars['String'];
+};
+
+export type CreateCompetitionInput = {
+  /** Competition description */
+  description?: InputMaybe<Scalars['String']>;
+  /** Competition end time */
+  endTime?: InputMaybe<Scalars['DateTime']>;
+  /** Competition location */
+  location?: InputMaybe<Scalars['String']>;
+  /** Competition name */
+  name: Scalars['String'];
+  /** Competition organizer */
+  organizer?: InputMaybe<Scalars['String']>;
+  /** Competition start time */
+  startTime: Scalars['DateTime'];
+  /** Competition type */
+  type: Scalars['String'];
+};
+
 export type CreateNetworkCommandInput = {
   /** Id of the competition the command is for. */
   competition_id: Scalars['String'];
@@ -42,15 +73,23 @@ export type CreateUserInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createCompetition: Scalars['Boolean'];
   createNetworkCommand: Scalars['Boolean'];
   createOresultsMapping: Scalars['Boolean'];
   createUser: User;
   login: Scalars['Boolean'];
   logout: Scalars['Boolean'];
+  removeCompetition: Scalars['Boolean'];
   removeNetworkCommand: Scalars['Boolean'];
   removeNode: Scalars['Boolean'];
   removeOresultsMapping: Scalars['Boolean'];
   removeUser: User;
+  updateCompetition: Scalars['Boolean'];
+};
+
+
+export type MutationCreateCompetitionArgs = {
+  competition: CreateCompetitionInput;
 };
 
 
@@ -75,6 +114,11 @@ export type MutationLoginArgs = {
 };
 
 
+export type MutationRemoveCompetitionArgs = {
+  id: Scalars['Int'];
+};
+
+
 export type MutationRemoveNetworkCommandArgs = {
   id: Scalars['Int'];
 };
@@ -92,6 +136,11 @@ export type MutationRemoveOresultsMappingArgs = {
 
 export type MutationRemoveUserArgs = {
   id: Scalars['Int'];
+};
+
+
+export type MutationUpdateCompetitionArgs = {
+  competition: UpdateCompetitionInput;
 };
 
 export type NetworkCommand = {
@@ -139,6 +188,8 @@ export type Punch = {
 export type Query = {
   __typename?: 'Query';
   checkLogin: Scalars['Boolean'];
+  competition: Competition;
+  competitions: Array<Competition>;
   networkCommands: Array<NetworkCommand>;
   nodes: Array<Node>;
   oresultsMappings: Array<OResultsMapping>;
@@ -146,6 +197,11 @@ export type Query = {
   userById: User;
   userByUsername: User;
   users: Array<User>;
+};
+
+
+export type QueryCompetitionArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -165,6 +221,8 @@ export type QueryUserByUsernameArgs = {
 
 export type Subscription = {
   __typename?: 'Subscription';
+  competitionAdded: Competition;
+  competitionRemoved: Competition;
   networkCommandAdded: NetworkCommand;
   networkCommandRemoved: NetworkCommand;
   nodeAdded?: Maybe<Node>;
@@ -174,14 +232,56 @@ export type Subscription = {
   punchAdded: Punch;
 };
 
+export type UpdateCompetitionInput = {
+  /** Competition description */
+  description?: InputMaybe<Scalars['String']>;
+  /** Competition end time */
+  endTime?: InputMaybe<Scalars['DateTime']>;
+  /** Competition ID */
+  id: Scalars['Int'];
+  /** Competition location */
+  location?: InputMaybe<Scalars['String']>;
+  /** Competition name */
+  name: Scalars['String'];
+  /** Competition organizer */
+  organizer?: InputMaybe<Scalars['String']>;
+  /** Competition start time */
+  startTime: Scalars['DateTime'];
+  /** Competition type */
+  type: Scalars['String'];
+};
+
 export type User = {
   __typename?: 'User';
+  competitions: Scalars['String'];
   /** User ID */
   id: Scalars['Int'];
   password: Scalars['String'];
   user_type: Scalars['Int'];
   username: Scalars['String'];
 };
+
+export type GetCompetitionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCompetitionsQuery = { __typename?: 'Query', competitions: Array<{ __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, endTime?: any | null, organizer?: string | null, owner: { __typename?: 'User', id: number, username: string } }> };
+
+export type CreateCompetitionMutationVariables = Exact<{
+  competition: CreateCompetitionInput;
+}>;
+
+
+export type CreateCompetitionMutation = { __typename?: 'Mutation', createCompetition: boolean };
+
+export type CompetitionAddedSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CompetitionAddedSubscription = { __typename?: 'Subscription', competitionAdded: { __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, endTime?: any | null, organizer?: string | null, owner: { __typename?: 'User', id: number, username: string } } };
+
+export type CompetitionRemovedSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CompetitionRemovedSubscription = { __typename?: 'Subscription', competitionRemoved: { __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, endTime?: any | null, organizer?: string | null, owner: { __typename?: 'User', id: number, username: string } } };
 
 export type GetDashboardOverviewQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -299,6 +399,162 @@ export type GetPunchesQueryVariables = Exact<{
 export type GetPunchesQuery = { __typename?: 'Query', punches: Array<{ __typename?: 'Punch', id: number, competition_id: string, time: any, receive_time: any, si_number: string, station_number: string, seconds: number }> };
 
 
+export const GetCompetitionsDocument = gql`
+    query getCompetitions {
+  competitions {
+    id
+    name
+    description
+    type
+    location
+    startTime
+    endTime
+    organizer
+    owner {
+      id
+      username
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetCompetitionsQuery__
+ *
+ * To run a query within a React component, call `useGetCompetitionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCompetitionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCompetitionsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetCompetitionsQuery(baseOptions?: Apollo.QueryHookOptions<GetCompetitionsQuery, GetCompetitionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetCompetitionsQuery, GetCompetitionsQueryVariables>(GetCompetitionsDocument, options);
+      }
+export function useGetCompetitionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCompetitionsQuery, GetCompetitionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetCompetitionsQuery, GetCompetitionsQueryVariables>(GetCompetitionsDocument, options);
+        }
+export type GetCompetitionsQueryHookResult = ReturnType<typeof useGetCompetitionsQuery>;
+export type GetCompetitionsLazyQueryHookResult = ReturnType<typeof useGetCompetitionsLazyQuery>;
+export type GetCompetitionsQueryResult = Apollo.QueryResult<GetCompetitionsQuery, GetCompetitionsQueryVariables>;
+export const CreateCompetitionDocument = gql`
+    mutation createCompetition($competition: CreateCompetitionInput!) {
+  createCompetition(competition: $competition)
+}
+    `;
+export type CreateCompetitionMutationFn = Apollo.MutationFunction<CreateCompetitionMutation, CreateCompetitionMutationVariables>;
+
+/**
+ * __useCreateCompetitionMutation__
+ *
+ * To run a mutation, you first call `useCreateCompetitionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateCompetitionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createCompetitionMutation, { data, loading, error }] = useCreateCompetitionMutation({
+ *   variables: {
+ *      competition: // value for 'competition'
+ *   },
+ * });
+ */
+export function useCreateCompetitionMutation(baseOptions?: Apollo.MutationHookOptions<CreateCompetitionMutation, CreateCompetitionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateCompetitionMutation, CreateCompetitionMutationVariables>(CreateCompetitionDocument, options);
+      }
+export type CreateCompetitionMutationHookResult = ReturnType<typeof useCreateCompetitionMutation>;
+export type CreateCompetitionMutationResult = Apollo.MutationResult<CreateCompetitionMutation>;
+export type CreateCompetitionMutationOptions = Apollo.BaseMutationOptions<CreateCompetitionMutation, CreateCompetitionMutationVariables>;
+export const CompetitionAddedDocument = gql`
+    subscription competitionAdded {
+  competitionAdded {
+    id
+    name
+    description
+    type
+    location
+    startTime
+    endTime
+    organizer
+    owner {
+      id
+      username
+    }
+  }
+}
+    `;
+
+/**
+ * __useCompetitionAddedSubscription__
+ *
+ * To run a query within a React component, call `useCompetitionAddedSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useCompetitionAddedSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCompetitionAddedSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCompetitionAddedSubscription(baseOptions?: Apollo.SubscriptionHookOptions<CompetitionAddedSubscription, CompetitionAddedSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<CompetitionAddedSubscription, CompetitionAddedSubscriptionVariables>(CompetitionAddedDocument, options);
+      }
+export type CompetitionAddedSubscriptionHookResult = ReturnType<typeof useCompetitionAddedSubscription>;
+export type CompetitionAddedSubscriptionResult = Apollo.SubscriptionResult<CompetitionAddedSubscription>;
+export const CompetitionRemovedDocument = gql`
+    subscription competitionRemoved {
+  competitionRemoved {
+    id
+    name
+    description
+    type
+    location
+    startTime
+    endTime
+    organizer
+    owner {
+      id
+      username
+    }
+  }
+}
+    `;
+
+/**
+ * __useCompetitionRemovedSubscription__
+ *
+ * To run a query within a React component, call `useCompetitionRemovedSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useCompetitionRemovedSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCompetitionRemovedSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCompetitionRemovedSubscription(baseOptions?: Apollo.SubscriptionHookOptions<CompetitionRemovedSubscription, CompetitionRemovedSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<CompetitionRemovedSubscription, CompetitionRemovedSubscriptionVariables>(CompetitionRemovedDocument, options);
+      }
+export type CompetitionRemovedSubscriptionHookResult = ReturnType<typeof useCompetitionRemovedSubscription>;
+export type CompetitionRemovedSubscriptionResult = Apollo.SubscriptionResult<CompetitionRemovedSubscription>;
 export const GetDashboardOverviewDocument = gql`
     query GetDashboardOverview {
   nodes {
