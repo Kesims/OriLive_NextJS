@@ -4,7 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import React from "react";
 import { AddMappingFormData } from "@/components/dashboard/oresults/oresults.type";
 import { useForm } from "react-hook-form";
-import { useCreateMapping } from "@/components/dashboard/oresults/addMapping.hook";
+import { useCreateMapping } from "@/hooks/oresults/addMapping.hook";
 import { useDevices } from "@/hooks/device/devices.hook";
 import { useTranslation } from "react-i18next";
 
