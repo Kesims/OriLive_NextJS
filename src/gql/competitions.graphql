@@ -52,3 +52,20 @@ subscription competitionRemoved {
         }
     }
 }
+
+query getOneCompetition($id: Int!) {
+    competition(id: $id) {
+        id
+        name
+        description
+        type
+        location
+        startTime
+        endTime
+        organizer
+        owner {
+            id
+            username
+        }
+    }
+}

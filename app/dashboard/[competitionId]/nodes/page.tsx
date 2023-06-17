@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { Box, LinearProgress } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import useCompetitionId from "@/hooks/competitionId/competitionId.hook";
 const NodeTableDynamic = dynamic(() => import("@/components/dashboard/nodes/nodeTable"), {
     loading: () => (
         <Box width={"100%"}>
@@ -15,7 +16,8 @@ const NodeTableDynamic = dynamic(() => import("@/components/dashboard/nodes/node
     ),
     ssr: false,
 });
-export default function Nodes() {
+export default function Nodes({ params }: { params: { competitionId: string } }) {
+    useCompetitionId(params.competitionId);
     const { allDevices } = useActiveDevices(180);
     const { t } = useTranslation("dashboard", { keyPrefix: "devices" });
 

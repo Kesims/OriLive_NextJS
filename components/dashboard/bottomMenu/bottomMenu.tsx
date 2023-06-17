@@ -49,6 +49,7 @@ export default function BottomMenu() {
                     icon={<HouseRounded />}
                     href={urlConf.dashboard.overview}
                 />
+
                 <BottomNavigationAction
                     label={t("punches")}
                     value="punches"

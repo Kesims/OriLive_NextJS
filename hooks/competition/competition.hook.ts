@@ -37,4 +37,13 @@ export default function useCompetition() {
             }
         }
     }, [competitionRemoved.data]);
+
+    const getCompetition = (id: number) => {
+        if (competitions) {
+            return competitions.find((m) => m.id == id);
+        }
+        return undefined;
+    };
+
+    return { competitions, loading, getCompetition };
 }

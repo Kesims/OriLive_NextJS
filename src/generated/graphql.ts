@@ -25,7 +25,7 @@ export type Competition = {
   location?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   organizer?: Maybe<Scalars['String']>;
-  owner: User;
+  owner?: Maybe<User>;
   startTime: Scalars['DateTime'];
   type: Scalars['String'];
 };
@@ -264,7 +264,7 @@ export type User = {
 export type GetCompetitionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCompetitionsQuery = { __typename?: 'Query', competitions: Array<{ __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, endTime?: any | null, organizer?: string | null, owner: { __typename?: 'User', id: number, username: string } }> };
+export type GetCompetitionsQuery = { __typename?: 'Query', competitions: Array<{ __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, endTime?: any | null, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null }> };
 
 export type CreateCompetitionMutationVariables = Exact<{
   competition: CreateCompetitionInput;
@@ -276,12 +276,19 @@ export type CreateCompetitionMutation = { __typename?: 'Mutation', createCompeti
 export type CompetitionAddedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CompetitionAddedSubscription = { __typename?: 'Subscription', competitionAdded: { __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, endTime?: any | null, organizer?: string | null, owner: { __typename?: 'User', id: number, username: string } } };
+export type CompetitionAddedSubscription = { __typename?: 'Subscription', competitionAdded: { __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, endTime?: any | null, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null } };
 
 export type CompetitionRemovedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CompetitionRemovedSubscription = { __typename?: 'Subscription', competitionRemoved: { __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, endTime?: any | null, organizer?: string | null, owner: { __typename?: 'User', id: number, username: string } } };
+export type CompetitionRemovedSubscription = { __typename?: 'Subscription', competitionRemoved: { __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, endTime?: any | null, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null } };
+
+export type GetOneCompetitionQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type GetOneCompetitionQuery = { __typename?: 'Query', competition: { __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, endTime?: any | null, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null } };
 
 export type GetDashboardOverviewQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -555,6 +562,52 @@ export function useCompetitionRemovedSubscription(baseOptions?: Apollo.Subscript
       }
 export type CompetitionRemovedSubscriptionHookResult = ReturnType<typeof useCompetitionRemovedSubscription>;
 export type CompetitionRemovedSubscriptionResult = Apollo.SubscriptionResult<CompetitionRemovedSubscription>;
+export const GetOneCompetitionDocument = gql`
+    query getOneCompetition($id: Int!) {
+  competition(id: $id) {
+    id
+    name
+    description
+    type
+    location
+    startTime
+    endTime
+    organizer
+    owner {
+      id
+      username
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetOneCompetitionQuery__
+ *
+ * To run a query within a React component, call `useGetOneCompetitionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetOneCompetitionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetOneCompetitionQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetOneCompetitionQuery(baseOptions: Apollo.QueryHookOptions<GetOneCompetitionQuery, GetOneCompetitionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetOneCompetitionQuery, GetOneCompetitionQueryVariables>(GetOneCompetitionDocument, options);
+      }
+export function useGetOneCompetitionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetOneCompetitionQuery, GetOneCompetitionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetOneCompetitionQuery, GetOneCompetitionQueryVariables>(GetOneCompetitionDocument, options);
+        }
+export type GetOneCompetitionQueryHookResult = ReturnType<typeof useGetOneCompetitionQuery>;
+export type GetOneCompetitionLazyQueryHookResult = ReturnType<typeof useGetOneCompetitionLazyQuery>;
+export type GetOneCompetitionQueryResult = Apollo.QueryResult<GetOneCompetitionQuery, GetOneCompetitionQueryVariables>;
 export const GetDashboardOverviewDocument = gql`
     query GetDashboardOverview {
   nodes {

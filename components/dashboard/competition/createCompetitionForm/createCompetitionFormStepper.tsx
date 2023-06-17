@@ -10,6 +10,7 @@ import useAddCompetition from "@/hooks/competition/addCompetition.hook";
 import GeneralInfoStep from "@/components/dashboard/competition/createCompetitionForm/steps/generalInfoStep";
 import AdditionalInfoStep from "@/components/dashboard/competition/createCompetitionForm/steps/additionalInfoStep";
 import { AddCompetitionData } from "@/hooks/competition/competition.types";
+import { useTranslation } from "react-i18next";
 
 export interface CompetitionFormInterface {
     name: string | undefined;
@@ -28,15 +29,17 @@ export default function CreateCompetitionFormStepper() {
         type: "individual",
     } as CompetitionFormInterface);
 
+    const { t } = useTranslation("dashboard", { keyPrefix: "createCompetition" });
+
     const { addCompetition } = useAddCompetition();
 
     const steps = [
         {
-            label: "Základní informace",
+            label: t("baseInformation"),
             component: <GeneralInfoStep formData={formData} setFormData={setFormData} />,
         },
         {
-            label: "Doplňující informace",
+            label: t("additionalInformation"),
             component: <AdditionalInfoStep formData={formData} setFormData={setFormData} />,
         },
     ];
@@ -110,13 +113,13 @@ export default function CreateCompetitionFormStepper() {
                         stepProps.completed = false;
                         labelProps.optional = (
                             <Typography variant="caption" color="error">
-                                Chybí některé údaje
+                                {t("someInformationMissing")}
                             </Typography>
                         );
                         labelProps.error = true;
                     }
                     if (isStepOptional(index)) {
-                        labelProps.optional = <Typography variant="caption">Volitelné</Typography>;
+                        labelProps.optional = <Typography variant="caption">{t("optional")}</Typography>;
                     }
                     return (
                         <Step key={step.label} {...stepProps}>
@@ -127,10 +130,10 @@ export default function CreateCompetitionFormStepper() {
             </Stepper>
             {activeStep === steps.length ? (
                 <React.Fragment>
-                    <Typography sx={{ mt: 2, mb: 1 }}>Závod byl úspěšně založen</Typography>
+                    <Typography sx={{ mt: 2, mb: 1 }}>{t("createdSuccessfully")}</Typography>
                     <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                         <Box sx={{ flex: "1 1 auto" }} />
-                        <Button onClick={handleReset}>Vytvořit další</Button>
+                        <Button onClick={handleReset}>{t("createAnother")}</Button>
                     </Box>
                 </React.Fragment>
             ) : (
@@ -143,11 +146,11 @@ export default function CreateCompetitionFormStepper() {
                             onClick={handleBack}
                             sx={{ mr: 1 }}
                         >
-                            Zpět
+                            {t("backButtonText")}
                         </Button>
                         <Box sx={{ flex: "1 1 auto" }} />
                         <Button onClick={handleNext}>
-                            {activeStep === steps.length - 1 ? "Vytvořit závod" : "Další"}
+                            {activeStep === steps.length - 1 ? t("createCompetition") : t("next")}
                         </Button>
                     </Box>
                 </React.Fragment>

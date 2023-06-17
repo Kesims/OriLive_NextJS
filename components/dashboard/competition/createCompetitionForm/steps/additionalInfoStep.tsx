@@ -10,7 +10,10 @@ interface Props {
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { CompetitionFormInterface } from "@/components/dashboard/competition/createCompetitionForm/createCompetitionFormStepper";
+import { useTranslation } from "react-i18next";
 export default function AdditionalInfoStep({ formData, setFormData }: Props) {
+    const { t } = useTranslation("dashboard", { keyPrefix: "createCompetition" });
+
     const onDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, description: e.target.value });
     };
@@ -30,10 +33,12 @@ export default function AdditionalInfoStep({ formData, setFormData }: Props) {
 
     return (
         <Box sx={{ paddingY: 4, paddingX: 3 }}>
-            <Typography variant={"h4"}>Doplňující informace o závodě</Typography>
+            <Typography variant={"h4"}>{t("additionalInformationTitle")}</Typography>
             <Box>
                 <Box sx={{ width: "60%", my: 2 }}>
-                    <Typography sx={{ display: "block", fontSize: "1.2em" }}>Popis závodu</Typography>
+                    <Typography sx={{ display: "block", fontSize: "1.2em" }}>
+                        {t("competitionDescription")}
+                    </Typography>
                     <TextField
                         id="outlined"
                         fullWidth
@@ -42,7 +47,9 @@ export default function AdditionalInfoStep({ formData, setFormData }: Props) {
                     />
                 </Box>
                 <Box sx={{ width: "60%", my: 2 }}>
-                    <Typography sx={{ display: "block", fontSize: "1.2em" }}>Místo závodu</Typography>
+                    <Typography sx={{ display: "block", fontSize: "1.2em" }}>
+                        {t("competitionLocation")}
+                    </Typography>
                     <TextField
                         id="outlined"
                         fullWidth
@@ -51,7 +58,9 @@ export default function AdditionalInfoStep({ formData, setFormData }: Props) {
                     />
                 </Box>
                 <Box sx={{ width: "60%", my: 2 }}>
-                    <Typography sx={{ display: "block", fontSize: "1.2em" }}>Pořádající oddíl</Typography>
+                    <Typography sx={{ display: "block", fontSize: "1.2em" }}>
+                        {t("competitionOrganizer")}
+                    </Typography>
                     <TextField
                         id="outlined"
                         fullWidth
@@ -61,7 +70,7 @@ export default function AdditionalInfoStep({ formData, setFormData }: Props) {
                 </Box>
                 <Box sx={{ width: "60%", my: 2 }}>
                     <Typography sx={{ display: "block", fontSize: "1.2em" }}>
-                        Předpokládané ukončení závodu
+                        {t("expectedEndDate")}
                     </Typography>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DateTimePicker

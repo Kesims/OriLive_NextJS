@@ -42,6 +42,7 @@ export interface TranslationKeys {
             logout: string;
             language: string;
             changeLanguage: string;
+            competitions: string;
         };
         bottomMenu: {
             overview: string;
@@ -50,6 +51,12 @@ export interface TranslationKeys {
             devices: string;
             oresults: string;
             logout: string;
+            competitions: string;
+        };
+        competitionSelect: {
+            title: string;
+            startBySelectingCompetition: string;
+            createNewCompetition: string;
         };
         overview: {
             title: string;
@@ -111,6 +118,31 @@ export interface TranslationKeys {
             siNumber: string;
             punchTime: string;
             receiveTime: string;
+        };
+        createCompetition: {
+            baseInformation: string;
+            additionalInformation: string;
+            someInformationMissing: string;
+            optional: string;
+            createdSuccessfully: string;
+            createAnother: string;
+            backButtonText: string;
+            createCompetition: string;
+            next: string;
+            generalInformation: string;
+            competitionName: string;
+            competitionNameHelper: string;
+            competitionDate: string;
+            competitionType: string;
+            selectCompetitionType: string;
+            individualCompetition: string;
+            relayCompetition: string;
+            additionalInformationTitle: string;
+            competitionDescription: string;
+            competitionLocation: string;
+            competitionOrganizer: string;
+            expectedEndDate: string;
+            backToSelection: string;
         };
     };
 }

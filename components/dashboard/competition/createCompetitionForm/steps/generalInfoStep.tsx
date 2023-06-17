@@ -4,6 +4,7 @@ import { MenuItem, Select, SelectChangeEvent, TextField, Typography } from "@mui
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { CompetitionFormInterface } from "@/components/dashboard/competition/createCompetitionForm/createCompetitionFormStepper";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { useTranslation } from "react-i18next";
 
 interface Props {
     formData: CompetitionFormInterface;
@@ -11,6 +12,8 @@ interface Props {
 }
 
 export default function GeneralInfoStep({ formData, setFormData }: Props) {
+    const { t } = useTranslation("dashboard", { keyPrefix: "createCompetition" });
+
     const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, name: e.target.value });
     };
@@ -26,12 +29,14 @@ export default function GeneralInfoStep({ formData, setFormData }: Props) {
 
     return (
         <Box sx={{ paddingY: 4, paddingX: 3 }}>
-            <Typography variant={"h4"}>Obecné informace o závodě</Typography>
+            <Typography variant={"h4"}>{t("generalInformation")}</Typography>
             <Box>
                 <Box sx={{ width: "60%", my: 2 }}>
-                    <Typography sx={{ display: "block", fontSize: "1.2em" }}>Název závodu *</Typography>
+                    <Typography sx={{ display: "block", fontSize: "1.2em" }}>
+                        {t("competitionName")}
+                    </Typography>
                     <TextField
-                        helperText="Zadejte název závodu, který bude následně zobrazen na webu."
+                        helperText={t("competitionNameHelper")}
                         required
                         id="outlined-required"
                         fullWidth
@@ -41,7 +46,7 @@ export default function GeneralInfoStep({ formData, setFormData }: Props) {
                 </Box>
                 <Box sx={{ width: "60%", my: 2 }}>
                     <Typography sx={{ display: "block", fontSize: "1.2em" }}>
-                        Datum konání závodu *
+                        {t("competitionDate")}
                     </Typography>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DateTimePicker
@@ -52,15 +57,17 @@ export default function GeneralInfoStep({ formData, setFormData }: Props) {
                     </LocalizationProvider>
                 </Box>
                 <Box sx={{ width: "60%", my: 2 }}>
-                    <Typography sx={{ display: "block", fontSize: "1.2em" }}>Typ závodu *</Typography>
+                    <Typography sx={{ display: "block", fontSize: "1.2em" }}>
+                        {t("competitionType")}
+                    </Typography>
                     <Select
                         fullWidth
-                        placeholder={"Zvolte typ závodu"}
+                        placeholder={t("selectCompetitionType")?.toString()}
                         onChange={onTypeChange}
                         value={formData.type ? formData.type : "individual"}
                     >
-                        <MenuItem value={"individual"}>Závod jednotlivců</MenuItem>
-                        <MenuItem value={"relay"}>Závod štafet</MenuItem>
+                        <MenuItem value={"individual"}>{t("individualCompetition")}</MenuItem>
+                        <MenuItem value={"relay"}>{t("relayCompetition")}</MenuItem>
                     </Select>
                 </Box>
             </Box>

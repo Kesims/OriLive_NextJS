@@ -8,8 +8,10 @@ import Grid2 from "@mui/material/Unstable_Grid2";
 import AddMapping from "@/components/dashboard/oresults/addMapping";
 import OResultsMappingsGrid from "@/components/dashboard/oresults/oresultsMappingsGrid";
 import { useTranslation } from "react-i18next";
+import useCompetitionId from "@/hooks/competitionId/competitionId.hook";
 
-export default function Oresults() {
+export default function Oresults({ params }: { params: { competitionId: string } }) {
+    useCompetitionId(params.competitionId);
     const oresults = useOResults();
     const { t } = useTranslation("dashboard", { keyPrefix: "oresults" });
 
