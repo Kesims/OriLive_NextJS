@@ -9,6 +9,7 @@ import ShuffleRoundedIcon from "@mui/icons-material/ShuffleRounded";
 import AvTimerOutlinedIcon from "@mui/icons-material/AvTimerOutlined";
 import DynamicFormOutlined from "@mui/icons-material/DynamicFormOutlined";
 import LanguageIcon from "@mui/icons-material/Language";
+import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import { Drawer } from "./drawer";
 import { DrawerHeader } from "./drawerHeader";
 import { urlConf, withID } from "@/src/urlConf";
@@ -22,14 +23,17 @@ import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import TodayIcon from "@mui/icons-material/Today";
 import { useContext } from "react";
 import { CompetitionContext } from "@/hooks/competitionId/competitionContext";
+import useCompetition from "@/hooks/competition/competition.hook";
+import { useRouter } from "next/navigation";
 
 export default function SideMenu() {
     const context = useContext(CompetitionContext);
     const [open, setOpen] = React.useState(false);
     const handleLogout = useHandleLogout();
     const theme = useTheme();
-
     const { t, i18n } = useTranslation("dashboard", { keyPrefix: "sideMenu" });
+    const { competitions } = useCompetition();
+    const router = useRouter();
 
     return (
         <Box sx={{ [theme.breakpoints.down("md")]: { display: "none" } }}>
@@ -44,25 +48,45 @@ export default function SideMenu() {
                                 opacity: open ? 1 : 0,
                                 width: "100%",
                             }}
+                            value={context.competition ? context.competition.id : -1}
+                            onChange={(e) => {
+                                const id = e.target.value;
+                                router.push(withID(urlConf.dashboard.overview, Number(id)));
+                            }}
                         >
-                            <MenuItem value={"Z1"}>Závod 1</MenuItem>
-                            <MenuItem value={"Z2"}>Závod 2</MenuItem>
+                            {competitions?.map((competition, n) => (
+                                <MenuItem value={competition.id} key={n}>
+                                    {competition.name}
+                                </MenuItem>
+                            ))}
+                            <MenuItem value={-1} disabled={true} />
                         </Select>
                     }
                     open={open}
                 />
+                <SideMenuItem
+                    open={open}
+                    text={t("competitions")}
+                    href={withID(urlConf.dashboard.competitions)}
+                >
+                    <ReceiptLongIcon sx={{ color: "black" }} />
+                </SideMenuItem>
                 <SideMenuGeneralItem
                     icon={<AddIcon sx={{ color: "black" }} />}
-                    content={"Nový závod"}
+                    content={t("createNewCompetition")}
                     href={withID(urlConf.dashboard.createCompetition, context.competition?.id)}
                     open={open}
                 />
-                <SideMenuItem open={open} text={t("competitions")} href={urlConf.dashboard.competition}>
-                    <TodayIcon sx={{ color: "black" }} />
-                </SideMenuItem>
-                <Divider />
+                <Divider sx={{ marginTop: 1 }} />
                 {context.competition && (
                     <List>
+                        <SideMenuItem
+                            open={open}
+                            text={t("thisCompetition")}
+                            href={withID(urlConf.dashboard.competition, context.competition.id)}
+                        >
+                            <TodayIcon sx={{ color: "black" }} />
+                        </SideMenuItem>
                         <SideMenuItem
                             href={withID(urlConf.dashboard.punches, context.competition.id)}
                             open={open}

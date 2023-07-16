@@ -13,7 +13,6 @@ export default function useAddCompetition() {
                     name: formData.name,
                     location: formData.location,
                     startTime: formData.startTime,
-                    endTime: formData.endTime,
                     description: formData.description,
                     type: formData.type,
                     organizer: formData.organizer,

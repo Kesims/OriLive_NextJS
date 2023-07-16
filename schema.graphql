@@ -8,13 +8,12 @@ schema {
 
 type Competition {
     description: String
-    endTime: DateTime
     "Competition ID"
     id: Int!
     location: String
     name: String!
     organizer: String
-    owner: User!
+    owner: User
     startTime: DateTime!
     type: String!
 }
@@ -112,8 +111,6 @@ scalar DateTime
 input CreateCompetitionInput {
     "Competition description"
     description: String
-    "Competition end time"
-    endTime: DateTime
     "Competition location"
     location: String
     "Competition name"
@@ -153,8 +150,6 @@ input CreateUserInput {
 input UpdateCompetitionInput {
     "Competition description"
     description: String
-    "Competition end time"
-    endTime: DateTime
     "Competition ID"
     id: Int!
     "Competition location"

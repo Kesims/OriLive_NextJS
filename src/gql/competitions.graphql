@@ -6,7 +6,6 @@ query getCompetitions {
         type
         location
         startTime
-        endTime
         organizer
         owner {
             id
@@ -19,6 +18,10 @@ mutation createCompetition($competition: CreateCompetitionInput!) {
     createCompetition(competition: $competition)
 }
 
+mutation updateCompetition($competition: UpdateCompetitionInput!) {
+    updateCompetition(competition: $competition)
+}
+
 subscription competitionAdded {
     competitionAdded {
         id
@@ -27,7 +30,6 @@ subscription competitionAdded {
         type
         location
         startTime
-        endTime
         organizer
         owner {
             id
@@ -44,7 +46,6 @@ subscription competitionRemoved {
         type
         location
         startTime
-        endTime
         organizer
         owner {
             id
@@ -61,11 +62,14 @@ query getOneCompetition($id: Int!) {
         type
         location
         startTime
-        endTime
         organizer
         owner {
             id
             username
         }
     }
+}
+
+mutation removeCompetition($id: Int!) {
+    removeCompetition(id: $id)
 }

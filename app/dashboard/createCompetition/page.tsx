@@ -3,6 +3,7 @@ import CreateCompetitionFormStepper from "@/components/dashboard/competition/cre
 import { Box, Card, Container } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useTranslation } from "react-i18next";
+import { urlConf, withID } from "@/src/urlConf";
 
 export default function CreateCompetition() {
     const { t } = useTranslation("dashboard", { keyPrefix: "createCompetition" });
@@ -29,7 +30,9 @@ export default function CreateCompetition() {
                             my: 3,
                         }}
                     >
-                        <Button variant={"text"}>{t("backToSelection")}</Button>
+                        <Button variant={"text"} href={withID(urlConf.dashboard.overview)}>
+                            {t("backToSelection")}
+                        </Button>
                     </Box>
                 </Container>
             </Box>

@@ -15,9 +15,11 @@ const gridItemStyle = {
 
 export const DashboardPageHeader: React.FC<Props> = ({ text, children }) => {
     return (
-        <Grid2 container mt={1} mb={2}>
+        <Grid2 container mt={1} mb={2} mx={1}>
             <Grid2 md={5} xs={12} sx={gridItemStyle}>
-                <Typography variant="h4">{text}</Typography>
+                <Typography variant="h4" fontWeight={"bolder"} sx={{ textTransform: "uppercase" }}>
+                    {text}
+                </Typography>
             </Grid2>
             <Grid2
                 md={7}

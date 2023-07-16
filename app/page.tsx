@@ -137,7 +137,7 @@ export default function Home() {
                     >
                         <Box sx={{ display: "flex", justifyContent: "center" }}>
                             <img
-                                src={"/o-node.png"}
+                                src={"/o-node.webp"}
                                 alt={"o-node"}
                                 width={"75%"}
                                 loading={"lazy"}
@@ -209,7 +209,7 @@ export default function Home() {
                     >
                         <Box sx={{ display: "flex", justifyContent: "center" }}>
                             <img
-                                src={"/nodeSimplistic.png"}
+                                src={"/nodeSimplistic.webp"}
                                 alt={"example network"}
                                 width={"40%"}
                                 loading={"lazy"}
@@ -248,7 +248,7 @@ export default function Home() {
                                 </Typography>
 
                                 <img
-                                    src={"/mobileShowcase.png"}
+                                    src={"/mobileShowcase.webp"}
                                     alt={"mobile app showcase"}
                                     width={"100%"}
                                     loading={"lazy"}
@@ -276,7 +276,7 @@ export default function Home() {
                                 </Typography>
 
                                 <img
-                                    src={"/laptopShowcase.png"}
+                                    src={"/laptopShowcase.webp"}
                                     alt={"dashboard"}
                                     width={"100%"}
                                     loading={"lazy"}

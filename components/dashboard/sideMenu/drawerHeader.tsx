@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-import { urlConf } from "@/src/urlConf";
+import { urlConf, withID } from "@/src/urlConf";
 import { CompetitionContext } from "@/hooks/competitionId/competitionContext";
 
 interface Props {
@@ -13,7 +13,7 @@ export const DrawerHeader: React.FC<Props> = ({ open }) => {
 
     return (
         <Link
-            href={urlConf.dashboard.overview + (context.competition?.id ? "/" + context.competition.id : "")}
+            href={withID(urlConf.dashboard.overview, context.competition?.id)}
             sx={(theme) => ({
                 display: "flex",
                 alignItems: "center",

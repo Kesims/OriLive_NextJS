@@ -8,10 +8,8 @@ import Grid2 from "@mui/material/Unstable_Grid2";
 import AddCommand from "@/components/dashboard/networkCommands/addCommand";
 import NetworkCommandGrid from "@/components/dashboard/networkCommands/networkCommandGrid";
 import { useTranslation } from "react-i18next";
-import useCompetitionId from "@/hooks/competitionId/competitionId.hook";
 
-export default function NetworkCommands({ params }: { params: { competitionId: string } }) {
-    useCompetitionId(params.competitionId);
+export default function NetworkCommands() {
     const networkCommands = useNetworkCommands();
     const { t } = useTranslation("dashboard", { keyPrefix: "networkCommands" });
 

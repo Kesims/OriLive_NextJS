@@ -43,6 +43,8 @@ export interface TranslationKeys {
             language: string;
             changeLanguage: string;
             competitions: string;
+            thisCompetition: string;
+            createNewCompetition: string;
         };
         bottomMenu: {
             overview: string;
@@ -143,6 +145,46 @@ export interface TranslationKeys {
             competitionOrganizer: string;
             expectedEndDate: string;
             backToSelection: string;
+        };
+        competition: {
+            title: string;
+            settings: string;
+            competitionName: string;
+            competitionDescription: string;
+            competitionLocation: string;
+            competitionOrganizer: string;
+            competitionDate: string;
+            competitionEndDate: string;
+            competitionType: string;
+            dangerZone: string;
+            deleteCompetition: string;
+            deleteCompetitionWarning: string;
+            delete: string;
+            removedSuccessfully: string;
+            saveChanges: string;
+            competitionInformation: string;
+            competitionID: string;
+            competitionIdInfo: string;
+            individualCompetition: string;
+            relayCompetition: string;
+            saveSuccess: string;
+            saveError: string;
+        };
+        deleteCompetitionDialog: {
+            title: string;
+            text: string;
+            cancel: string;
+            delete: string;
+        };
+        competitions: {
+            title: string;
+            individualCompetition: string;
+            relayCompetition: string;
+            viewCompetition: string;
+            noUpcomingCompetitions: string;
+            noArchivedCompetitions: string;
+            upcomingCompetitions: string;
+            archivedCompetitions: string;
         };
     };
 }

@@ -19,7 +19,6 @@ export type Scalars = {
 export type Competition = {
   __typename?: 'Competition';
   description?: Maybe<Scalars['String']>;
-  endTime?: Maybe<Scalars['DateTime']>;
   /** Competition ID */
   id: Scalars['Int'];
   location?: Maybe<Scalars['String']>;
@@ -33,8 +32,6 @@ export type Competition = {
 export type CreateCompetitionInput = {
   /** Competition description */
   description?: InputMaybe<Scalars['String']>;
-  /** Competition end time */
-  endTime?: InputMaybe<Scalars['DateTime']>;
   /** Competition location */
   location?: InputMaybe<Scalars['String']>;
   /** Competition name */
@@ -235,8 +232,6 @@ export type Subscription = {
 export type UpdateCompetitionInput = {
   /** Competition description */
   description?: InputMaybe<Scalars['String']>;
-  /** Competition end time */
-  endTime?: InputMaybe<Scalars['DateTime']>;
   /** Competition ID */
   id: Scalars['Int'];
   /** Competition location */
@@ -264,7 +259,7 @@ export type User = {
 export type GetCompetitionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCompetitionsQuery = { __typename?: 'Query', competitions: Array<{ __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, endTime?: any | null, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null }> };
+export type GetCompetitionsQuery = { __typename?: 'Query', competitions: Array<{ __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null }> };
 
 export type CreateCompetitionMutationVariables = Exact<{
   competition: CreateCompetitionInput;
@@ -273,22 +268,36 @@ export type CreateCompetitionMutationVariables = Exact<{
 
 export type CreateCompetitionMutation = { __typename?: 'Mutation', createCompetition: boolean };
 
+export type UpdateCompetitionMutationVariables = Exact<{
+  competition: UpdateCompetitionInput;
+}>;
+
+
+export type UpdateCompetitionMutation = { __typename?: 'Mutation', updateCompetition: boolean };
+
 export type CompetitionAddedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CompetitionAddedSubscription = { __typename?: 'Subscription', competitionAdded: { __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, endTime?: any | null, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null } };
+export type CompetitionAddedSubscription = { __typename?: 'Subscription', competitionAdded: { __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null } };
 
 export type CompetitionRemovedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CompetitionRemovedSubscription = { __typename?: 'Subscription', competitionRemoved: { __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, endTime?: any | null, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null } };
+export type CompetitionRemovedSubscription = { __typename?: 'Subscription', competitionRemoved: { __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null } };
 
 export type GetOneCompetitionQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
 
-export type GetOneCompetitionQuery = { __typename?: 'Query', competition: { __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, endTime?: any | null, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null } };
+export type GetOneCompetitionQuery = { __typename?: 'Query', competition: { __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null } };
+
+export type RemoveCompetitionMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type RemoveCompetitionMutation = { __typename?: 'Mutation', removeCompetition: boolean };
 
 export type GetDashboardOverviewQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -415,7 +424,6 @@ export const GetCompetitionsDocument = gql`
     type
     location
     startTime
-    endTime
     organizer
     owner {
       id
@@ -482,6 +490,37 @@ export function useCreateCompetitionMutation(baseOptions?: Apollo.MutationHookOp
 export type CreateCompetitionMutationHookResult = ReturnType<typeof useCreateCompetitionMutation>;
 export type CreateCompetitionMutationResult = Apollo.MutationResult<CreateCompetitionMutation>;
 export type CreateCompetitionMutationOptions = Apollo.BaseMutationOptions<CreateCompetitionMutation, CreateCompetitionMutationVariables>;
+export const UpdateCompetitionDocument = gql`
+    mutation updateCompetition($competition: UpdateCompetitionInput!) {
+  updateCompetition(competition: $competition)
+}
+    `;
+export type UpdateCompetitionMutationFn = Apollo.MutationFunction<UpdateCompetitionMutation, UpdateCompetitionMutationVariables>;
+
+/**
+ * __useUpdateCompetitionMutation__
+ *
+ * To run a mutation, you first call `useUpdateCompetitionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateCompetitionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateCompetitionMutation, { data, loading, error }] = useUpdateCompetitionMutation({
+ *   variables: {
+ *      competition: // value for 'competition'
+ *   },
+ * });
+ */
+export function useUpdateCompetitionMutation(baseOptions?: Apollo.MutationHookOptions<UpdateCompetitionMutation, UpdateCompetitionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateCompetitionMutation, UpdateCompetitionMutationVariables>(UpdateCompetitionDocument, options);
+      }
+export type UpdateCompetitionMutationHookResult = ReturnType<typeof useUpdateCompetitionMutation>;
+export type UpdateCompetitionMutationResult = Apollo.MutationResult<UpdateCompetitionMutation>;
+export type UpdateCompetitionMutationOptions = Apollo.BaseMutationOptions<UpdateCompetitionMutation, UpdateCompetitionMutationVariables>;
 export const CompetitionAddedDocument = gql`
     subscription competitionAdded {
   competitionAdded {
@@ -491,7 +530,6 @@ export const CompetitionAddedDocument = gql`
     type
     location
     startTime
-    endTime
     organizer
     owner {
       id
@@ -531,7 +569,6 @@ export const CompetitionRemovedDocument = gql`
     type
     location
     startTime
-    endTime
     organizer
     owner {
       id
@@ -571,7 +608,6 @@ export const GetOneCompetitionDocument = gql`
     type
     location
     startTime
-    endTime
     organizer
     owner {
       id
@@ -608,6 +644,37 @@ export function useGetOneCompetitionLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type GetOneCompetitionQueryHookResult = ReturnType<typeof useGetOneCompetitionQuery>;
 export type GetOneCompetitionLazyQueryHookResult = ReturnType<typeof useGetOneCompetitionLazyQuery>;
 export type GetOneCompetitionQueryResult = Apollo.QueryResult<GetOneCompetitionQuery, GetOneCompetitionQueryVariables>;
+export const RemoveCompetitionDocument = gql`
+    mutation removeCompetition($id: Int!) {
+  removeCompetition(id: $id)
+}
+    `;
+export type RemoveCompetitionMutationFn = Apollo.MutationFunction<RemoveCompetitionMutation, RemoveCompetitionMutationVariables>;
+
+/**
+ * __useRemoveCompetitionMutation__
+ *
+ * To run a mutation, you first call `useRemoveCompetitionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRemoveCompetitionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [removeCompetitionMutation, { data, loading, error }] = useRemoveCompetitionMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useRemoveCompetitionMutation(baseOptions?: Apollo.MutationHookOptions<RemoveCompetitionMutation, RemoveCompetitionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RemoveCompetitionMutation, RemoveCompetitionMutationVariables>(RemoveCompetitionDocument, options);
+      }
+export type RemoveCompetitionMutationHookResult = ReturnType<typeof useRemoveCompetitionMutation>;
+export type RemoveCompetitionMutationResult = Apollo.MutationResult<RemoveCompetitionMutation>;
+export type RemoveCompetitionMutationOptions = Apollo.BaseMutationOptions<RemoveCompetitionMutation, RemoveCompetitionMutationVariables>;
 export const GetDashboardOverviewDocument = gql`
     query GetDashboardOverview {
   nodes {

@@ -2,7 +2,7 @@ import { Competition, useGetOneCompetitionQuery } from "@/src/generated/graphql"
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { CompetitionContext } from "@/hooks/competitionId/competitionContext";
-import { urlConf } from "@/src/urlConf";
+import { urlConf, withID } from "@/src/urlConf";
 
 export default function useCompetitionId(competitionId: string) {
     const router = useRouter();
@@ -20,9 +20,9 @@ export default function useCompetitionId(competitionId: string) {
         if (!loading) {
             if (!data) {
                 console.log("No competition found with id " + competitionIdInteger);
-                router.push(urlConf.dashboard.overview);
+                router.push(withID(urlConf.dashboard.overview));
             } else {
-                console.log(data.competition);
+                // console.log(data.competition);
                 context.setCompetition(data.competition as Competition);
             }
         }

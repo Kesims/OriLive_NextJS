@@ -7,10 +7,8 @@ import { usePunches } from "@/hooks/punch/punches.hook";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import PunchTableGrid from "@/components/dashboard/punches/punchTableGrid";
 import { useTranslation } from "react-i18next";
-import useCompetitionId from "@/hooks/competitionId/competitionId.hook";
 
-export default function Punches({ params }: { params: { competitionId: string } }) {
-    useCompetitionId(params.competitionId);
+export default function Punches() {
     const afterDate = new Date(new Date(new Date().getTime() - 3600000).toString());
     const { punches, punchCount, minutesFromLastPunch } = usePunches(afterDate);
     const { t } = useTranslation("dashboard", { keyPrefix: "punches" });

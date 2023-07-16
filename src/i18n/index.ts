@@ -6,7 +6,7 @@ import LanguageDetector from "i18next-browser-languagedetector";
 
 export const initTranslations = async () => {
     await i18next
-        // .use(LanguageDetector)
+        .use(LanguageDetector)
         .use(initReactI18next)
         .init({
             resources: {
