@@ -26,12 +26,33 @@ export interface TranslationKeys {
         acknowledgementsText2: string;
         contact: string;
     };
+    changeLanguageButton: {
+        tooltip: string;
+    };
     login: {
         title: string;
         username: string;
         password: string;
         rememberMe: string;
         login: string;
+        unknownErrorOccurred: string;
+        register: string;
+        backToLandingPage: string;
+    };
+    register: {
+        title: string;
+        username: string;
+        password: string;
+        repeatPassword: string;
+        register: string;
+        registrationSuccessful: string;
+        unknownErrorOccurred: string;
+        passwordsDoNotMatch: string;
+        backToLandingPage: string;
+        text: {
+            title: string;
+            body: string;
+        };
     };
     dashboard: {
         sideMenu: {

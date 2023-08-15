@@ -42,7 +42,7 @@ export default function DashboardWithoutIDPage() {
                         }}
                     >
                         {competitions?.map((competition: Competition) => (
-                            <MenuItem key={competition.id} value={competition.id}>
+                            <MenuItem key={competition.competitionId} value={competition.competitionId}>
                                 {competition.name}
                             </MenuItem>
                         ))}

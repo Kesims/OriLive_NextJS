@@ -33,7 +33,9 @@ export default function useCompetition() {
         if (competitionRemoved.data) {
             const competition = competitionRemoved.data.competitionRemoved;
             if (competitions) {
-                setCompetitions([...(competitions as Competition[])].filter((m) => m.id != competition.id));
+                setCompetitions(
+                    [...(competitions as Competition[])].filter((m) => m.id != competition.competitionId),
+                );
             }
         }
     }, [competitionRemoved.data]);

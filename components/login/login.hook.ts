@@ -3,11 +3,13 @@ import { ApolloError } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
 import { LoginFormData } from "./login.types";
+import { useTranslation } from "react-i18next";
 
 export const useLogin = () => {
     const [login, { loading }] = useLoginMutationMutation({
         onCompleted: () => console.log("Login successful."),
     });
+    const { t } = useTranslation("login");
     const router = useRouter();
     const { enqueueSnackbar } = useSnackbar();
     const loginHandler = async (formData: LoginFormData) => {
@@ -24,7 +26,7 @@ export const useLogin = () => {
             if (e instanceof ApolloError) {
                 enqueueSnackbar(e.message, { variant: "error" });
             } else {
-                enqueueSnackbar("Došlo k neznámé chybě", { variant: "error" });
+                enqueueSnackbar(t("unknownErrorOccurred"), { variant: "error" });
             }
         }
     };

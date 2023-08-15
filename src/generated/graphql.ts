@@ -18,11 +18,13 @@ export type Scalars = {
 
 export type Competition = {
   __typename?: 'Competition';
-  description?: Maybe<Scalars['String']>;
   /** Competition ID */
+  competitionId: Scalars['Int'];
+  description?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
   location?: Maybe<Scalars['String']>;
   name: Scalars['String'];
+  oresultsIntegration?: Maybe<Scalars['String']>;
   organizer?: Maybe<Scalars['String']>;
   owner?: Maybe<User>;
   startTime: Scalars['DateTime'];
@@ -55,7 +57,7 @@ export type CreateNetworkCommandInput = {
 
 export type CreateOresultsMappingInput = {
   /** Local node ID */
-  local_id: Scalars['Int'];
+  local_id: Scalars['String'];
   /** OResults api key for the device */
   oresults_key: Scalars['String'];
 };
@@ -76,6 +78,7 @@ export type Mutation = {
   createUser: User;
   login: Scalars['Boolean'];
   logout: Scalars['Boolean'];
+  register: Scalars['Boolean'];
   removeCompetition: Scalars['Boolean'];
   removeNetworkCommand: Scalars['Boolean'];
   removeNode: Scalars['Boolean'];
@@ -111,8 +114,14 @@ export type MutationLoginArgs = {
 };
 
 
+export type MutationRegisterArgs = {
+  password: Scalars['String'];
+  username: Scalars['String'];
+};
+
+
 export type MutationRemoveCompetitionArgs = {
-  id: Scalars['Int'];
+  competitionId: Scalars['Int'];
 };
 
 
@@ -142,22 +151,25 @@ export type MutationUpdateCompetitionArgs = {
 
 export type NetworkCommand = {
   __typename?: 'NetworkCommand';
-  competition_id: Scalars['String'];
+  competition_id: Scalars['Int'];
   creation_time: Scalars['DateTime'];
   data: Scalars['Int'];
   /** NetworkCommand ID */
   id: Scalars['Int'];
+  owner?: Maybe<User>;
   type: Scalars['String'];
 };
 
 export type Node = {
   __typename?: 'Node';
   battery_level: Scalars['Int'];
+  competition_id: Scalars['String'];
   id: Scalars['Int'];
   last_contact: Scalars['DateTime'];
   neighbours: Scalars['String'];
   node_id: Scalars['String'];
   node_type: Scalars['Int'];
+  owner?: Maybe<User>;
 };
 
 export type OResultsMapping = {
@@ -167,7 +179,8 @@ export type OResultsMapping = {
   /** Mapping ID */
   id: Scalars['Int'];
   /** Local node ID */
-  node_id: Scalars['Int'];
+  node_id: Scalars['String'];
+  owner?: Maybe<User>;
 };
 
 export type Punch = {
@@ -175,6 +188,7 @@ export type Punch = {
   competition_id: Scalars['String'];
   /** Punch ID */
   id: Scalars['Int'];
+  owner?: Maybe<User>;
   receive_time: Scalars['DateTime'];
   seconds: Scalars['Int'];
   si_number: Scalars['String'];
@@ -198,7 +212,7 @@ export type Query = {
 
 
 export type QueryCompetitionArgs = {
-  id: Scalars['Int'];
+  competitionId: Scalars['Int'];
 };
 
 
@@ -230,9 +244,10 @@ export type Subscription = {
 };
 
 export type UpdateCompetitionInput = {
+  /** Competition ID */
+  competitionId: Scalars['Int'];
   /** Competition description */
   description?: InputMaybe<Scalars['String']>;
-  /** Competition ID */
   id: Scalars['Int'];
   /** Competition location */
   location?: InputMaybe<Scalars['String']>;
@@ -252,6 +267,7 @@ export type User = {
   /** User ID */
   id: Scalars['Int'];
   password: Scalars['String'];
+  token: Scalars['String'];
   user_type: Scalars['Int'];
   username: Scalars['String'];
 };
@@ -259,7 +275,7 @@ export type User = {
 export type GetCompetitionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCompetitionsQuery = { __typename?: 'Query', competitions: Array<{ __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null }> };
+export type GetCompetitionsQuery = { __typename?: 'Query', competitions: Array<{ __typename?: 'Competition', id: number, competitionId: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null }> };
 
 export type CreateCompetitionMutationVariables = Exact<{
   competition: CreateCompetitionInput;
@@ -278,19 +294,19 @@ export type UpdateCompetitionMutation = { __typename?: 'Mutation', updateCompeti
 export type CompetitionAddedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CompetitionAddedSubscription = { __typename?: 'Subscription', competitionAdded: { __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null } };
+export type CompetitionAddedSubscription = { __typename?: 'Subscription', competitionAdded: { __typename?: 'Competition', id: number, competitionId: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null } };
 
 export type CompetitionRemovedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CompetitionRemovedSubscription = { __typename?: 'Subscription', competitionRemoved: { __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null } };
+export type CompetitionRemovedSubscription = { __typename?: 'Subscription', competitionRemoved: { __typename?: 'Competition', id: number, competitionId: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null } };
 
 export type GetOneCompetitionQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
 
-export type GetOneCompetitionQuery = { __typename?: 'Query', competition: { __typename?: 'Competition', id: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null } };
+export type GetOneCompetitionQuery = { __typename?: 'Query', competition: { __typename?: 'Competition', id: number, competitionId: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null } };
 
 export type RemoveCompetitionMutationVariables = Exact<{
   id: Scalars['Int'];
@@ -325,12 +341,12 @@ export type CheckLoginQuery = { __typename?: 'Query', checkLogin: boolean };
 export type GetNetworkCommandsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetNetworkCommandsQuery = { __typename?: 'Query', networkCommands: Array<{ __typename?: 'NetworkCommand', id: number, competition_id: string, creation_time: any, type: string, data: number }> };
+export type GetNetworkCommandsQuery = { __typename?: 'Query', networkCommands: Array<{ __typename?: 'NetworkCommand', id: number, competition_id: number, creation_time: any, type: string, data: number }> };
 
 export type NetworkCommandAddedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type NetworkCommandAddedSubscription = { __typename?: 'Subscription', networkCommandAdded: { __typename?: 'NetworkCommand', id: number, competition_id: string, creation_time: any, type: string, data: number } };
+export type NetworkCommandAddedSubscription = { __typename?: 'Subscription', networkCommandAdded: { __typename?: 'NetworkCommand', id: number, competition_id: number, creation_time: any, type: string, data: number } };
 
 export type CreateNetworkCommandMutationVariables = Exact<{
   createNetworkCommandInput: CreateNetworkCommandInput;
@@ -349,7 +365,7 @@ export type DeleteNetworkCommandMutation = { __typename?: 'Mutation', removeNetw
 export type NetworkCommandRemovedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type NetworkCommandRemovedSubscription = { __typename?: 'Subscription', networkCommandRemoved: { __typename?: 'NetworkCommand', id: number, competition_id: string, creation_time: any, type: string, data: number } };
+export type NetworkCommandRemovedSubscription = { __typename?: 'Subscription', networkCommandRemoved: { __typename?: 'NetworkCommand', id: number, competition_id: number, creation_time: any, type: string, data: number } };
 
 export type GetNodesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -376,17 +392,17 @@ export type RemoveNodeMutation = { __typename?: 'Mutation', removeNode: boolean 
 export type GetOResultsMappingsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetOResultsMappingsQuery = { __typename?: 'Query', oresultsMappings: Array<{ __typename?: 'OResultsMapping', id: number, node_id: number, api_key: string }> };
+export type GetOResultsMappingsQuery = { __typename?: 'Query', oresultsMappings: Array<{ __typename?: 'OResultsMapping', id: number, node_id: string, api_key: string }> };
 
 export type OresultsMappingAddedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type OresultsMappingAddedSubscription = { __typename?: 'Subscription', oresultsMappingAdded: { __typename?: 'OResultsMapping', id: number, node_id: number, api_key: string } };
+export type OresultsMappingAddedSubscription = { __typename?: 'Subscription', oresultsMappingAdded: { __typename?: 'OResultsMapping', id: number, node_id: string, api_key: string } };
 
 export type OresultsMappingRemovedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type OresultsMappingRemovedSubscription = { __typename?: 'Subscription', oresultsMappingRemoved: { __typename?: 'OResultsMapping', id: number, node_id: number, api_key: string } };
+export type OresultsMappingRemovedSubscription = { __typename?: 'Subscription', oresultsMappingRemoved: { __typename?: 'OResultsMapping', id: number, node_id: string, api_key: string } };
 
 export type CreateOresultsMappingMutationVariables = Exact<{
   input: CreateOresultsMappingInput;
@@ -414,11 +430,20 @@ export type GetPunchesQueryVariables = Exact<{
 
 export type GetPunchesQuery = { __typename?: 'Query', punches: Array<{ __typename?: 'Punch', id: number, competition_id: string, time: any, receive_time: any, si_number: string, station_number: string, seconds: number }> };
 
+export type RegisterMutationMutationVariables = Exact<{
+  username: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+
+export type RegisterMutationMutation = { __typename?: 'Mutation', register: boolean };
+
 
 export const GetCompetitionsDocument = gql`
     query getCompetitions {
   competitions {
     id
+    competitionId
     name
     description
     type
@@ -525,6 +550,7 @@ export const CompetitionAddedDocument = gql`
     subscription competitionAdded {
   competitionAdded {
     id
+    competitionId
     name
     description
     type
@@ -564,6 +590,7 @@ export const CompetitionRemovedDocument = gql`
     subscription competitionRemoved {
   competitionRemoved {
     id
+    competitionId
     name
     description
     type
@@ -601,8 +628,9 @@ export type CompetitionRemovedSubscriptionHookResult = ReturnType<typeof useComp
 export type CompetitionRemovedSubscriptionResult = Apollo.SubscriptionResult<CompetitionRemovedSubscription>;
 export const GetOneCompetitionDocument = gql`
     query getOneCompetition($id: Int!) {
-  competition(id: $id) {
+  competition(competitionId: $id) {
     id
+    competitionId
     name
     description
     type
@@ -646,7 +674,7 @@ export type GetOneCompetitionLazyQueryHookResult = ReturnType<typeof useGetOneCo
 export type GetOneCompetitionQueryResult = Apollo.QueryResult<GetOneCompetitionQuery, GetOneCompetitionQueryVariables>;
 export const RemoveCompetitionDocument = gql`
     mutation removeCompetition($id: Int!) {
-  removeCompetition(id: $id)
+  removeCompetition(competitionId: $id)
 }
     `;
 export type RemoveCompetitionMutationFn = Apollo.MutationFunction<RemoveCompetitionMutation, RemoveCompetitionMutationVariables>;
@@ -1350,3 +1378,35 @@ export function useGetPunchesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type GetPunchesQueryHookResult = ReturnType<typeof useGetPunchesQuery>;
 export type GetPunchesLazyQueryHookResult = ReturnType<typeof useGetPunchesLazyQuery>;
 export type GetPunchesQueryResult = Apollo.QueryResult<GetPunchesQuery, GetPunchesQueryVariables>;
+export const RegisterMutationDocument = gql`
+    mutation RegisterMutation($username: String!, $password: String!) {
+  register(username: $username, password: $password)
+}
+    `;
+export type RegisterMutationMutationFn = Apollo.MutationFunction<RegisterMutationMutation, RegisterMutationMutationVariables>;
+
+/**
+ * __useRegisterMutationMutation__
+ *
+ * To run a mutation, you first call `useRegisterMutationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRegisterMutationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [registerMutationMutation, { data, loading, error }] = useRegisterMutationMutation({
+ *   variables: {
+ *      username: // value for 'username'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useRegisterMutationMutation(baseOptions?: Apollo.MutationHookOptions<RegisterMutationMutation, RegisterMutationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RegisterMutationMutation, RegisterMutationMutationVariables>(RegisterMutationDocument, options);
+      }
+export type RegisterMutationMutationHookResult = ReturnType<typeof useRegisterMutationMutation>;
+export type RegisterMutationMutationResult = Apollo.MutationResult<RegisterMutationMutation>;
+export type RegisterMutationMutationOptions = Apollo.BaseMutationOptions<RegisterMutationMutation, RegisterMutationMutationVariables>;

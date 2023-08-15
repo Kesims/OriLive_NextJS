@@ -1,5 +1,7 @@
 export const urlConf = {
     homepage: "/",
+    login: "/login",
+    register: "/register",
     dashboard: {
         overview: "/dashboard/{id}",
         punches: "/dashboard/{id}/punches",

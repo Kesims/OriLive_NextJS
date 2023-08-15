@@ -57,7 +57,7 @@ export default function CompetitionPage() {
                                     <Button
                                         variant={"outlined"}
                                         fullWidth={true}
-                                        href={withID(urlConf.dashboard.overview, competition.id)}
+                                        href={withID(urlConf.dashboard.overview, competition.competitionId)}
                                     >
                                         {t("viewCompetition")}
                                     </Button>

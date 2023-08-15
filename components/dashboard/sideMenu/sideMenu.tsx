@@ -48,14 +48,14 @@ export default function SideMenu() {
                                 opacity: open ? 1 : 0,
                                 width: "100%",
                             }}
-                            value={context.competition ? context.competition.id : -1}
+                            value={context.competition ? context.competition.competitionId : -1}
                             onChange={(e) => {
                                 const id = e.target.value;
                                 router.push(withID(urlConf.dashboard.overview, Number(id)));
                             }}
                         >
                             {competitions?.map((competition, n) => (
-                                <MenuItem value={competition.id} key={n}>
+                                <MenuItem value={competition.competitionId} key={n}>
                                     {competition.name}
                                 </MenuItem>
                             ))}
@@ -83,33 +83,36 @@ export default function SideMenu() {
                         <SideMenuItem
                             open={open}
                             text={t("thisCompetition")}
-                            href={withID(urlConf.dashboard.competition, context.competition.id)}
+                            href={withID(urlConf.dashboard.competition, context.competition.competitionId)}
                         >
                             <TodayIcon sx={{ color: "black" }} />
                         </SideMenuItem>
                         <SideMenuItem
-                            href={withID(urlConf.dashboard.punches, context.competition.id)}
+                            href={withID(urlConf.dashboard.punches, context.competition.competitionId)}
                             open={open}
                             text={t("punches")}
                         >
                             <AvTimerOutlinedIcon sx={{ color: "black" }} />
                         </SideMenuItem>
                         <SideMenuItem
-                            href={withID(urlConf.dashboard.nodes, context.competition.id)}
+                            href={withID(urlConf.dashboard.nodes, context.competition.competitionId)}
                             open={open}
                             text={t("devices")}
                         >
                             <StorageRoundedIcon sx={{ color: "black" }} />
                         </SideMenuItem>
                         <SideMenuItem
-                            href={withID(urlConf.dashboard.networkCommands, context.competition?.id)}
+                            href={withID(
+                                urlConf.dashboard.networkCommands,
+                                context.competition?.competitionId,
+                            )}
                             open={open}
                             text={t("networkCommands")}
                         >
                             <DynamicFormOutlined sx={{ color: "black" }} />
                         </SideMenuItem>
                         <SideMenuItem
-                            href={withID(urlConf.dashboard.oresults, context.competition.id)}
+                            href={withID(urlConf.dashboard.oresults, context.competition.competitionId)}
                             open={open}
                             text={t("oresults")}
                         >

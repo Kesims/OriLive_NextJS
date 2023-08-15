@@ -1,6 +1,7 @@
 query getCompetitions {
     competitions {
         id
+        competitionId
         name
         description
         type
@@ -25,6 +26,7 @@ mutation updateCompetition($competition: UpdateCompetitionInput!) {
 subscription competitionAdded {
     competitionAdded {
         id
+        competitionId
         name
         description
         type
@@ -41,6 +43,7 @@ subscription competitionAdded {
 subscription competitionRemoved {
     competitionRemoved {
         id
+        competitionId
         name
         description
         type
@@ -55,8 +58,9 @@ subscription competitionRemoved {
 }
 
 query getOneCompetition($id: Int!) {
-    competition(id: $id) {
+    competition(competitionId: $id) {
         id
+        competitionId
         name
         description
         type
@@ -71,5 +75,5 @@ query getOneCompetition($id: Int!) {
 }
 
 mutation removeCompetition($id: Int!) {
-    removeCompetition(id: $id)
+    removeCompetition(competitionId: $id)
 }

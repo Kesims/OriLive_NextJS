@@ -47,12 +47,36 @@ export default {
         acknowledgementsText2: ", který také poskytl mnoho tipů a je velmi otevřený spolupráci.",
         contact: "Kontakt",
     },
+    changeLanguageButton: {
+        tooltip: "Switch to English",
+    },
     login: {
         title: "Přihlášení",
         username: "Uživatelské jméno",
         password: "Heslo",
         rememberMe: "Zapamatovat si údaje",
         login: "Přihlásit se",
+        unknownErrorOccurred: "Při přihlašování došlo k neznámé chybě.",
+        register: "Registrovat se",
+        backToLandingPage: "Zpět na úvodní stránku",
+    },
+    register: {
+        title: "Registrace",
+        username: "Uživatelské jméno",
+        register: "Registrovat se",
+        passwordsDoNotMatch: "Hesla se neshodují.",
+        repeatPassword: "Heslo znovu",
+        password: "Heslo",
+        registrationSuccessful: "Registrace proběhla úspěšně.",
+        unknownErrorOccurred: "Při registraci došlo k neznámé chybě.",
+        backToLandingPage: "Zpět na úvodní stránku",
+        text: {
+            title: "Moment! OriLive je stále ve vývoji.",
+            body:
+                "Pokud vás projekt zaujal, neváhejte se registrovat. V případě, že narazíte na " +
+                "nějaký problém, nebo máte nápad na vylepšení, neváhejte mě kontaktovat. " +
+                "Všechny kontaktní informace najdete na úvodní stránce. Díky. ",
+        },
     },
     dashboard: {
         sideMenu: {

@@ -7,11 +7,13 @@ schema {
 }
 
 type Competition {
-    description: String
     "Competition ID"
+    competitionId: Int!
+    description: String
     id: Int!
     location: String
     name: String!
+    oresultsIntegration: String
     organizer: String
     owner: User
     startTime: DateTime!
@@ -25,7 +27,8 @@ type Mutation {
     createUser(createUserInput: CreateUserInput!): User!
     login(password: String!, username: String!): Boolean!
     logout: Boolean!
-    removeCompetition(id: Int!): Boolean!
+    register(password: String!, username: String!): Boolean!
+    removeCompetition(competitionId: Int!): Boolean!
     removeNetworkCommand(id: Int!): Boolean!
     removeNode(id: Int!): Boolean!
     removeOresultsMapping(id: Int!): Boolean!
@@ -34,21 +37,24 @@ type Mutation {
 }
 
 type NetworkCommand {
-    competition_id: String!
+    competition_id: Int!
     creation_time: DateTime!
     data: Int!
     "NetworkCommand ID"
     id: Int!
+    owner: User
     type: String!
 }
 
 type Node {
     battery_level: Int!
+    competition_id: String!
     id: Int!
     last_contact: DateTime!
     neighbours: String!
     node_id: String!
     node_type: Int!
+    owner: User
 }
 
 type OResultsMapping {
@@ -57,13 +63,15 @@ type OResultsMapping {
     "Mapping ID"
     id: Int!
     "Local node ID"
-    node_id: Int!
+    node_id: String!
+    owner: User
 }
 
 type Punch {
     competition_id: String!
     "Punch ID"
     id: Int!
+    owner: User
     receive_time: DateTime!
     seconds: Int!
     si_number: String!
@@ -73,7 +81,7 @@ type Punch {
 
 type Query {
     checkLogin: Boolean!
-    competition(id: Int!): Competition!
+    competition(competitionId: Int!): Competition!
     competitions: [Competition!]!
     networkCommands: [NetworkCommand!]!
     nodes: [Node!]!
@@ -101,6 +109,7 @@ type User {
     "User ID"
     id: Int!
     password: String!
+    token: String!
     user_type: Int!
     username: String!
 }
@@ -134,7 +143,7 @@ input CreateNetworkCommandInput {
 
 input CreateOresultsMappingInput {
     "Local node ID"
-    local_id: Int!
+    local_id: String!
     "OResults api key for the device"
     oresults_key: String!
 }
@@ -148,9 +157,10 @@ input CreateUserInput {
 }
 
 input UpdateCompetitionInput {
+    "Competition ID"
+    competitionId: Int!
     "Competition description"
     description: String
-    "Competition ID"
     id: Int!
     "Competition location"
     location: String

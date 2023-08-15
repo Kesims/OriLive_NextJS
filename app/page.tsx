@@ -21,14 +21,12 @@ import { EmailRounded, LinkedIn } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 import Button from "@mui/material/Button";
 import { changeLanguage } from "i18next";
+import ChangeLanguageButton from "@/components/changeLanguageButton/changeLanguageButton";
 
 export default function Home() {
     const theme = useTheme();
 
-    const { t, i18n } = useTranslation("landingPage");
-    const changeLanguageHandler = () => {
-        changeLanguage(i18n.language === "cs" ? "en" : "cs");
-    };
+    const { t } = useTranslation("landingPage");
 
     const oNodeList = [
         t("onodeBoardFeatures.compact"),
@@ -40,13 +38,7 @@ export default function Home() {
 
     return (
         <main>
-            <Box sx={{ position: "fixed", right: 0, top: 0, margin: 2 }}>
-                <Tooltip title={t("changeLanguage")} placement={"left"}>
-                    <Button onClick={changeLanguageHandler} sx={{ backgroundColor: "white" }}>
-                        {i18n.language === "cs" ? "en" : "cs"}
-                    </Button>
-                </Tooltip>
-            </Box>
+            <ChangeLanguageButton />
             <Grid2 container sx={{ [theme.breakpoints.up("md")]: { height: "100vh" }, width: "100%" }}>
                 <Grid2
                     sm={12}

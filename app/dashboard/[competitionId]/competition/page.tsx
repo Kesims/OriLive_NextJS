@@ -27,6 +27,7 @@ export default function CompetitionSettings() {
             variables: {
                 competition: {
                     id: context.competition.id,
+                    competitionId: context.competition.competitionId,
                     name: context.competition.name,
                     description: context.competition.description,
                     location: context.competition.location,
@@ -63,6 +64,7 @@ export default function CompetitionSettings() {
                                     context.setCompetition({
                                         description: undefined,
                                         id: 0,
+                                        competitionId: 0,
                                         location: undefined,
                                         organizer: undefined,
                                         owner: undefined,
@@ -85,6 +87,7 @@ export default function CompetitionSettings() {
                                 onChange={(event) => {
                                     context.setCompetition({
                                         id: 0,
+                                        competitionId: 0,
                                         location: undefined,
                                         organizer: undefined,
                                         owner: undefined,
@@ -109,6 +112,7 @@ export default function CompetitionSettings() {
                                     onChange={(event) => {
                                         context.setCompetition({
                                             id: 0,
+                                            competitionId: 0,
                                             description: undefined,
                                             organizer: undefined,
                                             owner: undefined,
@@ -132,6 +136,7 @@ export default function CompetitionSettings() {
                                     onChange={(event) => {
                                         context.setCompetition({
                                             id: 0,
+                                            competitionId: 0,
                                             description: undefined,
                                             location: undefined,
                                             owner: undefined,
@@ -161,6 +166,7 @@ export default function CompetitionSettings() {
                                         onChange={(date) => {
                                             context.setCompetition({
                                                 id: 0,
+                                                competitionId: 0,
                                                 description: undefined,
                                                 location: undefined,
                                                 organizer: undefined,
@@ -186,6 +192,7 @@ export default function CompetitionSettings() {
                                     onChange={(event) => {
                                         context.setCompetition({
                                             id: 0,
+                                            competitionId: 0,
                                             description: undefined,
                                             location: undefined,
                                             organizer: undefined,
@@ -239,7 +246,7 @@ export default function CompetitionSettings() {
                                     }}
                                 >
                                     <Typography fontWeight={"bolder"} fontSize={26} textAlign={"center"}>
-                                        {context.competition?.id}
+                                        {context.competition?.competitionId}
                                     </Typography>
                                 </Box>
                             </Grid2>
@@ -267,7 +274,7 @@ export default function CompetitionSettings() {
                                     }}
                                 >
                                     <RemoveCompetitionDialog
-                                        competitionId={context.competition?.id}
+                                        competitionId={context.competition?.competitionId}
                                         open={deleteDialogOpen}
                                         setOpen={setDeleteDialogOpen}
                                     />

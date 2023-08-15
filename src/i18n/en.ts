@@ -43,12 +43,35 @@ export default {
         acknowledgementsText2: ", who also provided many tips and is very open to cooperation.",
         contact: "Contact",
     },
+    changeLanguageButton: {
+        tooltip: "Přepnout do češtiny",
+    },
     login: {
         title: "Login",
         username: "Username",
         password: "Password",
         rememberMe: "Remember me",
         login: "Login",
+        unknownErrorOccurred: "Unknown error occurred.",
+        register: "Register",
+        backToLandingPage: "Back to landing page",
+    },
+    register: {
+        title: "Registration",
+        register: "Register",
+        password: "Password",
+        repeatPassword: "Repeat password",
+        username: "Username",
+        registrationSuccessful: "Registration successful.",
+        unknownErrorOccurred: "Unknown error occurred.",
+        passwordsDoNotMatch: "Passwords do not match.",
+        backToLandingPage: "Back to landing page",
+        text: {
+            title: "Wait! OriLive is still in development.",
+            body:
+                "Feel free to register and try it out, but keep in mind that the project is still in development." +
+                " If you encounter any problems, please contact me using the contact information on the landing page.",
+        },
     },
     dashboard: {
         sideMenu: {
