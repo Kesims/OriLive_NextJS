@@ -66,6 +66,7 @@ export interface TranslationKeys {
             competitions: string;
             thisCompetition: string;
             createNewCompetition: string;
+            tokenCopyTooltip: string;
         };
         bottomMenu: {
             overview: string;
@@ -132,6 +133,11 @@ export interface TranslationKeys {
             mapDeviceButton: string;
             deviceMappedSuccessfully: string;
             unknownErrorOccurred: string;
+            toggleOresultsIntegration: string;
+            sendDataToOresults: string;
+            integrationToggleSuccess: string;
+            integrationToggleError: string;
+            removeButton: string;
         };
         punches: {
             title: string;
@@ -190,6 +196,8 @@ export interface TranslationKeys {
             relayCompetition: string;
             saveSuccess: string;
             saveError: string;
+            userToken: string;
+            userTokenInfo: string;
         };
         deleteCompetitionDialog: {
             title: string;

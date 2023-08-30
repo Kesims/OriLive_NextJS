@@ -30,7 +30,7 @@ export default function NetworkCommands() {
                 <Grid2 xs={12} md={4}>
                     <AddCommand />
                 </Grid2>
-                <Grid2 xs={12} md={8} sx={{ minHeight: "100%" }}>
+                <Grid2 xs={12} md={8} sx={{ minHeight: "100%", py: 1.5 }}>
                     <NetworkCommandGrid networkCommands={networkCommands.networkCommands} />
                 </Grid2>
             </Grid2>

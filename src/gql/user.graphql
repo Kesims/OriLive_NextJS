@@ -1,0 +1,8 @@
+query getCurrentUser {
+    currentUser {
+        id
+        username
+        user_type
+        token
+    }
+}

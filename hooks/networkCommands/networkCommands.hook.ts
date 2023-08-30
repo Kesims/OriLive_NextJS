@@ -1,9 +1,7 @@
 import { useEffect, useReducer } from "react";
 import {
     NetworkCommand,
-    useDeleteNetworkCommandMutation,
     useGetNetworkCommandsQuery,
-    useLoginMutationMutation,
     useNetworkCommandAddedSubscription,
     useNetworkCommandRemovedSubscription,
 } from "@/src/generated/graphql";
@@ -54,14 +52,17 @@ export function useNetworkCommands() {
     useEffect(() => {
         if (!loading) {
             if (data) {
-                dispatch({ type: "setNetworkCommands", payload: data.networkCommands });
+                dispatch({ type: "setNetworkCommands", payload: data.networkCommands as NetworkCommand[] });
             }
         }
     }, [loading]);
 
     useEffect(() => {
         if (networkCommandAdded.data) {
-            dispatch({ type: "addNetworkCommand", payload: networkCommandAdded.data.networkCommandAdded });
+            dispatch({
+                type: "addNetworkCommand",
+                payload: networkCommandAdded.data.networkCommandAdded as NetworkCommand,
+            });
         }
     }, [networkCommandAdded.data]);
 
@@ -69,7 +70,7 @@ export function useNetworkCommands() {
         if (networkCommandRemoved.data) {
             dispatch({
                 type: "removeNetworkCommand",
-                payload: networkCommandRemoved.data.networkCommandRemoved,
+                payload: networkCommandRemoved.data.networkCommandRemoved as NetworkCommand,
             });
         }
     }, [networkCommandRemoved.data]);

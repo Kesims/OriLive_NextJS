@@ -119,6 +119,7 @@ export function useDevices() {
                 },
             });
             enqueueSnackbar(t("deviceRemovedSuccessfully"), { variant: "success" });
+            setDevices(devices?.filter((node) => node.id !== id));
             return true;
         } catch (e) {
             enqueueSnackbar(t("failedToRemoveDevice"), { variant: "error" });

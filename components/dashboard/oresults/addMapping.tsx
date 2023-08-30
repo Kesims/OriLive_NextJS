@@ -14,6 +14,8 @@ export default function AddMapping() {
     const { register, handleSubmit } = useForm<AddMappingFormData>();
     const { t } = useTranslation("dashboard", { keyPrefix: "oresults" });
 
+    console.log(devices.allDevices);
+
     return (
         <Panel md={12}>
             <Box
@@ -39,7 +41,7 @@ export default function AddMapping() {
                         {...register("nodeId", {})}
                     >
                         {devices.allDevices?.map((device) => (
-                            <MenuItem key={device.node_id} value={device.id}>
+                            <MenuItem key={device.node_id} value={device.node_id}>
                                 {device.node_id}
                             </MenuItem>
                         ))}

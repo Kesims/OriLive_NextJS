@@ -12,6 +12,7 @@ query getCompetitions {
             id
             username
         }
+        oresultsIntegration
     }
 }
 
@@ -36,7 +37,9 @@ subscription competitionAdded {
         owner {
             id
             username
+            token
         }
+        oresultsIntegration
     }
 }
 
@@ -53,7 +56,28 @@ subscription competitionRemoved {
         owner {
             id
             username
+            token
         }
+        oresultsIntegration
+    }
+}
+
+subscription competitionUpdated {
+    competitionUpdated {
+        id
+        competitionId
+        name
+        description
+        type
+        location
+        startTime
+        organizer
+        owner {
+            id
+            username
+            token
+        }
+        oresultsIntegration
     }
 }
 
@@ -70,7 +94,9 @@ query getOneCompetition($id: Int!) {
         owner {
             id
             username
+            token
         }
+        oresultsIntegration
     }
 }
 

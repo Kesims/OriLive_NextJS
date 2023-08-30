@@ -8,10 +8,12 @@ interface Props {
     children: ReactNode;
     open: boolean;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    mobileOpen: boolean;
 }
 
 const openedMixin = (theme: Theme): CSSObject => ({
-    width: drawerWidth,
+    width: "100vw",
+    [theme.breakpoints.up("md")]: { width: drawerWidth },
     transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
@@ -31,17 +33,18 @@ const closedMixin = (theme: Theme): CSSObject => ({
     },
 });
 
-export const Drawer: React.FC<Props> = ({ open, setOpen, children }) => {
+export const Drawer: React.FC<Props> = ({ open, setOpen, children, mobileOpen }) => {
     return (
         <MuiDrawer
-            onMouseEnter={() => setOpen(true)}
-            onMouseLeave={() => setOpen(false)}
+            onMouseEnter={() => (!mobileOpen ? setOpen(true) : null)}
+            onMouseLeave={() => (!mobileOpen ? setOpen(false) : null)}
             variant={"permanent"}
             sx={(theme) => ({
                 flexShrink: 0,
                 justifyContent: "space-around",
                 whiteSpace: "nowrap",
                 boxSizing: "border-box",
+                maxHeight: "100vh",
                 ...(open && {
                     ...openedMixin(theme),
                     "& .MuiDrawer-paper": openedMixin(theme),
@@ -50,6 +53,7 @@ export const Drawer: React.FC<Props> = ({ open, setOpen, children }) => {
                     ...closedMixin(theme),
                     "& .MuiDrawer-paper": closedMixin(theme),
                 }),
+                [theme.breakpoints.down("md")]: { paddingTop: "35px" },
             })}
         >
             {children}

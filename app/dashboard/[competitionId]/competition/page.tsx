@@ -12,6 +12,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useUpdateCompetitionMutation } from "@/src/generated/graphql";
 import { useSnackbar } from "notistack";
 import dayjs from "dayjs";
+import { UserContext } from "@/hooks/user/userContext";
 
 export default function CompetitionSettings() {
     const { t } = useTranslation("dashboard", { keyPrefix: "competition" });
@@ -20,7 +21,7 @@ export default function CompetitionSettings() {
     const context = useContext(CompetitionContext);
     const [updateCompetition] = useUpdateCompetitionMutation();
     const { enqueueSnackbar } = useSnackbar();
-
+    const userContext = useContext(UserContext);
     const handleSave = async () => {
         if (!context.competition) return;
         const { data } = await updateCompetition({
@@ -34,6 +35,7 @@ export default function CompetitionSettings() {
                     organizer: context.competition.organizer,
                     startTime: context.competition.startTime,
                     type: context.competition.type,
+                    oresultsIntegration: context.competition.oresultsIntegration,
                 },
             },
         });
@@ -247,6 +249,27 @@ export default function CompetitionSettings() {
                                 >
                                     <Typography fontWeight={"bolder"} fontSize={26} textAlign={"center"}>
                                         {context.competition?.competitionId}
+                                    </Typography>
+                                </Box>
+                            </Grid2>
+                            <Grid2 xs={8}>
+                                <Typography fontWeight={"bolder"} fontSize={18}>
+                                    {t("userToken")}
+                                </Typography>
+                                <Typography>{t("userTokenInfo")}</Typography>
+                            </Grid2>
+                            <Grid2 xs={4}>
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        flexFlow: "column",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        height: "100%",
+                                    }}
+                                >
+                                    <Typography fontWeight={"bolder"} fontSize={20} textAlign={"center"}>
+                                        {userContext.user?.token}
                                     </Typography>
                                 </Box>
                             </Grid2>

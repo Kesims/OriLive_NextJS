@@ -85,6 +85,7 @@ export default {
             competitions: "Competitions",
             thisCompetition: "This competition",
             createNewCompetition: "New competition",
+            tokenCopyTooltip: "Copy token to clipboard",
         },
         bottomMenu: {
             overview: "Overview",
@@ -138,6 +139,11 @@ export default {
             mapDeviceButton: "Add mapping",
             deviceMappedSuccessfully: "Device mapped successfully.",
             unknownErrorOccurred: "An unknown error occurred while trying to add the mapping.",
+            toggleOresultsIntegration: "Toggle OResults integration",
+            sendDataToOresults: "Send O-Node data to OResults",
+            integrationToggleSuccess: "Integration toggled successfully.",
+            integrationToggleError: "Failed to toggle integration due to an unknown error.",
+            removeButton: "Remove",
         },
         punches: {
             title: "Punches",
@@ -217,6 +223,8 @@ export default {
             relayCompetition: "Relay competition",
             saveSuccess: "Competition changes saved successfully.",
             saveError: "Failed to save competition changes.",
+            userToken: "User token",
+            userTokenInfo: "Used to identify the user in the OriLive system.",
         },
         competitions: {
             title: "My competitions",

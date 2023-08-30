@@ -3,6 +3,7 @@ import {
     Competition,
     useCompetitionAddedSubscription,
     useCompetitionRemovedSubscription,
+    useCompetitionUpdatedSubscription,
     useGetCompetitionsQuery,
 } from "@/src/generated/graphql";
 
@@ -11,6 +12,7 @@ export default function useCompetition() {
     const { data, loading } = useGetCompetitionsQuery();
     const competitionAdded = useCompetitionAddedSubscription();
     const competitionRemoved = useCompetitionRemovedSubscription();
+    const competitionUpdated = useCompetitionUpdatedSubscription();
 
     useEffect(() => {
         if (!loading) {
@@ -39,6 +41,22 @@ export default function useCompetition() {
             }
         }
     }, [competitionRemoved.data]);
+
+    useEffect(() => {
+        if (competitionUpdated.data) {
+            const competition = competitionUpdated.data.competitionUpdated;
+            if (competitions) {
+                setCompetitions(
+                    [...(competitions as Competition[])].map((m) => {
+                        if (m.id == competition.id) {
+                            return competition as Competition;
+                        }
+                        return m;
+                    }),
+                );
+            }
+        }
+    }, [competitionUpdated.data]);
 
     const getCompetition = (id: number) => {
         if (competitions) {

@@ -8,6 +8,7 @@ import Grid2 from "@mui/material/Unstable_Grid2";
 import AddMapping from "@/components/dashboard/oresults/addMapping";
 import OResultsMappingsGrid from "@/components/dashboard/oresults/oresultsMappingsGrid";
 import { useTranslation } from "react-i18next";
+import ToggleOresultsIntegration from "@/components/dashboard/oresults/toggleOresultsIntegration";
 
 export default function Oresults() {
     const oresults = useOResults();
@@ -26,9 +27,10 @@ export default function Oresults() {
         >
             <Grid2 container spacing={2} width={"100%"} sx={{ p: 2, minHeight: "calc(100vh - 160px)" }}>
                 <Grid2 xs={12} md={4}>
+                    <ToggleOresultsIntegration />
                     <AddMapping />
                 </Grid2>
-                <Grid2 xs={12} md={8} sx={{ minHeight: "100%" }}>
+                <Grid2 xs={12} md={8} sx={{ minHeight: "100%", py: 1.5 }}>
                     <OResultsMappingsGrid
                         oresultsMappings={oresults.mappings}
                         removeMapping={oresults.removeMapping}

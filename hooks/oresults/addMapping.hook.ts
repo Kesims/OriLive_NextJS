@@ -17,7 +17,7 @@ export const useCreateMapping = () => {
             const result = await createMapping({
                 variables: {
                     input: {
-                        local_id: parseInt(String(formData.nodeId)),
+                        local_id: String(formData.nodeId),
                         oresults_key: formData.oresultsKey,
                     },
                 },

@@ -90,6 +90,7 @@ export default {
             competitions: "Závody",
             thisCompetition: "Tento závod",
             createNewCompetition: "Nový závod",
+            tokenCopyTooltip: "Zkopírovat token do schránky",
         },
         bottomMenu: {
             overview: "Přehled",
@@ -143,6 +144,11 @@ export default {
             mapDeviceButton: "Mapovat zařízení",
             deviceMappedSuccessfully: "Mapování bylo úspešně nastaveno.",
             unknownErrorOccurred: "Při mapování zařízení došlo k neznámé chybě.",
+            toggleOresultsIntegration: "Přepnout integraci s OResults",
+            sendDataToOresults: "Posílat data z O-Node do OResults",
+            integrationToggleSuccess: "Integrace byla úspěšně přepnuta.",
+            integrationToggleError: "Při přepínání integrace došlo k neznámé chybě.",
+            removeButton: "Odebrat",
         },
         punches: {
             title: "Zaznamenané ražení",
@@ -215,6 +221,8 @@ export default {
             relayCompetition: "Závod štafet",
             saveSuccess: "Změny byly úspěšně uloženy.",
             saveError: "Při ukládání změn došlo k neznámé chybě.",
+            userToken: "Uživatelský token",
+            userTokenInfo: "Tento token slouží k identifikaci uživatele v systému OriLive.",
         },
         deleteCompetitionDialog: {
             title: "Smazat závod?",

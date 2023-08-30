@@ -25,7 +25,7 @@ export function useOResults() {
     useEffect(() => {
         if (!loading) {
             if (data) {
-                setMappings(data.oresultsMappings);
+                setMappings(data.oresultsMappings as OResultsMapping[]);
             }
         }
     }, [loading]);
@@ -34,8 +34,10 @@ export function useOResults() {
         if (mappingAdded.data) {
             const mapping = mappingAdded.data.oresultsMappingAdded;
             if (mappings) {
-                setMappings([...mappings, mapping]);
-            } else setMappings([mapping]);
+                setMappings([...mappings, mapping] as OResultsMapping[]);
+            } else {
+                setMappings([mapping] as OResultsMapping[]);
+            }
         }
     }, [mappingAdded.data]);
 
@@ -59,6 +61,7 @@ export function useOResults() {
                 },
             });
             enqueueSnackbar("Mapování bylo zrušeno.", { variant: "success" });
+            setMappings(mappings?.filter((m) => m.id != id));
             return true;
         } catch (e) {
             enqueueSnackbar("Při odebírání mapování došlo k neznámé chybě.", { variant: "error" });

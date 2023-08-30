@@ -7,15 +7,18 @@ import { TextInfo } from "@/components/dashboard/info/textInfo";
 import { Stack } from "@mui/material";
 import { StatusIconColor } from "@/components/dashboard/info/parts/statusIcon.types";
 import { useDashboardOverview } from "@/hooks/dashboard/overview/dashboardOverview.hook";
-import { urlConf } from "@/src/urlConf";
+import { urlConf, withID } from "@/src/urlConf";
 import { useTranslation } from "react-i18next";
 import useCompetitionId from "@/hooks/competitionId/competitionId.hook";
+import { useContext } from "react";
+import { CompetitionContext } from "@/hooks/competitionId/competitionContext";
 
 export default function Dashboard({ params }: { params: { competitionId: string } }) {
     const { nodeCount, gatewayCount, punchCount, punchText, networkCommandsText, oresultsMappingsText } =
         useDashboardOverview();
     const { t } = useTranslation("dashboard", { keyPrefix: "overview" });
     useCompetitionId(params.competitionId);
+    const context = useContext(CompetitionContext);
 
     return (
         <DashboardPage pageHeading={t("title")}>
@@ -23,7 +26,13 @@ export default function Dashboard({ params }: { params: { competitionId: string 
                 heading={t("onodesTitle")}
                 size={8}
                 button={
-                    <Button variant="contained" fullWidth disableElevation href={urlConf.dashboard.nodes}>
+                    <Button
+                        variant="contained"
+                        fullWidth
+                        disableElevation
+                        sx={{ mt: 1.5 }}
+                        href={withID(urlConf.dashboard.nodes, context.competition?.competitionId)}
+                    >
                         {t("deviceSettingsButton")}
                     </Button>
                 }
@@ -55,7 +64,13 @@ export default function Dashboard({ params }: { params: { competitionId: string 
                 heading={t("oresultsTitle")}
                 size={4}
                 button={
-                    <Button variant="contained" fullWidth disableElevation href={urlConf.dashboard.oresults}>
+                    <Button
+                        variant="contained"
+                        fullWidth
+                        disableElevation
+                        sx={{ mt: 1.5 }}
+                        href={withID(urlConf.dashboard.oresults, context.competition?.competitionId)}
+                    >
                         {t("oresultsSettingsButton")}
                     </Button>
                 }
@@ -80,7 +95,8 @@ export default function Dashboard({ params }: { params: { competitionId: string 
                         variant="contained"
                         fullWidth
                         disableElevation
-                        href={urlConf.dashboard.networkCommands}
+                        sx={{ mt: 1.5 }}
+                        href={withID(urlConf.dashboard.networkCommands, context.competition?.competitionId)}
                     >
                         {t("networkCommandsSettingsButton")}
                     </Button>
@@ -95,7 +111,13 @@ export default function Dashboard({ params }: { params: { competitionId: string 
                 heading={t("punchesTitle")}
                 size={8}
                 button={
-                    <Button variant="contained" fullWidth disableElevation href={urlConf.dashboard.punches}>
+                    <Button
+                        variant="contained"
+                        fullWidth
+                        disableElevation
+                        sx={{ mt: 1.5 }}
+                        href={withID(urlConf.dashboard.punches, context.competition?.competitionId)}
+                    >
                         {t("punchesSettingsButton")}
                     </Button>
                 }

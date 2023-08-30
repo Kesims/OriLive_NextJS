@@ -43,7 +43,7 @@ export default function OResultsMappingsGrid({ oresultsMappings, removeMapping }
             renderCell: (params) => (
                 <Box sx={{ p: 1 }}>
                     <Button variant={"contained"} onClick={() => removeMapping(params.value as number)}>
-                        Odebrat
+                        {t("removeButton")}
                     </Button>
                 </Box>
             ),

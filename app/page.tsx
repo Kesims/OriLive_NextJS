@@ -9,7 +9,6 @@ import {
     ListItem,
     ListItemIcon,
     ListItemText,
-    Tooltip,
     Typography,
     useTheme,
 } from "@mui/material";
@@ -19,8 +18,6 @@ import ArrowRightRounded from "@mui/icons-material/ArrowRightRounded";
 import List from "@mui/material/List";
 import { EmailRounded, LinkedIn } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
-import Button from "@mui/material/Button";
-import { changeLanguage } from "i18next";
 import ChangeLanguageButton from "@/components/changeLanguageButton/changeLanguageButton";
 
 export default function Home() {

@@ -13,7 +13,7 @@ type Competition {
     id: Int!
     location: String
     name: String!
-    oresultsIntegration: String
+    oresultsIntegration: Boolean
     organizer: String
     owner: User
     startTime: DateTime!
@@ -42,7 +42,7 @@ type NetworkCommand {
     data: Int!
     "NetworkCommand ID"
     id: Int!
-    owner: User
+    owner: User!
     type: String!
 }
 
@@ -54,7 +54,7 @@ type Node {
     neighbours: String!
     node_id: String!
     node_type: Int!
-    owner: User
+    owner: User!
 }
 
 type OResultsMapping {
@@ -64,14 +64,14 @@ type OResultsMapping {
     id: Int!
     "Local node ID"
     node_id: String!
-    owner: User
+    owner: User!
 }
 
 type Punch {
     competition_id: String!
     "Punch ID"
     id: Int!
-    owner: User
+    owner: User!
     receive_time: DateTime!
     seconds: Int!
     si_number: String!
@@ -83,6 +83,7 @@ type Query {
     checkLogin: Boolean!
     competition(competitionId: Int!): Competition!
     competitions: [Competition!]!
+    currentUser: User!
     networkCommands: [NetworkCommand!]!
     nodes: [Node!]!
     oresultsMappings: [OResultsMapping!]!
@@ -95,6 +96,7 @@ type Query {
 type Subscription {
     competitionAdded: Competition!
     competitionRemoved: Competition!
+    competitionUpdated: Competition!
     networkCommandAdded: NetworkCommand!
     networkCommandRemoved: NetworkCommand!
     nodeAdded: Node
@@ -166,6 +168,8 @@ input UpdateCompetitionInput {
     location: String
     "Competition name"
     name: String!
+    "Oresults integration"
+    oresultsIntegration: Boolean
     "Competition organizer"
     organizer: String
     "Competition start time"

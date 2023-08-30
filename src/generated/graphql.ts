@@ -24,7 +24,7 @@ export type Competition = {
   id: Scalars['Int'];
   location?: Maybe<Scalars['String']>;
   name: Scalars['String'];
-  oresultsIntegration?: Maybe<Scalars['String']>;
+  oresultsIntegration?: Maybe<Scalars['Boolean']>;
   organizer?: Maybe<Scalars['String']>;
   owner?: Maybe<User>;
   startTime: Scalars['DateTime'];
@@ -156,7 +156,7 @@ export type NetworkCommand = {
   data: Scalars['Int'];
   /** NetworkCommand ID */
   id: Scalars['Int'];
-  owner?: Maybe<User>;
+  owner: User;
   type: Scalars['String'];
 };
 
@@ -169,7 +169,7 @@ export type Node = {
   neighbours: Scalars['String'];
   node_id: Scalars['String'];
   node_type: Scalars['Int'];
-  owner?: Maybe<User>;
+  owner: User;
 };
 
 export type OResultsMapping = {
@@ -180,7 +180,7 @@ export type OResultsMapping = {
   id: Scalars['Int'];
   /** Local node ID */
   node_id: Scalars['String'];
-  owner?: Maybe<User>;
+  owner: User;
 };
 
 export type Punch = {
@@ -188,7 +188,7 @@ export type Punch = {
   competition_id: Scalars['String'];
   /** Punch ID */
   id: Scalars['Int'];
-  owner?: Maybe<User>;
+  owner: User;
   receive_time: Scalars['DateTime'];
   seconds: Scalars['Int'];
   si_number: Scalars['String'];
@@ -201,6 +201,7 @@ export type Query = {
   checkLogin: Scalars['Boolean'];
   competition: Competition;
   competitions: Array<Competition>;
+  currentUser: User;
   networkCommands: Array<NetworkCommand>;
   nodes: Array<Node>;
   oresultsMappings: Array<OResultsMapping>;
@@ -234,6 +235,7 @@ export type Subscription = {
   __typename?: 'Subscription';
   competitionAdded: Competition;
   competitionRemoved: Competition;
+  competitionUpdated: Competition;
   networkCommandAdded: NetworkCommand;
   networkCommandRemoved: NetworkCommand;
   nodeAdded?: Maybe<Node>;
@@ -253,6 +255,8 @@ export type UpdateCompetitionInput = {
   location?: InputMaybe<Scalars['String']>;
   /** Competition name */
   name: Scalars['String'];
+  /** Oresults integration */
+  oresultsIntegration?: InputMaybe<Scalars['Boolean']>;
   /** Competition organizer */
   organizer?: InputMaybe<Scalars['String']>;
   /** Competition start time */
@@ -275,7 +279,7 @@ export type User = {
 export type GetCompetitionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCompetitionsQuery = { __typename?: 'Query', competitions: Array<{ __typename?: 'Competition', id: number, competitionId: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null }> };
+export type GetCompetitionsQuery = { __typename?: 'Query', competitions: Array<{ __typename?: 'Competition', id: number, competitionId: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, oresultsIntegration?: boolean | null, owner?: { __typename?: 'User', id: number, username: string } | null }> };
 
 export type CreateCompetitionMutationVariables = Exact<{
   competition: CreateCompetitionInput;
@@ -294,19 +298,24 @@ export type UpdateCompetitionMutation = { __typename?: 'Mutation', updateCompeti
 export type CompetitionAddedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CompetitionAddedSubscription = { __typename?: 'Subscription', competitionAdded: { __typename?: 'Competition', id: number, competitionId: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null } };
+export type CompetitionAddedSubscription = { __typename?: 'Subscription', competitionAdded: { __typename?: 'Competition', id: number, competitionId: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, oresultsIntegration?: boolean | null, owner?: { __typename?: 'User', id: number, username: string, token: string } | null } };
 
 export type CompetitionRemovedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CompetitionRemovedSubscription = { __typename?: 'Subscription', competitionRemoved: { __typename?: 'Competition', id: number, competitionId: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null } };
+export type CompetitionRemovedSubscription = { __typename?: 'Subscription', competitionRemoved: { __typename?: 'Competition', id: number, competitionId: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, oresultsIntegration?: boolean | null, owner?: { __typename?: 'User', id: number, username: string, token: string } | null } };
+
+export type CompetitionUpdatedSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CompetitionUpdatedSubscription = { __typename?: 'Subscription', competitionUpdated: { __typename?: 'Competition', id: number, competitionId: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, oresultsIntegration?: boolean | null, owner?: { __typename?: 'User', id: number, username: string, token: string } | null } };
 
 export type GetOneCompetitionQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
 
-export type GetOneCompetitionQuery = { __typename?: 'Query', competition: { __typename?: 'Competition', id: number, competitionId: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, owner?: { __typename?: 'User', id: number, username: string } | null } };
+export type GetOneCompetitionQuery = { __typename?: 'Query', competition: { __typename?: 'Competition', id: number, competitionId: number, name: string, description?: string | null, type: string, location?: string | null, startTime: any, organizer?: string | null, oresultsIntegration?: boolean | null, owner?: { __typename?: 'User', id: number, username: string, token: string } | null } };
 
 export type RemoveCompetitionMutationVariables = Exact<{
   id: Scalars['Int'];
@@ -438,6 +447,11 @@ export type RegisterMutationMutationVariables = Exact<{
 
 export type RegisterMutationMutation = { __typename?: 'Mutation', register: boolean };
 
+export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', id: number, username: string, user_type: number, token: string } };
+
 
 export const GetCompetitionsDocument = gql`
     query getCompetitions {
@@ -454,6 +468,7 @@ export const GetCompetitionsDocument = gql`
       id
       username
     }
+    oresultsIntegration
   }
 }
     `;
@@ -560,7 +575,9 @@ export const CompetitionAddedDocument = gql`
     owner {
       id
       username
+      token
     }
+    oresultsIntegration
   }
 }
     `;
@@ -600,7 +617,9 @@ export const CompetitionRemovedDocument = gql`
     owner {
       id
       username
+      token
     }
+    oresultsIntegration
   }
 }
     `;
@@ -626,6 +645,48 @@ export function useCompetitionRemovedSubscription(baseOptions?: Apollo.Subscript
       }
 export type CompetitionRemovedSubscriptionHookResult = ReturnType<typeof useCompetitionRemovedSubscription>;
 export type CompetitionRemovedSubscriptionResult = Apollo.SubscriptionResult<CompetitionRemovedSubscription>;
+export const CompetitionUpdatedDocument = gql`
+    subscription competitionUpdated {
+  competitionUpdated {
+    id
+    competitionId
+    name
+    description
+    type
+    location
+    startTime
+    organizer
+    owner {
+      id
+      username
+      token
+    }
+    oresultsIntegration
+  }
+}
+    `;
+
+/**
+ * __useCompetitionUpdatedSubscription__
+ *
+ * To run a query within a React component, call `useCompetitionUpdatedSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useCompetitionUpdatedSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCompetitionUpdatedSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCompetitionUpdatedSubscription(baseOptions?: Apollo.SubscriptionHookOptions<CompetitionUpdatedSubscription, CompetitionUpdatedSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<CompetitionUpdatedSubscription, CompetitionUpdatedSubscriptionVariables>(CompetitionUpdatedDocument, options);
+      }
+export type CompetitionUpdatedSubscriptionHookResult = ReturnType<typeof useCompetitionUpdatedSubscription>;
+export type CompetitionUpdatedSubscriptionResult = Apollo.SubscriptionResult<CompetitionUpdatedSubscription>;
 export const GetOneCompetitionDocument = gql`
     query getOneCompetition($id: Int!) {
   competition(competitionId: $id) {
@@ -640,7 +701,9 @@ export const GetOneCompetitionDocument = gql`
     owner {
       id
       username
+      token
     }
+    oresultsIntegration
   }
 }
     `;
@@ -1410,3 +1473,40 @@ export function useRegisterMutationMutation(baseOptions?: Apollo.MutationHookOpt
 export type RegisterMutationMutationHookResult = ReturnType<typeof useRegisterMutationMutation>;
 export type RegisterMutationMutationResult = Apollo.MutationResult<RegisterMutationMutation>;
 export type RegisterMutationMutationOptions = Apollo.BaseMutationOptions<RegisterMutationMutation, RegisterMutationMutationVariables>;
+export const GetCurrentUserDocument = gql`
+    query getCurrentUser {
+  currentUser {
+    id
+    username
+    user_type
+    token
+  }
+}
+    `;
+
+/**
+ * __useGetCurrentUserQuery__
+ *
+ * To run a query within a React component, call `useGetCurrentUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCurrentUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCurrentUserQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetCurrentUserQuery(baseOptions?: Apollo.QueryHookOptions<GetCurrentUserQuery, GetCurrentUserQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetCurrentUserQuery, GetCurrentUserQueryVariables>(GetCurrentUserDocument, options);
+      }
+export function useGetCurrentUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCurrentUserQuery, GetCurrentUserQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetCurrentUserQuery, GetCurrentUserQueryVariables>(GetCurrentUserDocument, options);
+        }
+export type GetCurrentUserQueryHookResult = ReturnType<typeof useGetCurrentUserQuery>;
+export type GetCurrentUserLazyQueryHookResult = ReturnType<typeof useGetCurrentUserLazyQuery>;
+export type GetCurrentUserQueryResult = Apollo.QueryResult<GetCurrentUserQuery, GetCurrentUserQueryVariables>;

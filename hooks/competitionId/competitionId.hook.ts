@@ -1,4 +1,8 @@
-import { Competition, useGetOneCompetitionQuery } from "@/src/generated/graphql";
+import {
+    Competition,
+    useCompetitionUpdatedSubscription,
+    useGetOneCompetitionQuery,
+} from "@/src/generated/graphql";
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { CompetitionContext } from "@/hooks/competitionId/competitionContext";
@@ -27,4 +31,15 @@ export default function useCompetitionId(competitionId: string) {
             }
         }
     }, [loading]);
+
+    const competitionUpdated = useCompetitionUpdatedSubscription();
+
+    useEffect(() => {
+        if (competitionUpdated.data) {
+            const competition = competitionUpdated.data.competitionUpdated;
+            if (competition.id == context.competition?.id) {
+                context.setCompetition(competition as Competition);
+            }
+        }
+    }, [competitionUpdated.data]);
 }
