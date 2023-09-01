@@ -12,6 +12,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     const [competition, setCompetition] = useState<Competition | undefined>(undefined);
     const [user, setUser] = useState<User | undefined>(undefined);
 
+    const [hideMain, setHideMain] = useState(false);
+
     return (
         <Box>
             <UserContext.Provider value={{ user, setUser }}>
@@ -22,7 +24,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                             [theme.breakpoints.down("md")]: { marginTop: "40px" },
                         }}
                     >
-                        <SideMenu />
+                        <SideMenu hideMain={hideMain} setHideMain={setHideMain} />
                         <Box
                             component="main"
                             sx={{
@@ -30,6 +32,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                 padding: 3,
                                 mb: 0,
                                 [theme.breakpoints.down("md")]: { padding: 1, mb: "65px" },
+                                display: hideMain ? "none" : "block",
                             }}
                         >
                             {children}

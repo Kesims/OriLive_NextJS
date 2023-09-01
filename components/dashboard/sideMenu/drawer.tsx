@@ -44,7 +44,6 @@ export const Drawer: React.FC<Props> = ({ open, setOpen, children, mobileOpen })
                 justifyContent: "space-around",
                 whiteSpace: "nowrap",
                 boxSizing: "border-box",
-                maxHeight: "100vh",
                 ...(open && {
                     ...openedMixin(theme),
                     "& .MuiDrawer-paper": openedMixin(theme),

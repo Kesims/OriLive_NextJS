@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
+import { Box, Link } from "@mui/material";
 import { urlConf, withID } from "@/src/urlConf";
 import { CompetitionContext } from "@/hooks/competitionId/competitionContext";
 
@@ -20,10 +19,38 @@ export const DrawerHeader: React.FC<Props> = ({ open }) => {
                 padding: theme.spacing(1, 1),
             })}
         >
-            <IconButton>
+            <Box
+                sx={{
+                    borderRadius: 1,
+                    backgroundColor: "none",
+                    marginTop: 1,
+                    marginLeft: 1,
+                    position: "relative",
+                    height: 45,
+                }}
+            >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={open ? "/logo.png" : "/logoSmall.png"} height={35} alt={"OriLive logo"} />
-            </IconButton>
+                <img
+                    style={{
+                        transitionDuration: "0.2s",
+                        opacity: open ? 0 : 1,
+                        position: "absolute",
+                    }}
+                    src={"/logoSmall.png"}
+                    height={35}
+                    alt={"OriLive logo small"}
+                />
+                <img
+                    src={"/logo.png"}
+                    style={{
+                        transitionDuration: "0.3s",
+                        opacity: open ? 1 : 0,
+                        position: "absolute",
+                    }}
+                    alt={"OriLive logo"}
+                    height={35}
+                />
+            </Box>
         </Link>
     );
 };

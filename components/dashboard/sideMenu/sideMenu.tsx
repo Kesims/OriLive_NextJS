@@ -30,7 +30,12 @@ import useUsernameToken from "@/hooks/user/usernameToken.hook";
 import Button from "@mui/material/Button";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 
-export default function SideMenu() {
+interface Props {
+    hideMain: boolean;
+    setHideMain: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function SideMenu({ hideMain, setHideMain }: Props) {
     const context = useContext(CompetitionContext);
     const [open, setOpen] = React.useState(false);
     const handleLogout = useHandleLogout();
@@ -46,11 +51,12 @@ export default function SideMenu() {
 
     const onMobileOpen = () => {
         setMobileOpen(!mobileOpen);
+        setHideMain(!hideMain);
         setOpen(!open);
     };
 
     return (
-        <Box sx={{ position: "absolute" }}>
+        <Box sx={{ position: "relative" }}>
             <Button
                 onClick={onMobileOpen}
                 sx={{
@@ -66,7 +72,12 @@ export default function SideMenu() {
             >
                 <MenuRoundedIcon />
             </Button>
-            <Box sx={{ [theme.breakpoints.down("md")]: { display: mobileOpen ? "block" : "none" } }}>
+            <Box
+                sx={{
+                    [theme.breakpoints.down("md")]: { display: mobileOpen ? "block" : "none" },
+                    maxHeight: "100vh",
+                }}
+            >
                 <Drawer open={open} setOpen={setOpen} mobileOpen={mobileOpen}>
                     <Button
                         onClick={onMobileOpen}

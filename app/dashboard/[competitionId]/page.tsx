@@ -46,7 +46,7 @@ export default function Dashboard({ params }: { params: { competitionId: string 
                             : StatusIconColor.red
                     }
                     value={nodeCount}
-                    description={t("devicesAsNodes")}
+                    description={t("devicesAsGateways")}
                 />
                 <LargeNumericInfo
                     statusColor={
@@ -57,7 +57,7 @@ export default function Dashboard({ params }: { params: { competitionId: string 
                             : StatusIconColor.red
                     }
                     value={gatewayCount}
-                    description={t("devicesAsGateways")}
+                    description={t("devicesAsNodes")}
                 />
             </BasePanel>
             <BasePanel

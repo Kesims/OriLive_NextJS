@@ -63,6 +63,7 @@ export default function PunchTableGrid({ punches }: Props) {
                 disableColumnSelector={true}
                 disableRowSelectionOnClick={true}
                 rowHeight={40}
+                initialState={{ sorting: { sortModel: [{ field: "receiveTime", sort: "desc" }] } }}
                 sx={{
                     "& .MuiDataGrid-sortIcon": {
                         opacity: 1,
